@@ -6,4 +6,3 @@ from implementing_partner import IP
 
 class User(AbstractUser):
     title = models.CharField(max_length=150)
-    IP = models.ForeignKey(IP)
