@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="col-lg-12">
+        <h3>Admin Area</h3>
+        <br>
+
+        <strong>Users</strong>
+        <ul>
+            <li><p><a href="{% url "dashboard:add-user" %}">Add new user</a></p></li>
+            <li><p><a href="{% url "dashboard:list-user" %}">View list of numbers</a></p></li>
+        </ul>
+    </div>
+
+{% endblock %}

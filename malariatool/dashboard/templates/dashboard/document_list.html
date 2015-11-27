@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-lg-12">
+        <p>DOCUMENTS</p>
+        <a class="btn btn-default" href="{% url 'dashboard:document-new' %}">ADD NEW DOCUMENT</a>
+
+        <table id="document_table" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <td>DOCUMENT NAME</td>
+                <td>UPLOADER</td>
+                <td>DESCRIPTION</td>
+                <td>DOCUMENT TYPE</td>
+                <td>UPLOAD DATE</td>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <td>DOCUMENT NAME</td>
+                <td>UPLOADER</td>
+                <td>DESCRIPTION</td>
+                <td>DOCUMENT TYPE</td>
+                <td>UPLOAD DATE</td>
+            </tr>
+            </tfoot>
+            <tbody>
+            {% for document in object_list %}
+                <tr>
+                <td>{{ document.display_name }}</td>
+                <td>{{ document.uploader }}</td>
+                <td>{{ document.description }}</td>
+                <td>{{ document.type }}</td>
+                <td>{{ document.created }}</td>
+                </tr>
+            {% empty %}
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#document_table').DataTable();
+        });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-lg-12">
+        <p>USERS</p>
+        <a class="btn btn-default" href="{% url 'dashboard:add-user' %}">ADD NEW USERS</a>
+
+        <table id="user_table" class="display" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <td>TITLE</td>
+                <td>FIRST NAME</td>
+                <td>LAST NAME</td>
+                <td>DATE JOINED</td>
+                <td>LAST LOGIN</td>
+            </tr>
+            </thead>
+
+            <tfoot>
+            <tr>
+                <td>TITLE</td>
+                <td>FIRST NAME</td>
+                <td>LAST NAME</td>
+                <td>DATE JOINED</td>
+                <td>LAST LOGIN</td>
+            </tr>
+            </tfoot>
+            <tbody>
+            {% for user in object_list %}
+                <tr>
+                    <td>{{ user.title }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.date_joined }}</td>
+                    <td>{{ user.last_login }}</td>
+                </tr>
+            {% empty %}
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#user_table').DataTable();
+        });
+
+    </script>
+{% endblock %}

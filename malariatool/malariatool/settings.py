@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'dashboard',
     'django_extensions',
+    'custom_user',
 )
 
 
