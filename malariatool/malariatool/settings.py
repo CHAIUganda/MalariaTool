@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'dashboard',
     'django_extensions',
     'custom_user',
+    'widget_tweaks',
 )
 
 

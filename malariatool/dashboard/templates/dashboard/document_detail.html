@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="col-lg-5">
-    <p>{{ object.display_name }}</p>
-    <p>{{ object.description }}</p>
-    <p>{{ object.file }}</p>
-    <p>{{ object.uploader }}</p>
+    <div class="col-lg-5">
+        <strong>Display Name:</strong>
 
-</div>
+        <p> {{ object.display_name }}</p>
+
+        <strong>Description:</strong>
+
+        <p>{{ object.description }}</p>
+        <strong>File</strong>
+        <a href="{{ MEDIA_URL }}{{ object.file }}">{{ object.file }}</a>
+        <br>
+        <strong>Uploader</strong>
+        <p>{{ object.uploader }}</p>
+    </div>
 {% endblock %}

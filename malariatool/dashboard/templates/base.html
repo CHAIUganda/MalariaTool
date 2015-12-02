@@ -47,9 +47,18 @@
                 <li class="active"><a href="#">DASHBOARD</a></li>
                 <li><a href="#about">MAP</a></li>
                 <li><a href="#about">CALENDAR</a></li>
-                <li><a href="#about">TASK MANAGEMENT</a></li>
+                <li><a href="{% url 'dashboard:add-task' %}">TASK MANAGEMENT</a></li>
                 <li><a href="{% url 'dashboard:document-list' %}">DOCUMENTS</a></li>
                 <li><a href="{% url 'dashboard:admin' %}">ADMIN</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">{{ request.user.first_name }} {{ request.user.last_name }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -57,9 +66,9 @@
 
 <div class="container">
     <div class="row">
-    {% block content %}
+        {% block content %}
 
-    {% endblock %}
+        {% endblock %}
     </div>
 </div><!-- /.container -->
 
