@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load widget_tweaks %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,15 +45,15 @@
 
                     <div class="form-group">
                         <label for=id_{{ field.name }}">{{ field.label }}</label>
-                        <input type="text" class="form-control" id="id_{{ field.name }}" name="{{ field.name }}">
+                        {{ field|add_class:"form-control" }}
                     </div>
 
                 {% endfor %}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
-    </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
 
-</div>
+    </div>
 </div><!-- /.container -->
 
 
