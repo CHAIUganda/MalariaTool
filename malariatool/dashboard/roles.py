@@ -1,7 +1,7 @@
 from rolepermissions.roles import AbstractUserRole
 
 
-class Admin(AbstractUserRole):
+class AdminRole(AbstractUserRole):
     available_permissions = {
         'add_implementing_partner': True,
         'add_document': True,
@@ -9,7 +9,7 @@ class Admin(AbstractUserRole):
     }
 
 
-class IPUser(AbstractUserRole):
+class IPUserRole(AbstractUserRole):
     available_permissions = {
         'add_task': True,
         'add_document': True,
