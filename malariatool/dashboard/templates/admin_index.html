@@ -8,16 +8,21 @@
 
         <strong>Users</strong>
         <ul>
-            <li><p><a href="{% url "dashboard:add-user" %}">Add new user</a></p></li>
-            <li><p><a href="{% url "dashboard:list-user" %}">View list of numbers</a></p></li>
+            <li><p><a href="{% url "dashboard:user-new" %}">Add new user</a></p></li>
+            <li><p><a href="{% url "dashboard:user-list" %}">View list of numbers</a></p></li>
         </ul>
-
 
 
         <strong>IPs</strong>
         <ul>
-            <li><p><a href="{% url "dashboard:add-ip" %}">Add IP</a></p></li>
-            <li><p><a href="{% url "dashboard:list-ip" %}">View IPs</a></p></li>
+            <li><p><a href="{% url "dashboard:ip-new" %}">Add IP</a></p></li>
+            <li><p><a href="{% url "dashboard:ip-list" %}">View IPs</a></p></li>
+        </ul>
+
+        <strong>Tasks</strong>
+        <ul>
+            <li><p><a href="{% url "dashboard:task-new" %}">Add Tasks</a></p></li>
+            <li><p><a href="{% url "dashboard:task-list" %}">View Tasks</a></p></li>
         </ul>
     </div>
 

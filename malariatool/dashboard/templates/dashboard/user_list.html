@@ -2,8 +2,9 @@
 
 {% block content %}
     <div class="col-lg-12">
+
         <p>USERS</p>
-        <a class="btn btn-default" href="{% url 'dashboard:add-user' %}">ADD NEW USERS</a>
+        <a class="btn btn-default" href="{% url 'dashboard:user-new' %}">ADD NEW USERS</a>
 
         <table id="user_table" class="display" cellspacing="0" width="100%">
             <thead>

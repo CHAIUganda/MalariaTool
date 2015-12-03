@@ -5,8 +5,8 @@ from dashboard.models import Task
 
 class TaskCreateView(CreateView):
     model = Task
-    fields = ['start_date', 'end_date','target_acutal_per_quarter', 'target_output_per_quarter', 'affected_districts', 'duration']
+    fields = ['start_date', 'end_date', 'type', 'affected_districts', 'ip']
 
 
 class TaskListView(ListView):
-    pass
+    model = Task

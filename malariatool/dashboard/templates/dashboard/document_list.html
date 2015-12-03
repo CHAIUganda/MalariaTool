@@ -1,9 +1,14 @@
 {% extends "base.html" %}
+{% load permission_tags %}
 
 {% block content %}
     <div class="col-lg-12">
-        <p>DOCUMENTS</p>
-        <a class="btn btn-default" href="{% url 'dashboard:document-new' %}">ADD NEW DOCUMENT</a>
+
+        {% if user|can:'add_documents' %}
+            <p>DOCUMENTS</p>
+            <a class="btn btn-default" href="{% url 'dashboard:document-new' %}">ADD NEW DOCUMENT</a>
+
+        {% endif %}
 
         <table id="document_table" class="display" cellspacing="0" width="100%">
             <thead>
@@ -28,11 +33,11 @@
             <tbody>
             {% for document in object_list %}
                 <tr>
-                <td><a href="{% url "dashboard:document-detail" document.id %}">{{ document.display_name }}</a></td>
-                <td>{{ document.uploader }}</td>
-                <td>{{ document.description }}</td>
-                <td>{{ document.type }}</td>
-                <td>{{ document.created }}</td>
+                    <td><a href="{% url "dashboard:document-detail" document.id %}">{{ document.display_name }}</a></td>
+                    <td>{{ document.uploader }}</td>
+                    <td>{{ document.description }}</td>
+                    <td>{{ document.type }}</td>
+                    <td>{{ document.created }}</td>
                 </tr>
             {% empty %}
 

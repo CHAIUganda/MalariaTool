@@ -1,9 +1,7 @@
 {% extends "base.html" %}
-
-
 {% block content %}
     <div class="col-lg-12">
-        <table id="ip_table" class="display" cellspacing="0" width="100%">
+        <table id="task_table" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <td>No.</td>
@@ -11,10 +9,9 @@
             </tr>
             </thead>
             <tbody>
-            {% for ip in object_list %}
+            {% for task in object_list %}
                 <tr>
-                    <td><a href="{% url "dashboard:ip-detail" ip.id %}">{{ ip.id }}</a></td>
-                    <td><a href="{% url "dashboard:ip-detail" ip.id %}">{{ ip.name }}</a></td>
+                    <td><a href="#">{{ task.id }}</a></td>
                 </tr>
             {% empty %}
 
@@ -28,7 +25,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $('#ip_table').DataTable();
+            $('#task_table').DataTable();
         });
 
     </script>

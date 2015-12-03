@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-lg-offset-1 col-lg-6">
+        <strong><p>{{ object.name }}</p></strong>
+        <strong>Overview:</strong>
+        <br />
+        {{ object.overview }}
+        <br />
+        <strong>Objectives:</strong>
+        <br />
+        {{ object.objectives }}
+        <br />
+        <strong>Areas of Operations:</strong>
+        <br />
+        {{ object.areas_of_operations }}
+
+    </div>
+{% endblock %}

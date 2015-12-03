@@ -4,6 +4,7 @@ from dashboard.views.admin_dashboard import AdminDashboardView
 from dashboard.views.document import DocumentListView, DocumentCreateView, DocumentDetailView
 from dashboard.views.home import Home
 from dashboard.views.implementing_partner import IPListView, IPCreateView
+from dashboard.views.ip import IPDetailView
 from dashboard.views.task import TaskCreateView, TaskListView
 from dashboard.views.users import UserCreateView, UserListView
 
@@ -16,14 +17,15 @@ urlpatterns = [
 
     url(r'^dashboard/admin/$', AdminDashboardView.as_view(), name='admin'),
 
-    url(r'^user/new/$', UserCreateView.as_view(), name='add-user'),
-    url(r'^user/list/$', UserListView.as_view(), name='list-user'),
+    url(r'^user/new/$', UserCreateView.as_view(), name='user-new'),
+    url(r'^user/list/$', UserListView.as_view(), name='user-list'),
 
-    url(r'^task/new/$', TaskCreateView.as_view(), name='add-task'),
-    url(r'^task/list/$', TaskListView.as_view(), name='list-task'),
+    url(r'^task/new/$', TaskCreateView.as_view(), name='task-new'),
+    url(r'^task/list/$', TaskListView.as_view(), name='task-list'),
 
-    url(r'^ip/list/$', IPListView.as_view(), name='list-ip'),
-    url(r'^ip/new/$', IPCreateView.as_view(), name='add-ip'),
+    url(r'^ip/list/$', IPListView.as_view(), name='ip-list'),
+    url(r'^ip/new/$', IPCreateView.as_view(), name='ip-new'),
+    url(r'^ip/(?P<pk>\d+)/$', IPDetailView.as_view(), name='ip-detail'),
 
     url(r'^login/$', 'django.contrib.auth.views.login', name='login',
         kwargs={'template_name': 'login.html'}),
