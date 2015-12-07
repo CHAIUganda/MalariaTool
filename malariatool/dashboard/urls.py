@@ -1,6 +1,7 @@
 from django.conf.urls import url
 
 from dashboard.views.admin_dashboard import AdminDashboardView
+from dashboard.views.calendar import CalendarView
 from dashboard.views.document import DocumentListView, DocumentCreateView, DocumentDetailView
 from dashboard.views.home import Home
 from dashboard.views.implementing_partner import IPListView, IPCreateView
@@ -26,6 +27,9 @@ urlpatterns = [
     url(r'^ip/list/$', IPListView.as_view(), name='ip-list'),
     url(r'^ip/new/$', IPCreateView.as_view(), name='ip-new'),
     url(r'^ip/(?P<pk>\d+)/$', IPDetailView.as_view(), name='ip-detail'),
+
+    url(r'^calendar/$', CalendarView.as_view(), name='calendar-view'),
+
 
     url(r'^login/$', 'django.contrib.auth.views.login', name='login',
         kwargs={'template_name': 'login.html'}),
