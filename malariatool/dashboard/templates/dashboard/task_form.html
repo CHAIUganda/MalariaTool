@@ -5,9 +5,16 @@
         <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
             {% for field in form %}
 
-                 <div class="form-group">
-                    <label for=id_{{ field.name }}">{{ field.label }}</label>
-                    {{ field|add_class:"form-control"}}
+                <div class="form-group">
+                <label for=id_{{ field.name }}">{{ field.label }}</label>
+                {{ field|add_class:"form-control" }}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <p class="alert-danger"> {{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+                <div>
+
                 </div>
 
             {% endfor %}

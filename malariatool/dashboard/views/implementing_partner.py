@@ -11,4 +11,4 @@ class IPListView(ListView):
 class IPCreateView(CreateView):
     model = IP
     fields = ['name', 'overview', 'objectives', 'areas_of_operations', 'implementation_period']
-    success_url = reverse_lazy("dashboard:list-ip")
+    success_url = reverse_lazy("dashboard:ip-list")
