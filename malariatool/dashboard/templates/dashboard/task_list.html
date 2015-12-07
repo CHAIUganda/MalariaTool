@@ -4,14 +4,19 @@
         <table id="task_table" class="display" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <td>No.</td>
+                <td>Task</td>
                 <td>IP</td>
+                <td>Remaining Time</td>
+                <td>Affected Districts</td>
             </tr>
             </thead>
             <tbody>
             {% for task in object_list %}
                 <tr>
-                    <td><a href="#">{{ task.id }}</a></td>
+                    <td><a href="#">{{ task.type }}</a></td>
+                    <td><a href="#">{{ task.ip.name }}</a></td>
+                    <td><a href="#">{{ task.end_date|timeuntil  }}</a></td>
+                    <td><a href="#">{{ task.affected_districts }}</a></td>
                 </tr>
             {% empty %}
 
