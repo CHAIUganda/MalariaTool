@@ -4,16 +4,44 @@
     <div class="col-lg-offset-1 col-lg-6">
         <strong><p>{{ object.name }}</p></strong>
         <strong>Overview:</strong>
-        <br />
+        <br/>
         {{ object.overview }}
-        <br />
+        <br/>
         <strong>Objectives:</strong>
-        <br />
+        <br/>
         {{ object.objectives }}
-        <br />
+        <br/>
         <strong>Areas of Operations:</strong>
-        <br />
+        <br/>
         {{ object.areas_of_operations }}
 
+    </div>
+    <br />
+    <br />
+    <br />
+
+    <div class="col-lg-offset-1 col-lg-6">
+
+        <strong>Users attached to this ip</strong>
+
+        <table id="user_table" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <td>No</td>
+                <td>Users</td>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.first_name }}{{ user.last_name }}</td>
+                </tr>
+            {% empty %}
+
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

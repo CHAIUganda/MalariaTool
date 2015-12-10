@@ -6,32 +6,25 @@
         <p>USERS</p>
         <a class="btn btn-default" href="{% url 'dashboard:user-new' %}">ADD NEW USERS</a>
 
-        <table id="user_table" class="display" cellspacing="0" width="100%">
+        <table id="user_table" class="display table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <td>TITLE</td>
                 <td>FIRST NAME</td>
                 <td>LAST NAME</td>
+                <td>IP</td>
                 <td>DATE JOINED</td>
                 <td>LAST LOGIN</td>
             </tr>
             </thead>
 
-            <tfoot>
-            <tr>
-                <td>TITLE</td>
-                <td>FIRST NAME</td>
-                <td>LAST NAME</td>
-                <td>DATE JOINED</td>
-                <td>LAST LOGIN</td>
-            </tr>
-            </tfoot>
             <tbody>
             {% for user in object_list %}
                 <tr>
                     <td>{{ user.title }}</td>
                     <td>{{ user.first_name }}</td>
                     <td>{{ user.last_name }}</td>
+                    <td>{{ user.ip }}</td>
                     <td>{{ user.date_joined }}</td>
                     <td>{{ user.last_login }}</td>
                 </tr>

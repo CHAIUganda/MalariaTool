@@ -10,7 +10,7 @@
 
         {% endif %}
 
-        <table id="document_table" class="display" cellspacing="0" width="100%">
+        <table id="document_table" class="display table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <td>DOCUMENT NAME</td>
@@ -19,17 +19,7 @@
                 <td>DOCUMENT TYPE</td>
                 <td>UPLOAD DATE</td>
             </tr>
-            </thead>
-
-            <tfoot>
-            <tr>
-                <td>DOCUMENT NAME</td>
-                <td>UPLOADER</td>
-                <td>DESCRIPTION</td>
-                <td>DOCUMENT TYPE</td>
-                <td>UPLOAD DATE</td>
-            </tr>
-            </tfoot>
+            </thead>    e
             <tbody>
             {% for document in object_list %}
                 <tr>

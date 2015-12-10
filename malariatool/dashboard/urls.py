@@ -4,8 +4,7 @@ from dashboard.views.admin_dashboard import AdminDashboardView
 from dashboard.views.calendar import CalendarView
 from dashboard.views.document import DocumentListView, DocumentCreateView, DocumentDetailView
 from dashboard.views.home import Home
-from dashboard.views.implementing_partner import IPListView, IPCreateView
-from dashboard.views.ip import IPDetailView
+from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDetailView
 from dashboard.views.task import TaskCreateView, TaskListView
 from dashboard.views.users import UserCreateView, UserListView
 

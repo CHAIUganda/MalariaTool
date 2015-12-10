@@ -17,5 +17,6 @@ class Task(TimeStampedModel):
     start_date = models.DateField()
     end_date = models.DateField()
     affected_districts = models.ForeignKey(District, related_name="affected_districts")
+    overview = models.TextField()
     type = models.CharField(max_length=150, choices=type_choices)
     ip = models.ForeignKey(IP, related_name="tasks")

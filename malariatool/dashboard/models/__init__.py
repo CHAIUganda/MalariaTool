@@ -7,12 +7,12 @@ from dashboard.models.tasks import Task
 from dashboard.models.user import User
 
 __all__ =[
+    'IP',
     'User',
+    'Document'
     'District',
     'Repository',
     'Task',
-    'IP',
     'Meeting',
-    'Document'
 
 ]

@@ -1,3 +1,4 @@
+from django.core.mail import EmailMessage
 from django.views.generic import CreateView, ListView
 
 from dashboard.forms.users import UserForm
@@ -15,6 +16,15 @@ class UserCreateView(CreateView):
         user.set_password(form.data.get('password'))
         user.save()
         IPUserRole.assign_role_to_user(user)
+        # email = EmailMessage(
+        #     'subject_message',
+        #     'content_message',
+        #     'sender smtp gmail' + '<chaimalariatool@gmail.com>',
+        #     ['remo@codesync.ug'],
+        #     headers={'Reply-To': 'chaimalariatool@gmail.com'}
+        # )
+        #
+        # email.send(fail_silently=False)
         return super(UserCreateView, self).form_valid(form)
 
 
