@@ -1,6 +1,5 @@
-from django.core.urlresolvers import reverse_lazy, reverse
-from django.http import HttpResponseRedirect, HttpResponse
-from django.views.generic import CreateView, ListView
+from django.core.urlresolvers import reverse
+from django.views.generic import CreateView, ListView, DetailView
 
 from dashboard.forms.task import TaskForm
 from dashboard.models import Task
@@ -10,19 +9,13 @@ from dashboard.models.tasks import Item
 class TaskCreateView(CreateView):
     model = Task
     form_class = TaskForm
-    success_url = reverse_lazy("dashboard:home")
 
     def form_invalid(self, form):
-        print "invalid"
-        print form
         return super(TaskCreateView, self).form_invalid(form)
 
     def form_valid(self, form):
         districts = form.cleaned_data.get("affected_districts")
         ip = form.cleaned_data.get("ip")
-        print "------------------------------------------"
-        print form.cleaned_data
-        print ip
         form.instance.ip = ip
         for district in districts:
             form.instance.affected_districts = district
@@ -45,7 +38,6 @@ class TaskItemCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(TaskItemCreateView, self).get_context_data(**kwargs)
-        print self.kwargs
         task = Task.objects.get(id=self.kwargs.get('pk'))
         context['task'] = task
         context['items'] = Item.objects.filter(task=task)
@@ -55,3 +47,14 @@ class TaskItemCreateView(CreateView):
         task = Task.objects.get(id=self.kwargs.get('pk'))
         form.instance.task = task
         return super(TaskItemCreateView, self).form_valid(form)
+
+
+class TaskDetailView(DetailView):
+    model = Task
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskDetailView, self).get_context_data(**kwargs)
+        task = Task.objects.get(id=self.kwargs.get('pk'))
+        context['task'] = task
+        context['sub_tasks'] = Item.objects.filter(task=task)
+        return context

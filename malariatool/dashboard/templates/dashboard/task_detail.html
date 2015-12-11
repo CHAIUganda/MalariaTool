@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-lg-5">
+
+        <a class="btn btn-default" href="{% url 'dashboard:task-add-items' object.id %}">ADD SUB TASKS</a>
+        <br/>
+        <br/>
+        <strong>Task:</strong>
+
+        <p> {{ object.overview }}</p>
+        <strong>Type:</strong>
+
+        <p> {{ object.type }}</p>
+
+        <strong>SubTasks:</strong>
+        <ul>
+
+            {% for sub_task in sub_tasks %}
+                <li>{{ sub_task.description }} {{ sub_task.estimated_end_date }}</li>
+            {% endfor %}
+
+        </ul>
+
+        <p>{{ object.uploader }}</p>
+    </div>
+{% endblock %}

@@ -13,10 +13,10 @@
             <tbody>
             {% for task in object_list %}
                 <tr>
-                    <td><a href="#">{{ task.type|title }}</a></td>
-                    <td><a href="#">{{ task.ip.name }}</a></td>
-                    <td><a href="#">{{ task.end_date|timeuntil  }}</a></td>
-                    <td><a href="#">{{ task.affected_districts }}</a></td>
+                    <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.type|title }}</a></td>
+                    <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.ip.name }}</a></td>
+                    <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.end_date|timeuntil  }}</a></td>
+                    <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.affected_districts }}</a></td>
                 </tr>
             {% empty %}
 
