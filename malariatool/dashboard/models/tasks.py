@@ -1,4 +1,6 @@
 from django.db import models
+from model_utils import Choices
+from model_utils.fields import StatusField
 from model_utils.models import TimeStampedModel
 
 from dashboard.models import IP
@@ -19,4 +21,12 @@ class Task(TimeStampedModel):
     affected_districts = models.ForeignKey(District, related_name="affected_districts")
     overview = models.TextField()
     type = models.CharField(max_length=150, choices=type_choices)
-    ip = models.ForeignKey(IP, related_name="tasks")
+    ip = models.ForeignKey(IP, related_name="ip_tasks")
+
+
+class Item(TimeStampedModel):
+    STATUS = Choices('not started', 'ongoing', 'done')
+    description = models.TextField()
+    estimated_end_date = models.DateField()
+    status = StatusField()
+    task = models.ForeignKey(Task, related_name="taskitems")

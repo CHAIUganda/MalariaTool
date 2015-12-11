@@ -10,4 +10,4 @@ class TaskForm(ModelForm):
 
     class Meta:
         model = Task
-        fields = ['start_date', 'end_date', 'type']
+        fields = ['start_date', 'end_date', 'type', ]
