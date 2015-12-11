@@ -15,7 +15,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -26,9 +25,6 @@ SECRET_KEY = '_3^84bydrw09*b^vjbf_l3(=a%*o_lo*3&5%$o!k5yo4=v88ed'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
-
-
 
 # Application definition
 
@@ -46,9 +42,7 @@ INSTALLED_APPS = (
     'widget_tweaks',
 )
 
-
 AUTH_USER_MODEL = 'dashboard.User'
-
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -80,7 +74,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'malariatool.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
