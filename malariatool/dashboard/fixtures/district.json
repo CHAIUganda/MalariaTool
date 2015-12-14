@@ -1,0 +1,1010 @@
+[
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.551Z",
+      "name": "Abim",
+      "created": "2015-12-14T14:52:34.550Z"
+    },
+    "model": "dashboard.district",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.554Z",
+      "name": "Adjumani",
+      "created": "2015-12-14T14:52:34.554Z"
+    },
+    "model": "dashboard.district",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.555Z",
+      "name": "Agago",
+      "created": "2015-12-14T14:52:34.555Z"
+    },
+    "model": "dashboard.district",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.557Z",
+      "name": "Alebtong",
+      "created": "2015-12-14T14:52:34.557Z"
+    },
+    "model": "dashboard.district",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.558Z",
+      "name": "Amolatar",
+      "created": "2015-12-14T14:52:34.558Z"
+    },
+    "model": "dashboard.district",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.559Z",
+      "name": "Amudat",
+      "created": "2015-12-14T14:52:34.559Z"
+    },
+    "model": "dashboard.district",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.561Z",
+      "name": "Amuria",
+      "created": "2015-12-14T14:52:34.561Z"
+    },
+    "model": "dashboard.district",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.562Z",
+      "name": "Amuru",
+      "created": "2015-12-14T14:52:34.562Z"
+    },
+    "model": "dashboard.district",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.564Z",
+      "name": "Apac",
+      "created": "2015-12-14T14:52:34.563Z"
+    },
+    "model": "dashboard.district",
+    "pk": 9
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.565Z",
+      "name": "Arua",
+      "created": "2015-12-14T14:52:34.565Z"
+    },
+    "model": "dashboard.district",
+    "pk": 10
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.566Z",
+      "name": "Budaka",
+      "created": "2015-12-14T14:52:34.566Z"
+    },
+    "model": "dashboard.district",
+    "pk": 11
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.567Z",
+      "name": "Bududa",
+      "created": "2015-12-14T14:52:34.567Z"
+    },
+    "model": "dashboard.district",
+    "pk": 12
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.569Z",
+      "name": "Bugiri",
+      "created": "2015-12-14T14:52:34.569Z"
+    },
+    "model": "dashboard.district",
+    "pk": 13
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.570Z",
+      "name": "Buhweju",
+      "created": "2015-12-14T14:52:34.570Z"
+    },
+    "model": "dashboard.district",
+    "pk": 14
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.571Z",
+      "name": "Buikwe",
+      "created": "2015-12-14T14:52:34.571Z"
+    },
+    "model": "dashboard.district",
+    "pk": 15
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.572Z",
+      "name": "Bukedea",
+      "created": "2015-12-14T14:52:34.572Z"
+    },
+    "model": "dashboard.district",
+    "pk": 16
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.573Z",
+      "name": "Bukomansimbi",
+      "created": "2015-12-14T14:52:34.573Z"
+    },
+    "model": "dashboard.district",
+    "pk": 17
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.574Z",
+      "name": "Bukwo",
+      "created": "2015-12-14T14:52:34.574Z"
+    },
+    "model": "dashboard.district",
+    "pk": 18
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.576Z",
+      "name": "Bulambuli",
+      "created": "2015-12-14T14:52:34.575Z"
+    },
+    "model": "dashboard.district",
+    "pk": 19
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.577Z",
+      "name": "Buliisa",
+      "created": "2015-12-14T14:52:34.577Z"
+    },
+    "model": "dashboard.district",
+    "pk": 20
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.578Z",
+      "name": "Bundibugyo",
+      "created": "2015-12-14T14:52:34.578Z"
+    },
+    "model": "dashboard.district",
+    "pk": 21
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.579Z",
+      "name": "Bushenyi",
+      "created": "2015-12-14T14:52:34.578Z"
+    },
+    "model": "dashboard.district",
+    "pk": 22
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.580Z",
+      "name": "Busia",
+      "created": "2015-12-14T14:52:34.579Z"
+    },
+    "model": "dashboard.district",
+    "pk": 23
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.581Z",
+      "name": "Butaleja",
+      "created": "2015-12-14T14:52:34.580Z"
+    },
+    "model": "dashboard.district",
+    "pk": 24
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.582Z",
+      "name": "Butambala",
+      "created": "2015-12-14T14:52:34.581Z"
+    },
+    "model": "dashboard.district",
+    "pk": 25
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.583Z",
+      "name": "Buvuma",
+      "created": "2015-12-14T14:52:34.582Z"
+    },
+    "model": "dashboard.district",
+    "pk": 26
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.583Z",
+      "name": "Buyende",
+      "created": "2015-12-14T14:52:34.583Z"
+    },
+    "model": "dashboard.district",
+    "pk": 27
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.584Z",
+      "name": "Dokolo",
+      "created": "2015-12-14T14:52:34.584Z"
+    },
+    "model": "dashboard.district",
+    "pk": 28
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.585Z",
+      "name": "Gomba",
+      "created": "2015-12-14T14:52:34.585Z"
+    },
+    "model": "dashboard.district",
+    "pk": 29
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.586Z",
+      "name": "Gulu",
+      "created": "2015-12-14T14:52:34.586Z"
+    },
+    "model": "dashboard.district",
+    "pk": 30
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.587Z",
+      "name": "Hoima",
+      "created": "2015-12-14T14:52:34.587Z"
+    },
+    "model": "dashboard.district",
+    "pk": 31
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.588Z",
+      "name": "Ibanda",
+      "created": "2015-12-14T14:52:34.588Z"
+    },
+    "model": "dashboard.district",
+    "pk": 32
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.589Z",
+      "name": "Iganga",
+      "created": "2015-12-14T14:52:34.589Z"
+    },
+    "model": "dashboard.district",
+    "pk": 33
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.590Z",
+      "name": "Isingiro",
+      "created": "2015-12-14T14:52:34.590Z"
+    },
+    "model": "dashboard.district",
+    "pk": 34
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.591Z",
+      "name": "Jinja",
+      "created": "2015-12-14T14:52:34.591Z"
+    },
+    "model": "dashboard.district",
+    "pk": 35
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.592Z",
+      "name": "Kaabong",
+      "created": "2015-12-14T14:52:34.592Z"
+    },
+    "model": "dashboard.district",
+    "pk": 36
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.593Z",
+      "name": "Kabale",
+      "created": "2015-12-14T14:52:34.593Z"
+    },
+    "model": "dashboard.district",
+    "pk": 37
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.594Z",
+      "name": "Kabarole",
+      "created": "2015-12-14T14:52:34.594Z"
+    },
+    "model": "dashboard.district",
+    "pk": 38
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.595Z",
+      "name": "Kaberamaido",
+      "created": "2015-12-14T14:52:34.595Z"
+    },
+    "model": "dashboard.district",
+    "pk": 39
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.596Z",
+      "name": "Kalangala",
+      "created": "2015-12-14T14:52:34.596Z"
+    },
+    "model": "dashboard.district",
+    "pk": 40
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.597Z",
+      "name": "Kaliro",
+      "created": "2015-12-14T14:52:34.597Z"
+    },
+    "model": "dashboard.district",
+    "pk": 41
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.598Z",
+      "name": "Kalungu",
+      "created": "2015-12-14T14:52:34.598Z"
+    },
+    "model": "dashboard.district",
+    "pk": 42
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.599Z",
+      "name": "Kampala",
+      "created": "2015-12-14T14:52:34.599Z"
+    },
+    "model": "dashboard.district",
+    "pk": 43
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.600Z",
+      "name": "Kamuli",
+      "created": "2015-12-14T14:52:34.600Z"
+    },
+    "model": "dashboard.district",
+    "pk": 44
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.602Z",
+      "name": "Kamwenge",
+      "created": "2015-12-14T14:52:34.601Z"
+    },
+    "model": "dashboard.district",
+    "pk": 45
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.603Z",
+      "name": "Kanungu",
+      "created": "2015-12-14T14:52:34.603Z"
+    },
+    "model": "dashboard.district",
+    "pk": 46
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.604Z",
+      "name": "Kapchorwa",
+      "created": "2015-12-14T14:52:34.604Z"
+    },
+    "model": "dashboard.district",
+    "pk": 47
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.605Z",
+      "name": "Kasese",
+      "created": "2015-12-14T14:52:34.605Z"
+    },
+    "model": "dashboard.district",
+    "pk": 48
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.606Z",
+      "name": "Katakwi",
+      "created": "2015-12-14T14:52:34.606Z"
+    },
+    "model": "dashboard.district",
+    "pk": 49
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.607Z",
+      "name": "Kayunga",
+      "created": "2015-12-14T14:52:34.607Z"
+    },
+    "model": "dashboard.district",
+    "pk": 50
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.608Z",
+      "name": "Kibaale",
+      "created": "2015-12-14T14:52:34.608Z"
+    },
+    "model": "dashboard.district",
+    "pk": 51
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.609Z",
+      "name": "Kiboga",
+      "created": "2015-12-14T14:52:34.609Z"
+    },
+    "model": "dashboard.district",
+    "pk": 52
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.610Z",
+      "name": "Kibuku",
+      "created": "2015-12-14T14:52:34.610Z"
+    },
+    "model": "dashboard.district",
+    "pk": 53
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.611Z",
+      "name": "Kiruhuura",
+      "created": "2015-12-14T14:52:34.611Z"
+    },
+    "model": "dashboard.district",
+    "pk": 54
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.612Z",
+      "name": "Kiryandongo",
+      "created": "2015-12-14T14:52:34.612Z"
+    },
+    "model": "dashboard.district",
+    "pk": 55
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.613Z",
+      "name": "Kisoro",
+      "created": "2015-12-14T14:52:34.613Z"
+    },
+    "model": "dashboard.district",
+    "pk": 56
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.614Z",
+      "name": "Kitgum",
+      "created": "2015-12-14T14:52:34.614Z"
+    },
+    "model": "dashboard.district",
+    "pk": 57
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.615Z",
+      "name": "Koboko",
+      "created": "2015-12-14T14:52:34.615Z"
+    },
+    "model": "dashboard.district",
+    "pk": 58
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.616Z",
+      "name": "Kole",
+      "created": "2015-12-14T14:52:34.616Z"
+    },
+    "model": "dashboard.district",
+    "pk": 59
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.617Z",
+      "name": "Kotido",
+      "created": "2015-12-14T14:52:34.617Z"
+    },
+    "model": "dashboard.district",
+    "pk": 60
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.618Z",
+      "name": "Kumi",
+      "created": "2015-12-14T14:52:34.618Z"
+    },
+    "model": "dashboard.district",
+    "pk": 61
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.619Z",
+      "name": "Kween",
+      "created": "2015-12-14T14:52:34.619Z"
+    },
+    "model": "dashboard.district",
+    "pk": 62
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.620Z",
+      "name": "Kyankwanzi",
+      "created": "2015-12-14T14:52:34.620Z"
+    },
+    "model": "dashboard.district",
+    "pk": 63
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.621Z",
+      "name": "Kyegegwa",
+      "created": "2015-12-14T14:52:34.621Z"
+    },
+    "model": "dashboard.district",
+    "pk": 64
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.622Z",
+      "name": "Kyenjojo",
+      "created": "2015-12-14T14:52:34.622Z"
+    },
+    "model": "dashboard.district",
+    "pk": 65
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.623Z",
+      "name": "Lamwo",
+      "created": "2015-12-14T14:52:34.623Z"
+    },
+    "model": "dashboard.district",
+    "pk": 66
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.624Z",
+      "name": "Lira",
+      "created": "2015-12-14T14:52:34.624Z"
+    },
+    "model": "dashboard.district",
+    "pk": 67
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.625Z",
+      "name": "Luuka",
+      "created": "2015-12-14T14:52:34.625Z"
+    },
+    "model": "dashboard.district",
+    "pk": 68
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.627Z",
+      "name": "Luwero",
+      "created": "2015-12-14T14:52:34.626Z"
+    },
+    "model": "dashboard.district",
+    "pk": 69
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.628Z",
+      "name": "Lwengo",
+      "created": "2015-12-14T14:52:34.627Z"
+    },
+    "model": "dashboard.district",
+    "pk": 70
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.629Z",
+      "name": "Lyantonde",
+      "created": "2015-12-14T14:52:34.629Z"
+    },
+    "model": "dashboard.district",
+    "pk": 71
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.630Z",
+      "name": "Manafwa",
+      "created": "2015-12-14T14:52:34.630Z"
+    },
+    "model": "dashboard.district",
+    "pk": 72
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.631Z",
+      "name": "Masaka",
+      "created": "2015-12-14T14:52:34.631Z"
+    },
+    "model": "dashboard.district",
+    "pk": 73
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.632Z",
+      "name": "Masindi",
+      "created": "2015-12-14T14:52:34.632Z"
+    },
+    "model": "dashboard.district",
+    "pk": 74
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.633Z",
+      "name": "Mayuge",
+      "created": "2015-12-14T14:52:34.633Z"
+    },
+    "model": "dashboard.district",
+    "pk": 75
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.634Z",
+      "name": "Mbale",
+      "created": "2015-12-14T14:52:34.634Z"
+    },
+    "model": "dashboard.district",
+    "pk": 76
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.635Z",
+      "name": "Mbarara",
+      "created": "2015-12-14T14:52:34.635Z"
+    },
+    "model": "dashboard.district",
+    "pk": 77
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.636Z",
+      "name": "Mitoma",
+      "created": "2015-12-14T14:52:34.636Z"
+    },
+    "model": "dashboard.district",
+    "pk": 78
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.637Z",
+      "name": "Mityana",
+      "created": "2015-12-14T14:52:34.637Z"
+    },
+    "model": "dashboard.district",
+    "pk": 79
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.638Z",
+      "name": "Moroto",
+      "created": "2015-12-14T14:52:34.638Z"
+    },
+    "model": "dashboard.district",
+    "pk": 80
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.639Z",
+      "name": "Moyo",
+      "created": "2015-12-14T14:52:34.639Z"
+    },
+    "model": "dashboard.district",
+    "pk": 81
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.640Z",
+      "name": "Mpigi",
+      "created": "2015-12-14T14:52:34.640Z"
+    },
+    "model": "dashboard.district",
+    "pk": 82
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.641Z",
+      "name": "Mubende",
+      "created": "2015-12-14T14:52:34.641Z"
+    },
+    "model": "dashboard.district",
+    "pk": 83
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.642Z",
+      "name": "Mukono",
+      "created": "2015-12-14T14:52:34.642Z"
+    },
+    "model": "dashboard.district",
+    "pk": 84
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.643Z",
+      "name": "Nakapiripirit",
+      "created": "2015-12-14T14:52:34.643Z"
+    },
+    "model": "dashboard.district",
+    "pk": 85
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.644Z",
+      "name": "Nakaseke",
+      "created": "2015-12-14T14:52:34.644Z"
+    },
+    "model": "dashboard.district",
+    "pk": 86
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.645Z",
+      "name": "Nakasongola",
+      "created": "2015-12-14T14:52:34.645Z"
+    },
+    "model": "dashboard.district",
+    "pk": 87
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.646Z",
+      "name": "Namayingo",
+      "created": "2015-12-14T14:52:34.646Z"
+    },
+    "model": "dashboard.district",
+    "pk": 88
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.647Z",
+      "name": "Namutumba",
+      "created": "2015-12-14T14:52:34.647Z"
+    },
+    "model": "dashboard.district",
+    "pk": 89
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.648Z",
+      "name": "Napak",
+      "created": "2015-12-14T14:52:34.648Z"
+    },
+    "model": "dashboard.district",
+    "pk": 90
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.649Z",
+      "name": "Nebbi",
+      "created": "2015-12-14T14:52:34.649Z"
+    },
+    "model": "dashboard.district",
+    "pk": 91
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.650Z",
+      "name": "Ngora",
+      "created": "2015-12-14T14:52:34.650Z"
+    },
+    "model": "dashboard.district",
+    "pk": 92
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.651Z",
+      "name": "Ntoroko",
+      "created": "2015-12-14T14:52:34.651Z"
+    },
+    "model": "dashboard.district",
+    "pk": 93
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.652Z",
+      "name": "Ntungamo",
+      "created": "2015-12-14T14:52:34.652Z"
+    },
+    "model": "dashboard.district",
+    "pk": 94
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.654Z",
+      "name": "Nwoya",
+      "created": "2015-12-14T14:52:34.653Z"
+    },
+    "model": "dashboard.district",
+    "pk": 95
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.655Z",
+      "name": "Nyadri",
+      "created": "2015-12-14T14:52:34.654Z"
+    },
+    "model": "dashboard.district",
+    "pk": 96
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.656Z",
+      "name": "Otuke",
+      "created": "2015-12-14T14:52:34.655Z"
+    },
+    "model": "dashboard.district",
+    "pk": 97
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.657Z",
+      "name": "Oyam",
+      "created": "2015-12-14T14:52:34.657Z"
+    },
+    "model": "dashboard.district",
+    "pk": 98
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.658Z",
+      "name": "Pader",
+      "created": "2015-12-14T14:52:34.658Z"
+    },
+    "model": "dashboard.district",
+    "pk": 99
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.659Z",
+      "name": "Pallisa",
+      "created": "2015-12-14T14:52:34.659Z"
+    },
+    "model": "dashboard.district",
+    "pk": 100
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.660Z",
+      "name": "Rakai",
+      "created": "2015-12-14T14:52:34.660Z"
+    },
+    "model": "dashboard.district",
+    "pk": 101
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.661Z",
+      "name": "Rubirizi",
+      "created": "2015-12-14T14:52:34.661Z"
+    },
+    "model": "dashboard.district",
+    "pk": 102
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.662Z",
+      "name": "Rukungiri",
+      "created": "2015-12-14T14:52:34.661Z"
+    },
+    "model": "dashboard.district",
+    "pk": 103
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.663Z",
+      "name": "Sembabule",
+      "created": "2015-12-14T14:52:34.662Z"
+    },
+    "model": "dashboard.district",
+    "pk": 104
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.663Z",
+      "name": "Serere",
+      "created": "2015-12-14T14:52:34.663Z"
+    },
+    "model": "dashboard.district",
+    "pk": 105
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.664Z",
+      "name": "Sheema",
+      "created": "2015-12-14T14:52:34.664Z"
+    },
+    "model": "dashboard.district",
+    "pk": 106
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.665Z",
+      "name": "Sironko",
+      "created": "2015-12-14T14:52:34.665Z"
+    },
+    "model": "dashboard.district",
+    "pk": 107
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.666Z",
+      "name": "Soroti",
+      "created": "2015-12-14T14:52:34.666Z"
+    },
+    "model": "dashboard.district",
+    "pk": 108
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.667Z",
+      "name": "Tororo",
+      "created": "2015-12-14T14:52:34.667Z"
+    },
+    "model": "dashboard.district",
+    "pk": 109
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.668Z",
+      "name": "Wakiso",
+      "created": "2015-12-14T14:52:34.668Z"
+    },
+    "model": "dashboard.district",
+    "pk": 110
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.669Z",
+      "name": "Yumbe",
+      "created": "2015-12-14T14:52:34.669Z"
+    },
+    "model": "dashboard.district",
+    "pk": 111
+  },
+  {
+    "fields": {
+      "modified": "2015-12-14T14:52:34.670Z",
+      "name": "Zombo",
+      "created": "2015-12-14T14:52:34.670Z"
+    },
+    "model": "dashboard.district",
+    "pk": 112
+  }
+]
