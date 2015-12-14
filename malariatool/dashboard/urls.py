@@ -5,7 +5,8 @@ from dashboard.views.calendar import CalendarView
 from dashboard.views.document import DocumentListView, DocumentCreateView, DocumentDetailView
 from dashboard.views.home import Home
 from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDetailView
-from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView
+from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
+    TaskNoteUpdateView, TaskItemNotesListView
 from dashboard.views.users import UserCreateView, UserListView
 
 urlpatterns = [
@@ -24,7 +25,9 @@ urlpatterns = [
     url(r'^task/list/$', TaskListView.as_view(), name='task-list'),
     url(r'^task/(?P<pk>\d+)/$', TaskDetailView.as_view(), name='task-detail'),
     url(r'^task/(?P<pk>\d+)/additems$', TaskItemCreateView.as_view(), name='task-add-items'),
-    url(r'^task/(?P<pk>\d+)/update', TaskItemUpdateView.as_view(), name='task-update-items'),
+    url(r'^task/item/(?P<pk>\d+)/update', TaskItemUpdateView.as_view(), name='task-update-items'),
+    url(r'^task/note/(?P<pk>\d+)/update', TaskNoteUpdateView.as_view(), name='task-update-notes'),
+    url(r'^item/(?P<pk>\d+)/notes', TaskItemNotesListView.as_view(), name='subtask-notes-list'),
 
     url(r'^ip/list/$', IPListView.as_view(), name='ip-list'),
     url(r'^ip/new/$', IPCreateView.as_view(), name='ip-new'),

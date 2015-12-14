@@ -1,9 +1,9 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, ListView, DetailView, FormView
 
-from dashboard.forms.task import TaskForm, TaskItemForm
+from dashboard.forms.task import TaskForm, TaskItemForm, TaskNoteForm
 from dashboard.models import Task
-from dashboard.models.tasks import Item
+from dashboard.models.tasks import Item, Note
 
 
 class TaskCreateView(CreateView):
@@ -45,6 +45,7 @@ class TaskItemCreateView(CreateView):
     def form_valid(self, form):
         task = Task.objects.get(id=self.kwargs.get('pk'))
         form.instance.task = task
+        form.instance.save()
         return super(TaskItemCreateView, self).form_valid(form)
 
 
@@ -62,10 +63,40 @@ class TaskDetailView(DetailView):
 class TaskItemUpdateView(FormView):
     form_class = TaskItemForm
     template_name = "dashboard/update_tasks.html"
-    success_url = "/"
+
+    def get_success_url(self):
+        task = Task.objects.get(id=self.kwargs.get('pk'))
+        return reverse("dashboard:task-detail", kwargs={'pk': task.id})
 
     def form_valid(self, form):
         item = Item.objects.get(pk=self.kwargs.get('pk'))
         item.status = form.cleaned_data.get('status')
         item.save()
         return super(TaskItemUpdateView, self).form_valid(form)
+
+
+class TaskNoteUpdateView(FormView):
+    form_class = TaskNoteForm
+    template_name = "dashboard/update_notes.html"
+
+    def get_success_url(self):
+        item = Item.objects.get(id=self.kwargs.get('pk'))
+        return reverse("dashboard:task-detail", kwargs={'pk': item.task.id})
+
+    def form_valid(self, form):
+        item = Item.objects.get(id=self.kwargs.get('pk'))
+        print item
+        print item.id
+        form.instance.item = item
+        form.instance.save()
+        return super(TaskNoteUpdateView, self).form_valid(form)
+
+
+class TaskItemNotesListView(DetailView):
+    model = Item
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskItemNotesListView, self).get_context_data(**kwargs)
+        item = Item.objects.filter(id=self.kwargs.get('pk'))
+        context['notes'] = Note.objects.filter(item=item)
+        return context

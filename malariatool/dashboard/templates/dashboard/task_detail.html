@@ -4,13 +4,6 @@
 
 {% block content %}
     <div class="col-lg-12">
-
-        {% if user|can:'add_tasks' %}
-            <p>DOCUMENTS</p>
-            <a class="btn btn-default" href="{% url 'dashboard:task-add-items' object.id %}">ADD SUB TASKS</a>
-        {% endif %}
-        <br/>
-        <br/>
         <strong>Task:</strong>
         <br/>
         <strong>Overview:</strong>
@@ -24,8 +17,12 @@
                 <th>Sub-Tasks</th>
                 <th>Due Date</th>
                 <th>Status</th>
+                <th>Notes attached</th>
                 {% if user|can:'add_tasks' %}
-                    <th>Update</th>
+                    <th>Update Status</th>
+                {% endif %}
+                {% if user|can:'add_tasks' %}
+                    <th>Add Notes</th>
                 {% endif %}
             </tr>
             {% for sub_task in sub_tasks %}
@@ -33,11 +30,19 @@
                     <td>{{ sub_task.description }}</td>
                     <td>{{ sub_task.estimated_end_date }}</td>
                     <td>{{ sub_task.status|title }}</td>
+                    <td>{{ sub_task.notes }}
+                        {% if sub_task.notes > 1 %}
+                            <a href="{% url 'dashboard:subtask-notes-list' sub_task.id %}">View Notes</a>
+                        {% endif %}
+                    </td>
                     {% if user|can:'add_tasks' %}
                         <td><a class="btn btn-default"
                                href="{% url 'dashboard:task-update-items' sub_task.id %}">Update Status</a></td>
                     {% endif %}
-
+                    {% if user|can:'add_tasks' %}
+                        <td><a class="btn btn-default"
+                               href="{% url 'dashboard:task-update-notes' sub_task.id %}">Add Notes</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
 

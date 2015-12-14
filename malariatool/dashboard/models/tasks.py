@@ -46,5 +46,16 @@ class Item(TimeStampedModel):
     status = StatusField()
     task = models.ForeignKey(Task, related_name="taskitems")
 
+    def notes(self):
+        return len(self.taskitemnotes.all())
+
+    def __unicode__(self):
+        return str(self.id)
+
+
+class Note(TimeStampedModel):
+    item = models.ForeignKey(Item, related_name="taskitemnotes")
+    text = models.TextField()
+
     def __unicode__(self):
         return str(self.id)

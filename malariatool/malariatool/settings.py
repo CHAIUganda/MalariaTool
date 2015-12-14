@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django_extensions',
     'custom_user',
     'widget_tweaks',
+    'djrill',
 )
 
 AUTH_USER_MODEL = 'dashboard.User'
@@ -99,6 +100,9 @@ USE_TZ = True
 
 ROLEPERMISSIONS_MODULE = 'dashboard.roles'
 
+MANDRILL_API_KEY = os.environ.get('MANDRILL_API_KEY')
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+DEFAULT_FROM_EMAIL = "me@remosamuel.com"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 

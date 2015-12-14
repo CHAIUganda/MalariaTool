@@ -10,7 +10,7 @@ class DocumentListView(ListView):
 
 class DocumentCreateView(CreateView):
     model = Document
-    fields = ['display_name', 'file', 'description','type']
+    fields = ['display_name', 'file', 'description', 'type']
     success_url = reverse_lazy("dashboard:document-list")
 
     def form_valid(self, form):
