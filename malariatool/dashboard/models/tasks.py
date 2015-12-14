@@ -23,10 +23,28 @@ class Task(TimeStampedModel):
     type = models.CharField(max_length=150, choices=type_choices)
     ip = models.ForeignKey(IP, related_name="ip_tasks")
 
+    def percent_complete(self):
+        items = self.taskitems.all()
+        done_items_list = []
+        total_items = len(items)
+        for item in items:
+            if item.STATUS == "done":
+                done_items_list.append(item)
+        if total_items < 1:
+            total_items = 1
+        percentage = (float(len(done_items_list)) / total_items) * 100
+        return percentage
+
+    def __unicode__(self):
+        return str(self.id)
+
 
 class Item(TimeStampedModel):
-    STATUS = Choices('not started', 'ongoing', 'done')
+    STATUS = Choices('not_started', 'ongoing', 'done')
     description = models.TextField()
     estimated_end_date = models.DateField()
     status = StatusField()
     task = models.ForeignKey(Task, related_name="taskitems")
+
+    def __unicode__(self):
+        return str(self.id)

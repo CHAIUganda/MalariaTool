@@ -21,7 +21,7 @@ from dashboard import urls as dashboard_urls
 from malariatool import settings
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include(dashboard_urls, namespace = 'dashboard')),
+                  url(r'^admin/', include(admin.site.urls)),
+                  url(r'^', include(dashboard_urls, namespace='dashboard')),
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

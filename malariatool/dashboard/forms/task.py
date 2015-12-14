@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm
 
 from dashboard.models import Task, District, IP
+from dashboard.models.tasks import Item
 
 
 class TaskForm(ModelForm):
@@ -11,3 +12,7 @@ class TaskForm(ModelForm):
     class Meta:
         model = Task
         fields = ['start_date', 'end_date', 'type', 'overview']
+
+
+class TaskItemForm(forms.Form):
+    status = forms.ChoiceField(choices=Item.STATUS)
