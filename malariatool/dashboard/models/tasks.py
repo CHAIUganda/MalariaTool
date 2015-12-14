@@ -9,12 +9,12 @@ from dashboard.models.district import District
 
 class Task(TimeStampedModel):
     type_choices = (
-        ('training', 'Training'),
-        ('supervision', 'Supervision'),
-        ('bcc', 'BCC'),
-        ('net_distribution', 'New Distribution'),
-        ('iptp', 'IPTp'),
-        ('irs', 'IRS'),
+        ('Training', 'Training'),
+        ('Supervision', 'Supervision'),
+        ('BCC', 'BCC'),
+        ('New Distribution', 'New Distribution'),
+        ('IPTp', 'IPTp'),
+        ('IRS', 'IRS'),
     )
     start_date = models.DateField()
     end_date = models.DateField()
@@ -33,7 +33,7 @@ class Task(TimeStampedModel):
         if total_items < 1:
             total_items = 1
         percentage = (float(len(done_items_list)) / total_items) * 100
-        return round(percentage,1)
+        return round(percentage, 1)
 
     def __unicode__(self):
         return str(self.id)

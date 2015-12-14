@@ -10,8 +10,8 @@ class TaskCreateView(CreateView):
     model = Task
     form_class = TaskForm
 
-    def form_invalid(self, form):
-        return super(TaskCreateView, self).form_invalid(form)
+    def get_success_url(self):
+        return reverse("dashboard:task-add-items", kwargs={'pk': self.object.id})
 
     def form_valid(self, form):
         districts = form.cleaned_data.get("affected_districts")
@@ -19,7 +19,6 @@ class TaskCreateView(CreateView):
         form.instance.ip = ip
         for district in districts:
             form.instance.affected_districts = district
-        form.instance.save()
         return super(TaskCreateView, self).form_valid(form)
 
 
@@ -63,3 +62,10 @@ class TaskDetailView(DetailView):
 class TaskItemUpdateView(FormView):
     form_class = TaskItemForm
     template_name = "dashboard/update_tasks.html"
+    success_url = "/"
+
+    def form_valid(self, form):
+        item = Item.objects.get(pk=self.kwargs.get('pk'))
+        item.status = form.cleaned_data.get('status')
+        item.save()
+        return super(TaskItemUpdateView, self).form_valid(form)

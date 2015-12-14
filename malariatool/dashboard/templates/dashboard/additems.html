@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
-
+{% load permission_tags %}
 {% block content %}
     <div class="col-lg-5 clonedInput">
         <h2>Add sub-tasks </h2>
@@ -9,13 +9,22 @@
         {{ task.id }}
         {{ task.overview }}
         {{ task.start_date }}
-
-        <p>Items</p>
-        <ul>
+        <table class="table">
+            <tr>
+                <th>Sub-Tasks</th>
+                <th>Due Date</th>
+                <th>Status</th>
+            </tr>
             {% for item in items %}
-                <li>{{ item.description }} - {{ item.estimated_end_date }} <span class="label-success"> {{ item.status   }}</span></li>
+                <tr>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.estimated_end_date }}</td>
+                    <td>{{ item.status|title }}</td>
+
+                </tr>
             {% endfor %}
-        </ul>
+
+        </table>
         <form action="" method="post" enctype="multipart/form-data" id="add-task-form">{% csrf_token %}
             {% for field in form %}
 
