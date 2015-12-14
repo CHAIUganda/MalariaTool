@@ -18,8 +18,9 @@
                     <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.ip.name }}</a></td>
                     <td>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ task.percent_complete }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ task.percent_complete }}%">
-                                <span class="sr-only">{{ task.percent_complete }} Complete</span>
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ task.percent_complete }}"
+                                 aria-valuemin="0" aria-valuemax="100" style="width:{{ task.percent_complete }}%">
+                                <span style="text:white;"><strong>{{ task.percent_complete }}% </strong></span>
                             </div>
                         </div>
                     </td>

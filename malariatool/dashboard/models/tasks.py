@@ -28,12 +28,12 @@ class Task(TimeStampedModel):
         done_items_list = []
         total_items = len(items)
         for item in items:
-            if item.STATUS == "done":
+            if item.status == "done":
                 done_items_list.append(item)
         if total_items < 1:
             total_items = 1
         percentage = (float(len(done_items_list)) / total_items) * 100
-        return percentage
+        return round(percentage,1)
 
     def __unicode__(self):
         return str(self.id)

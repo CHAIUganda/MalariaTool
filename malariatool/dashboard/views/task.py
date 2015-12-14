@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, ListView, DetailView, FormView
+
 from dashboard.forms.task import TaskForm, TaskItemForm
 from dashboard.models import Task
 from dashboard.models.tasks import Item
@@ -62,4 +63,3 @@ class TaskDetailView(DetailView):
 class TaskItemUpdateView(FormView):
     form_class = TaskItemForm
     template_name = "dashboard/update_tasks.html"
-
