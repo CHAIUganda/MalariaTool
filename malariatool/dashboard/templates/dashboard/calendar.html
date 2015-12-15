@@ -1,40 +1,64 @@
-{% extends "base.html" %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'/>
+    <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.5.0/fullcalendar.min.css' rel='stylesheet'/>
+    <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.5.0/fullcalendar.print.css' rel='stylesheet'
+          media='print'/>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="{% static "js/moment.min.js" %}"></script>
+    <script src="{% static "js/fullcalendar.min.js" %}"></script>
+    {% block js %}
 
-{% block content %}
-    <div id='calendar'></div>
-{% endblock %}
+        <script type="application/javascript">
+            $(document).ready(function () {
 
-{% block js %}
-    <script type="application/javascript">
-        $(document).ready(function () {
-
-            $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,basicWeek,basicDay'
-                },
-                defaultDate: '2015-12-12',
-                editable: true,
-                eventLimit: true, // allow "more" link when too many events
-                events: [
-                    {
-                        title: 'All Day Event',
-                        start: '2015-12-01'
+                $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,basicWeek,basicDay'
                     },
-                    {
-                        title: 'Long Event',
-                        start: '2015-12-07',
-                        end: '2015-12-10'
-                    },
-                    {
-                        title: 'Conference',
-                        start: '2015-12-11',
-                        end: '2015-12-13'
-                    }
-                ]
+                    defaultDate: '2015-12-12',
+                    editable: true,
+                    eventLimit: true, // allow "more" link when too many events
+                    events: [
+                        {% for meeting in meetings %}
+                            {
+                                title: "{{ meeting.title }}",
+                                start: "{{ meeting.start|date:"c" }}",
+                                end: "{{ meeting.end|date:"c" }}"
+
+
+                            },
+                        {% endfor %}
+
+                    ]
+                });
+
             });
+        </script>
+    {% endblock %}
+    <style>
 
-        });
-    </script>
-{% endblock %}
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+            font-size: 14px;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id='calendar'></div>
+
+</body>
+</html>

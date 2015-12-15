@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^ip/new/$', IPCreateView.as_view(), name='ip-new'),
     url(r'^ip/(?P<pk>\d+)/$', IPDetailView.as_view(), name='ip-detail'),
 
-    url(r'^meeting/add$', MeetingCreateView.as_view(), name='meeting-new'),
+    url(r'^meeting/add/$', MeetingCreateView.as_view(), name='meeting-new'),
     url(r'^calendar/$', CalendarView.as_view(), name='calendar-view'),
 
     url(r'^login/$', 'django.contrib.auth.views.login', name='login',

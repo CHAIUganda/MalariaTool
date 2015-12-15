@@ -9,3 +9,7 @@ class Meeting(TimeStampedModel):
     start = models.DateTimeField()
     end = models.DateTimeField()
     attendees = models.ManyToManyField(User, related_name="attendees")
+
+    def __str__(self):
+        return self.title
+
