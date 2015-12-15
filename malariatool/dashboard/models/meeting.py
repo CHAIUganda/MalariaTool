@@ -6,6 +6,6 @@ from dashboard.models.user import User
 
 class Meeting(TimeStampedModel):
     title = models.CharField(max_length=255)
-    date = models.DateField()
-    time = models.TimeField()
-    attendees = models.ForeignKey(User, related_name="attendee")
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    attendees = models.ManyToManyField(User, related_name="attendees")
