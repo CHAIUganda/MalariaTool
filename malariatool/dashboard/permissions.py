@@ -19,7 +19,7 @@ def add_implemting_partners(role):
 
 @register_object_checker()
 def add_tasks(role):
-    if role == IPUserRole:
+    if role == IPUserRole or AdminRole:
         return True
     return False
 
