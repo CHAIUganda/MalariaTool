@@ -17,8 +17,10 @@ class TaskCreateView(CreateView):
         districts = form.cleaned_data.get("affected_districts")
         ip = form.cleaned_data.get("ip")
         form.instance.ip = ip
-        for district in districts:
-            form.instance.affected_districts = district
+        self.object = form.save()
+        districts_list = list(districts)
+        for district in districts_list:
+            self.object.affected_districts.add(district)
         return super(TaskCreateView, self).form_valid(form)
 
 
@@ -45,7 +47,6 @@ class TaskItemCreateView(CreateView):
     def form_valid(self, form):
         task = Task.objects.get(id=self.kwargs.get('pk'))
         form.instance.task = task
-        form.instance.save()
         return super(TaskItemCreateView, self).form_valid(form)
 
 

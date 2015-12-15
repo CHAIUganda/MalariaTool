@@ -25,7 +25,28 @@
                         </div>
                     </td>
                     <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.end_date|timeuntil }}</a></td>
-                    <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.affected_districts }}</a></td>
+                    <td>
+                        {% if task.affected_districts.all|length < 4 %}
+                            {% for district in task.affected_districts.all %}
+                                {{ district.name }},
+                            {% endfor %}
+                        {% elif task.affected_districts.all|length > 4 %}
+                            {% for district in task.affected_districts.all|slice:"4" %}
+                                {{ district.name }},
+                            {% endfor %}
+                            <a type="button" class="district-hover" data-container="body"
+                                    data-placement="bottom" data-trigger="hover"
+                                    data-content="
+                                {% for district in task.affected_districts.all %}
+                                        {{ district }}
+                                {% endfor %}
+                                        ">
+                                ....
+                            </a>
+                        {% endif %}
+
+
+                    </td>
                 </tr>
             {% empty %}
 

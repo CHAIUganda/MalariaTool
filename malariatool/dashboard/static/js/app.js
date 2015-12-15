@@ -12,3 +12,7 @@ $('#id_estimated_end_date').datepicker({
     autoclose: true,
     todayHighlight: true
 });
+
+
+$('.district-hover').popover();
+$('.district-hover').popover({trigger: "hover"});
