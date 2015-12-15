@@ -5,6 +5,7 @@ from dashboard.views.calendar import CalendarView
 from dashboard.views.document import DocumentListView, DocumentCreateView, DocumentDetailView
 from dashboard.views.home import Home
 from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDetailView
+from dashboard.views.map import MapView
 from dashboard.views.meeting import MeetingCreateView
 from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
     TaskNoteUpdateView, TaskItemNotesListView
@@ -36,6 +37,8 @@ urlpatterns = [
 
     url(r'^meeting/add/$', MeetingCreateView.as_view(), name='meeting-new'),
     url(r'^calendar/$', CalendarView.as_view(), name='calendar-view'),
+
+    url(r'^map/$', MapView.as_view(), name='map-view'),
 
     url(r'^login/$', 'django.contrib.auth.views.login', name='login',
         kwargs={'template_name': 'login.html'}),
