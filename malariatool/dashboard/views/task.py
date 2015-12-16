@@ -66,7 +66,8 @@ class TaskItemUpdateView(FormView):
     template_name = "dashboard/update_tasks.html"
 
     def get_success_url(self):
-        task = Task.objects.get(id=self.kwargs.get('pk'))
+        item = Item.objects.get(id=self.kwargs.get('pk'))
+        task = item.task
         return reverse("dashboard:task-detail", kwargs={'pk': task.id})
 
     def form_valid(self, form):

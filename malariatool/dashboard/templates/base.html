@@ -53,7 +53,7 @@
                 <li><a href="{% url 'dashboard:ip-list' %}">Partners</a></li>
                 <li><a href="{% url 'dashboard:document-list' %}">Documents</a></li>
                 <li><a href="{% url 'dashboard:calendar-view' %}">Calendar</a></li>
-                {% if user|can:'add_task' %}
+                {% if user|can:'add_tasks' or user|can:'update_tasks' %}
                     <li><a href="{% url 'dashboard:task-list' %}">Tasks</a></li>
                 {% endif %}
                 {% if user|can:'add_users' %}

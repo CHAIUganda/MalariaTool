@@ -6,13 +6,15 @@ class AdminRole(AbstractUserRole):
         'add_implementing_partner': True,
         'add_document': True,
         'add_users': True,
-        'add_tasks': True
+        'add_tasks': True,
+        'add_notes': True,
+
     }
 
 
 class IPUserRole(AbstractUserRole):
     available_permissions = {
-        'add_task': True,
         'add_document': True,
-        'update_tasks': True
+        'update_tasks': True,
+        'update_notes': True,
     }
