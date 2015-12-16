@@ -1,5 +1,5 @@
-from django.core.mail import EmailMessage
-from django.views.generic import CreateView, ListView
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import CreateView, ListView, DeleteView
 
 from dashboard.forms.users import UserForm
 from dashboard.models import User
@@ -30,3 +30,12 @@ class UserCreateView(CreateView):
 
 class UserListView(ListView):
     model = User
+
+    class Meta:
+        ordering = ["-id"]
+
+
+class UserDeleteView(DeleteView):
+    template_name = "dashboard/user_list.html"
+    model = User
+    success_url = reverse_lazy('dashboard:user-list')

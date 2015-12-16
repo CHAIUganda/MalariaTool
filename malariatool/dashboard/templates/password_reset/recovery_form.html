@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
+
 {% block content %}
-    <div class="col-lg-5">
+
+
+    <div class="col-lg-offset-3 col-lg-5">
         <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
             {% for field in form %}
 
@@ -18,9 +21,11 @@
                 </div>
 
             {% endfor %}
+            <br />
 
-            <input type="submit" value="Create Task" class="btn btn-default"/>
+            <input type="submit" value="Reset Password" class="btn btn-default"/>
             </div>
         </form>
     </div>
+
 {% endblock %}

@@ -9,7 +9,7 @@ from dashboard.views.map import MapView
 from dashboard.views.meeting import MeetingCreateView
 from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
     TaskNoteUpdateView, TaskItemNotesListView
-from dashboard.views.users import UserCreateView, UserListView
+from dashboard.views.users import UserCreateView, UserListView, UserDeleteView
 
 urlpatterns = [
     url(r'^$', Home.as_view(), name='home'),
@@ -22,6 +22,7 @@ urlpatterns = [
 
     url(r'^user/new/$', UserCreateView.as_view(), name='user-new'),
     url(r'^user/list/$', UserListView.as_view(), name='user-list'),
+    url(r'^user/delete/(?P<pk>\d+)/$', UserDeleteView.as_view(), name='user-delete'),
 
     url(r'^task/new/$', TaskCreateView.as_view(), name='task-new'),
     url(r'^task/list/$', TaskListView.as_view(), name='task-list'),
@@ -35,7 +36,7 @@ urlpatterns = [
     url(r'^ip/new/$', IPCreateView.as_view(), name='ip-new'),
     url(r'^ip/(?P<pk>\d+)/$', IPDetailView.as_view(), name='ip-detail'),
 
-    url(r'^meeting/add/$', MeetingCreateView.as_view(), name='meeting-new'),
+    url(r'^meeting/new/$', MeetingCreateView.as_view(), name='meeting-new'),
     url(r'^calendar/$', CalendarView.as_view(), name='calendar-view'),
 
     url(r'^map/$', MapView.as_view(), name='map-view'),

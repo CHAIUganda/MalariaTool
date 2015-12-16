@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'custom_user',
     'widget_tweaks',
     'djrill',
+    'password_reset',
 )
 
 AUTH_USER_MODEL = 'dashboard.User'
