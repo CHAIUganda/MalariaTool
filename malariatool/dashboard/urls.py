@@ -9,7 +9,7 @@ from dashboard.views.map import MapView
 from dashboard.views.meeting import MeetingCreateView
 from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
     TaskNoteUpdateView, TaskItemNotesListView
-from dashboard.views.users import UserCreateView, UserListView, UserDeleteView
+from dashboard.views.users import UserCreateView, UserListView, UserDeleteView, UserUpdateView
 
 urlpatterns = [
     url(r'^$', Home.as_view(), name='home'),
@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^user/new/$', UserCreateView.as_view(), name='user-new'),
     url(r'^user/list/$', UserListView.as_view(), name='user-list'),
     url(r'^user/delete/(?P<pk>\d+)/$', UserDeleteView.as_view(), name='user-delete'),
+    url(r'^user/edit/(?P<pk>\d+)/$', UserUpdateView.as_view(), name='user-edit'),
 
     url(r'^task/new/$', TaskCreateView.as_view(), name='task-new'),
     url(r'^task/list/$', TaskListView.as_view(), name='task-list'),

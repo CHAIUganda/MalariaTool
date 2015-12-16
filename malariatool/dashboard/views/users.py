@@ -2,7 +2,7 @@ from django.contrib.sites.models import Site, RequestSite
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse_lazy
 from django.template import loader
-from django.views.generic import CreateView, ListView, DeleteView
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 from password_reset.utils import get_username
 
 from dashboard.forms.users import UserForm
@@ -58,3 +58,9 @@ class UserDeleteView(DeleteView):
     template_name = "dashboard/user_list.html"
     model = User
     success_url = reverse_lazy('dashboard:user-list')
+
+
+class UserUpdateView(UpdateView):
+    model = User
+    fields = ['first_name', 'last_name', 'ip']
+    success_url = reverse_lazy("dashboard:user-list")
