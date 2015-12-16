@@ -1,0 +1,8 @@
+Hello {{ username}},
+
+You have added as user on the National Malaria Control Website.
+
+Username: {{ username }}
+Password: {{ pass }}
+
+Please login in here: http{% if secure %}s{% endif %}://{{ site.domain }}{% url "dashboard:login" %}
