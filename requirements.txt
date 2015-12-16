@@ -20,3 +20,4 @@ simplegeneric==0.8.1
 six==1.10.0
 traitlets==4.0.0
 djrill==2.0
+django-password-reset==0.8.1
