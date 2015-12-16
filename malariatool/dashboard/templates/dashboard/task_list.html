@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load permission_tags %}
 {% block content %}
     <div class="col-lg-12">
         <table id="task_table" class="display table table-striped table-bordered" cellspacing="0" width="100%">
@@ -9,6 +10,9 @@
                 <td>Percent Complete</td>
                 <td>Remaining Time</td>
                 <td>Affected Districts</td>
+                {% if user|can:'add_tasks' %}
+                    <td>Manage</td>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -35,8 +39,8 @@
                                 {{ district.name }},
                             {% endfor %}
                             <a type="button" class="district-hover" data-container="body"
-                                    data-placement="bottom" data-trigger="hover"
-                                    data-content="
+                               data-placement="bottom" data-trigger="hover"
+                               data-content="
                                 {% for district in task.affected_districts.all %}
                                         {{ district }}
                                 {% endfor %}
@@ -47,9 +51,39 @@
 
 
                     </td>
-                </tr>
-            {% empty %}
+                    {% if user|can:'add_tasks' %}
+                        <td>
+                            <a href="{% url "dashboard:task-edit" task.id %}" class="btn btn-default">EDIT</a>
+                            <a href="#" class="btn btn-default" data-toggle="modal"
+                               data-target="#delete-task-{{ task.id }}">DELETE</a>
+                        </td>
 
+                        </tr>
+                        <div class="modal fade" id="delete-task-{{ task.id }}" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form method="POST" action="{% url "dashboard:task-delete" task.id %}">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                                    aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            {% csrf_token %}
+                                            Are you sure you could like to delete this
+                                            task {{ task.overview }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="submit" class="btn btn-default">Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
             {% endfor %}
             </tbody>
         </table>

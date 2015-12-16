@@ -1,5 +1,5 @@
-from django.core.urlresolvers import reverse
-from django.views.generic import CreateView, ListView, DetailView, FormView
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.views.generic import CreateView, ListView, DetailView, FormView, UpdateView, DeleteView
 
 from dashboard.forms.task import TaskForm, TaskItemForm, TaskNoteForm
 from dashboard.models import Task
@@ -102,3 +102,15 @@ class TaskItemNotesListView(DetailView):
         item = Item.objects.filter(id=self.kwargs.get('pk'))
         context['notes'] = Note.objects.filter(item=item)
         return context
+
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    fields = ['start_date', 'end_date', 'type', 'overview']
+    success_url = reverse_lazy("dashboard:task-list")
+
+
+class TaskDeleteView(DeleteView):
+    template_name = "dashboard/task_list.html"
+    model = Task
+    success_url = reverse_lazy('dashboard:task-list')

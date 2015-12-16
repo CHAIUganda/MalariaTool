@@ -8,7 +8,7 @@ from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDet
 from dashboard.views.map import MapView
 from dashboard.views.meeting import MeetingCreateView
 from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
-    TaskNoteUpdateView, TaskItemNotesListView
+    TaskNoteUpdateView, TaskItemNotesListView, TaskUpdateView, TaskDeleteView
 from dashboard.views.users import UserCreateView, UserListView, UserDeleteView, UserUpdateView
 
 urlpatterns = [
@@ -28,6 +28,9 @@ urlpatterns = [
     url(r'^task/new/$', TaskCreateView.as_view(), name='task-new'),
     url(r'^task/list/$', TaskListView.as_view(), name='task-list'),
     url(r'^task/(?P<pk>\d+)/$', TaskDetailView.as_view(), name='task-detail'),
+    url(r'^task/edit/(?P<pk>\d+)/$', TaskUpdateView.as_view(), name='task-edit'),
+    url(r'^task/delete/(?P<pk>\d+)/$', TaskDeleteView.as_view(), name='task-delete'),
+
     url(r'^task/(?P<pk>\d+)/additems$', TaskItemCreateView.as_view(), name='task-add-items'),
     url(r'^task/item/(?P<pk>\d+)/update', TaskItemUpdateView.as_view(), name='task-update-items'),
     url(r'^task/note/(?P<pk>\d+)/update', TaskNoteUpdateView.as_view(), name='task-update-notes'),
