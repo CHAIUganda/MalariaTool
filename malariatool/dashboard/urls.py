@@ -6,7 +6,7 @@ from dashboard.views.document import DocumentListView, DocumentCreateView, Docum
 from dashboard.views.home import Home
 from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDetailView
 from dashboard.views.map import MapView
-from dashboard.views.meeting import MeetingCreateView
+from dashboard.views.meeting import MeetingCreateView, MeetingAddAttendeesView
 from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
     TaskNoteUpdateView, TaskItemNotesListView, TaskUpdateView, TaskDeleteView
 from dashboard.views.users import UserCreateView, UserListView, UserDeleteView, UserUpdateView
@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^ip/(?P<pk>\d+)/$', IPDetailView.as_view(), name='ip-detail'),
 
     url(r'^meeting/new/$', MeetingCreateView.as_view(), name='meeting-new'),
+    url(r'^meeting/(?P<pk>\d+)/attendees/$', MeetingAddAttendeesView.as_view(), name='meeting-add-attendees'),
     url(r'^calendar/$', CalendarView.as_view(), name='calendar-view'),
 
     url(r'^map/$', MapView.as_view(), name='map-view'),
