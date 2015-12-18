@@ -1,0 +1,8 @@
+Hello {{ username}},
+
+You have invited to attend a meeting on {{ meeting.title }} from the National Malaria Control Website.
+
+Meeting: {{ meeting.title }}
+Start: {{ meeting.start }}
+End: {{ meeting.end }}
+Location: {{ meeting.location }}

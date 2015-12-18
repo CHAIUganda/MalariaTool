@@ -84,7 +84,7 @@
             {% endfor %}
 
             <input type="submit" class="btn btn-purple" value="Add Attendees"/>
-            <a href="{% url "dashboard:meeting-add-attendees" meeting.id %}" class="btn btn-purple">Done and Nofity
+            <a href="{% url "dashboard:meeting-notify-attendees" meeting.id %}" class="btn btn-purple">Done and Nofity
                 Attendees</a>
 
         </form>
