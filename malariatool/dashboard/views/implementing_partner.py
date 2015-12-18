@@ -1,11 +1,14 @@
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import CreateView, DetailView
 
+from dashboard.forms.implementing_partner import IPForm
 from dashboard.models import IP, User
+from dashboard.views.document import FormListView
 
 
-class IPListView(ListView):
+class IPListView(FormListView):
     model = IP
+    form_class = IPForm
 
 
 class IPCreateView(CreateView):

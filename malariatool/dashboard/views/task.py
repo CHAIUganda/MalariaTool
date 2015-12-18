@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, DetailView, FormView, Upd
 from dashboard.forms.task import TaskForm, TaskItemForm, TaskNoteForm
 from dashboard.models import Task
 from dashboard.models.tasks import Item, Note
+from dashboard.views.document import FormListView
 
 
 class TaskCreateView(CreateView):
@@ -24,8 +25,9 @@ class TaskCreateView(CreateView):
         return super(TaskCreateView, self).form_valid(form)
 
 
-class TaskListView(ListView):
+class TaskListView(FormListView):
     model = Task
+    form_class = TaskForm
 
 
 class TaskItemCreateView(CreateView):

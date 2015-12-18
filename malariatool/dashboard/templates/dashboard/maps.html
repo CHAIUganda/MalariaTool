@@ -31,7 +31,7 @@
             map.setView(new L.LatLng(1.395, 32.322), 7);
             map.addLayer(osm);
             $.getJSON("/static/js/districts.json", function (data) {
-
+                console.log(data);
                 var geojson = L.geoJson(data, {
                     onEachFeature: function (feature, layer) {
                         layer.bindPopup(feature.properties.name);

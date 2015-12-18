@@ -1,8 +1,14 @@
 {% extends "base.html" %}
-
+{% load permission_tags %}
+{% load widget_tweaks %}
 
 {% block content %}
     <div class="col-lg-12 ">
+        {% if user|can:'add_tasks' %}
+            <p><a class="btn btn-purple pull-right" data-toggle="modal" data-target="#create-ip">ADD IPs</a></p>
+            <br/>
+        {% endif %}
+        <br/>
         <table id="ip_table" class="display table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>
@@ -21,6 +27,44 @@
             {% endfor %}
             </tbody>
         </table>
+
+        <div class="modal fade" id="create-ip" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="{% url "dashboard:document-new" %}" method="post"
+                          enctype="multipart/form-data">{% csrf_token %}
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">New Document</h4>
+                        </div>
+                        <div class="modal-body">
+                            {% for field in form %}
+
+                                <div class="form-group">
+                                    <label for=id_{{ field.name }}">{{ field.label }}</label>
+                                    {{ field|add_class:"form-control" }}
+                                    {% if field.errors %}
+                                        {% for error in field.errors %}
+                                            <p class="alert-danger"> {{ error }}</p>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                            {% endfor %}
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-purple" data-dismiss="modal">Close
+                            </button>
+                            <input type="submit" value="Create IP" class="btn btn-purple"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

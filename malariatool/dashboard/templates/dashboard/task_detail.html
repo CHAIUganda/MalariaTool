@@ -36,11 +36,11 @@
                         {% endif %}
                     </td>
                     {% if user|can:'update_tasks' and object.ip == user.ip or user|can:'add_tasks' %}
-                        <td><a class="btn btn-default"
+                        <td><a class="btn btn-purple"
                                href="{% url 'dashboard:task-update-items' sub_task.id %}">Update Status</a></td>
                     {% endif %}
                     {% if user|can:'update_tasks' and object.ip == user.ip or user|can:'add_tasks' %}
-                        <td><a class="btn btn-default"
+                        <td><a class="btn btn-purple"
                                href="{% url 'dashboard:task-update-notes' sub_task.id %}">Add Notes</a></td>
                     {% endif %}
                 </tr>
@@ -48,7 +48,7 @@
 
         </table>
         {% if user|can:'add_task' %}
-            <a class="btn btn-default" href="{% url 'dashboard:task-add-items' object.id %}">ADD SUB TASKS</a>
+            <a class="btn btn-purple" href="{% url 'dashboard:task-add-items' object.id %}">ADD SUB TASKS</a>
 
         {% endif %}
 
