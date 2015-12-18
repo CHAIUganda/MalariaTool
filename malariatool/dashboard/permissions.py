@@ -43,3 +43,10 @@ def add_notes(role):
     if role == IPUserRole or AdminRole:
         return True
     return False
+
+
+@register_object_checker()
+def add_meetings(role):
+    if role == AdminRole:
+        return True
+    return False

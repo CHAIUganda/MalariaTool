@@ -8,6 +8,7 @@ class AdminRole(AbstractUserRole):
         'add_users': True,
         'add_tasks': True,
         'add_notes': True,
+        'add_meetings': True
 
     }
 

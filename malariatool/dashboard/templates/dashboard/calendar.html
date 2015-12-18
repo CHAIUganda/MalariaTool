@@ -77,7 +77,8 @@
                         {
                             title: "{{ meeting.title }}",
                             start: "{{ meeting.start|date:"c" }}",
-                            end: "{{ meeting.end|date:"c" }}"
+                            end: "{{ meeting.end|date:"c" }}",
+                            url: "{% url "dashboard:meeting-add-attendees" meeting.id %}"
 
 
                         },

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
+{% load permission_tags %}
 {% block content %}
     <div class="col-lg-6">
         <p>{{ meeting.title }}</p>
@@ -13,14 +14,19 @@
         <table class="table">
             <tr>
                 <th>Email</th>
+                {% if user|can:'add_meetings' %}
                 <th></th>
+                {%  endif %}
             </tr>
             {% for attendee in meeting.attendees.all %}
                 <tr>
                     <td>{{ attendee.email }}</td>
-                    <td><a href="#" data-toggle="modal" data-target="#remove-attendee-{{ attendee.id }}"><span
-                            class="glyphicon glyphicon-remove"></span></a>
-                    </td>
+                    {% if user|can:'add_meetings' %}
+                        <td><a href="#" data-toggle="modal" data-target="#remove-attendee-{{ attendee.id }}"><span
+                                class="glyphicon glyphicon-remove"></span></a>
+                        </td>
+
+                    {% endif %}
 
                 </tr>
 
@@ -28,7 +34,8 @@
                      aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <form action="{% url "dashboard:meeting-remove-attendees" meeting.id attendee.id %}" method="post"
+                            <form action="{% url "dashboard:meeting-remove-attendees" meeting.id attendee.id %}"
+                                  method="post"
                                   enctype="multipart/form-data">{% csrf_token %}
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -36,7 +43,8 @@
                                     <h4 class="modal-title" id="myModalLabel">Remove Attendee</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Are you sure you want to remove {{ attendee.email }} from this meeting invitation</p>
+                                    <p>Are you sure you want to remove {{ attendee.email }} from this meeting
+                                        invitation</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-purple" data-dismiss="modal">Close
@@ -56,7 +64,8 @@
         </table>
     </div>
 
-    <div class="col-lg-5">
+    {% if user|can:'add_meetings' %}
+           <div class="col-lg-5">
         <p>Add Attendees</p>
 
         <form action="" method="post" enctype="multipart/form-data" id="add-task-form">{% csrf_token %}
@@ -80,6 +89,10 @@
 
         </form>
     </div>
+    {% endif %}
+
+
+
 
 
 {% endblock %}
