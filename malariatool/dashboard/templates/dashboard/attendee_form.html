@@ -13,16 +13,45 @@
         <table class="table">
             <tr>
                 <th>Email</th>
+                <th></th>
             </tr>
             {% for attendee in meeting.attendees.all %}
                 <tr>
                     <td>{{ attendee.email }}</td>
+                    <td><a href="#" data-toggle="modal" data-target="#remove-attendee-{{ attendee.id }}"><span
+                            class="glyphicon glyphicon-remove"></span></a>
+                    </td>
 
                 </tr>
+
+                <div class="modal fade" id="remove-attendee-{{ attendee.id }}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="{% url "dashboard:meeting-remove-attendees" meeting.id attendee.id %}" method="post"
+                                  enctype="multipart/form-data">{% csrf_token %}
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Remove Attendee</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to remove {{ attendee.email }} from this meeting invitation</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-purple" data-dismiss="modal">Close
+                                    </button>
+                                    <input type="submit" value="Remove Attendee" class="btn btn-purple"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             {% empty %}
                 <tr>
                     <td>No attendees yet</td>
                 </tr>
+
             {% endfor %}
         </table>
     </div>
@@ -46,8 +75,15 @@
             {% endfor %}
 
             <input type="submit" class="btn btn-purple" value="Add Attendees"/>
-            <a href="{% url "dashboard:meeting-add-attendees" meeting.id %}" class="btn btn-purple">Done</a>
+            <a href="{% url "dashboard:meeting-add-attendees" meeting.id %}" class="btn btn-purple">Done and Nofity
+                Attendees</a>
 
         </form>
     </div>
+
+
+{% endblock %}
+
+{% block js %}
+
 {% endblock %}

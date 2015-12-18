@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse_lazy, reverse
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, DeleteView
 
 from dashboard.forms.meeting import AddAttendee
 from dashboard.models import Meeting
@@ -37,8 +37,14 @@ class MeetingAddAttendeesView(FormView):
         for ip in ips:
             attendees.extend(list(ip.ip_user.values_list('email', flat=True)))
         meeting = Meeting.objects.get(id=self.kwargs.get('pk'))
-        print meeting.title
-        print attendees
         for attendee in attendees:
             meeting.attendees.add(Attendee.objects.create(email=attendee))
         return super(MeetingAddAttendeesView, self).form_valid(form)
+
+
+class MeetingAttendeeDeleteView(DeleteView):
+    model = Attendee
+
+    def get_success_url(self):
+        print self.kwargs.get('meeting_id')
+        return reverse("dashboard:meeting-add-attendees", kwargs={'pk': self.kwargs.get('meeting_id')})

@@ -5,6 +5,7 @@ $('#id_start_date, #id_end_date').datepicker({
 });
 
 $('#id_affected_districts').select2();
+$('#id_ip').select2();
 
 
 $('#id_estimated_end_date').datepicker({
