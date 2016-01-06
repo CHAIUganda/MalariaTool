@@ -86,4 +86,4 @@ class MeetingAttendeesNotifyView(RedirectView):
         subject = loader.render_to_string(self.email_subject_template_name,
                                           context).strip()
         send_mail(subject=subject, message=body, from_email="National Malaria Control<me@remosamuel.com>",
-                  recipient_list=[attendee],fail_silently=True)
+                  recipient_list=[attendee], fail_silently=True)
