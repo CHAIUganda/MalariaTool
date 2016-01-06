@@ -9,12 +9,12 @@ from dashboard.models.district import District
 
 class Task(TimeStampedModel):
     type_choices = (
-        ('Training', 'Training'),
-        ('Supervision', 'Supervision'),
-        ('BCC', 'BCC'),
-        ('New Distribution', 'New Distribution'),
-        ('IPTp', 'IPTp'),
-        ('IRS', 'IRS'),
+        ('training', 'Training'),
+        ('supervision', 'Supervision'),
+        ('bcc', 'BCC'),
+        ('new_distribution', 'New Distribution'),
+        ('iptp', 'IPTp'),
+        ('irs', 'IRS'),
     )
     start_date = models.DateField()
     end_date = models.DateField()

@@ -1,8 +1,9 @@
+from braces.views import JSONResponseMixin
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView, FormView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, FormView, UpdateView, DeleteView, View
 
 from dashboard.forms.task import TaskForm, TaskItemForm, TaskNoteForm
-from dashboard.models import Task
+from dashboard.models import Task, District
 from dashboard.models.tasks import Item, Note
 from dashboard.views.document import FormListView
 
@@ -116,3 +117,12 @@ class TaskDeleteView(DeleteView):
     template_name = "dashboard/task_list.html"
     model = Task
     success_url = reverse_lazy('dashboard:task-list')
+
+
+class TaskFilter(JSONResponseMixin, View):
+    json_dumps_kwargs = {u"indent": 2}
+
+    def dispatch(self, request, *args, **kwargs):
+        districts_ids = Task.objects.filter(type=kwargs.get('type')).values_list('affected_districts', flat=True)
+        districts = District.objects.filter(pk__in=districts_ids).values_list('name', flat=True)
+        return self.render_json_response(list(districts))
