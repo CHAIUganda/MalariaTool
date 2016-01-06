@@ -11,12 +11,12 @@
     <div>
         <p>Filters</p>
         <select name="task" id="tasks">
-            <option value="Training">Training</option>
-            <option value="Supervision">Supervision</option>
-            <option value="BCC">BCC</option>
-            <option value="New Distribution">New Distribution</option>
-            <option value="IPTp">IPTp</option>
-            <option value="IRS">IRS</option>
+            <option value="supervision">Supervision</option>
+            <option value="bcc">BCC</option>
+            <option value="training">Training</option>
+            <option value="new_distribution">New Distribution</option>
+            <option value="iptp">IPTp</option>
+            <option value="irs">IRS</option>
         </select>
 
     </div>
@@ -34,6 +34,7 @@
         var ajaxRequest;
         var plotlist;
         var plotlayers = [];
+        var districts = [];
 
         function initmap() {
             // set up the map
@@ -69,39 +70,45 @@
             map.setView(new L.LatLng(1.395, 32.322), 7);
             map.addLayer(osm);
             $.getJSON("/static/js/districts.json", function (data) {
-                console.log(data);
-                var geojson = L.geoJson(data, {
+                var tiles = L.geoJson(data, {
                     style: style(),
                     onEachFeature: function (feature, layer) {
                         layer.bindPopup(feature.properties.name);
                         layer._polygonId = feature.id;
-                        console.log(layer._polygonId);
                     }
 
                 });
-                geojson.addTo(map)
+                tiles.addTo(map)
             });
+            $('#tasks').on('change', function (data) {
+                map.removeLayer('geojson');
+                $.getJSON("/task/" + $(this).val(), function (data) {
+                    districts = data;
+                    $.getJSON("/static/js/districts2.json", function (data) {
+                        var geojson = L.geoJson(data, {
+                            style: style2(),
+                            onEachFeature: function (feature, layer) {
+                                layer.bindPopup(feature.properties.name);
+                                layer._polygonId = feature.id;
+                            },
+                            filter: function (feature, layer) {
+                                return $.inArray(feature.properties.name, districts) > -1;
+                            }
 
-            $.getJSON("/static/js/districts2.json", function (data) {
-                console.log(data);
-                var geojson = L.geoJson(data, {
-                    style: style2(),
-                    onEachFeature: function (feature, layer) {
-                        layer.bindPopup(feature.properties.name);
-                        layer._polygonId = feature.id;
-                        console.log(layer._polygonId);
-                    },
-                    filter: function (feature, layer) {
-                        categories = ["Mbarara","Lwengo","Kabale","Buhweju"];
-                        return $.inArray(feature.properties.name, categories) > -1;
-                    }
-
+                        });
+                        geojson.addTo(map);
+                    });
                 });
-                geojson.addTo(map)
+
             });
+
 
         }
         initmap();
+
+        $(document).ready(function () {
+
+        });
 
     </script>
 {% endblock %}
