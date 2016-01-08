@@ -1,8 +1,9 @@
+from braces.views import JSONResponseMixin
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, View
 
 from dashboard.forms.implementing_partner import IPForm
-from dashboard.models import IP, User
+from dashboard.models import IP, User, Task, District
 from dashboard.views.document import FormListView
 
 
@@ -21,8 +22,18 @@ class IPDetailView(DetailView):
     model = IP
 
     def get_context_data(self, **kwargs):
-        context =  super(IPDetailView, self).get_context_data(**kwargs)
+        context = super(IPDetailView, self).get_context_data(**kwargs)
         ip = kwargs.get('object')
-        context['users']  = User.objects.filter(ip=ip.id)
+        context['users'] = User.objects.filter(ip=ip.id)
         return context
 
+
+class IPFilterView(JSONResponseMixin, View):
+    json_dumps_kwargs = {u"indent": 2}
+
+    def dispatch(self, request, *args, **kwargs):
+        # Task.objects.filter(ip=ip).values_list('affected_districts', flat=True)
+        ip = IP.objects.get(id=kwargs.get('pk'))
+        districts_ids = Task.objects.filter(ip=ip).values_list('affected_districts', flat=True)
+        districts = District.objects.filter(pk__in=districts_ids).values_list('name', flat=True)
+        return self.render_json_response(list(districts))

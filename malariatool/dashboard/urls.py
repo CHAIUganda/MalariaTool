@@ -4,7 +4,7 @@ from dashboard.views.admin_dashboard import AdminDashboardView
 from dashboard.views.calendar import CalendarView
 from dashboard.views.document import DocumentListView, DocumentCreateView, DocumentDetailView
 from dashboard.views.home import Home
-from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDetailView
+from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDetailView, IPFilterView
 from dashboard.views.map import MapView
 from dashboard.views.meeting import MeetingCreateView, MeetingAddAttendeesView, MeetingAttendeeDeleteView, \
     MeetingAttendeesNotifyView
@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^ip/list/$', IPListView.as_view(), name='ip-list'),
     url(r'^ip/new/$', IPCreateView.as_view(), name='ip-new'),
     url(r'^ip/(?P<pk>\d+)/$', IPDetailView.as_view(), name='ip-detail'),
+    url(r'^ip/(?P<pk>\d+)/districts/$', IPFilterView.as_view(), name='ip-filter'),
 
     url(r'^meeting/new/$', MeetingCreateView.as_view(), name='meeting-new'),
     url(r'^meeting/(?P<pk>\d+)/attendees/$', MeetingAddAttendeesView.as_view(), name='meeting-add-attendees'),

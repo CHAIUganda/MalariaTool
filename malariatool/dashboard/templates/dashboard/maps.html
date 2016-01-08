@@ -8,16 +8,28 @@
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="{% static "js/leaflet.ajax.min.js" %}"></script>
 
-    <div>
-        <p>Filters</p>
-        <select name="task" id="tasks">
-            <option value="supervision">Supervision</option>
-            <option value="bcc">BCC</option>
-            <option value="training">Training</option>
-            <option value="new_distribution">New Distribution</option>
-            <option value="iptp">IPTp</option>
-            <option value="irs">IRS</option>
-        </select>
+    <div class="col-lg-offset-1">
+        <div>
+            <label for="tasks">Filters</label>
+            <select name="task" id="tasks">
+                <option value="#">Filter by Tasks</option>
+                <option value="supervision">Supervision</option>
+                <option value="bcc">BCC</option>
+                <option value="training">Training</option>
+                <option value="new_distribution">New Distribution</option>
+                <option value="iptp">IPTp</option>
+                <option value="irs">IRS</option>
+            </select>
+
+            <select name="ip" id="ips">
+                <option value="#">Filter by IPs</option>
+                {% for ip in ips %}
+                    <option value="{{ ip.id }}">{{ ip }}</option>
+
+                {% endfor %}
+
+            </select>
+        </div>
 
     </div>
     <div id="map" class="col-lg-offset-1 col-lg-10" style="height: 600px"></div>
@@ -35,6 +47,7 @@
         var plotlist;
         var plotlayers = [];
         var districts = [];
+        var geojson;
 
         function initmap() {
             // set up the map
@@ -67,6 +80,16 @@
                 };
             }
 
+            function style3(feature) {
+                return {
+                    fillColor: '#41ab5d',
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.5
+                };
+            }
             map.setView(new L.LatLng(1.395, 32.322), 7);
             map.addLayer(osm);
             $.getJSON("/static/js/districts.json", function (data) {
@@ -81,12 +104,38 @@
                 tiles.addTo(map)
             });
             $('#tasks').on('change', function (data) {
-                map.removeLayer('geojson');
+                if (map.hasLayer(geojson)) {
+                    map.removeLayer(geojson);
+                }
                 $.getJSON("/task/" + $(this).val(), function (data) {
                     districts = data;
                     $.getJSON("/static/js/districts2.json", function (data) {
-                        var geojson = L.geoJson(data, {
+                        geojson = L.geoJson(data, {
                             style: style2(),
+                            onEachFeature: function (feature, layer) {
+                                layer.bindPopup(feature.properties.name);
+                                layer._polygonId = feature.id;
+                            },
+                            filter: function (feature, layer) {
+                                return $.inArray(feature.properties.name, districts) > -1;
+                            }
+
+                        });
+                        geojson.addTo(map);
+                    });
+                });
+
+            });
+
+            $('#ips').on('change', function (data) {
+                if (map.hasLayer(geojson)) {
+                    map.removeLayer(geojson);
+                }
+                $.getJSON("/ip/" + $(this).val() + "/districts/", function (data) {
+                    districts = data;
+                    $.getJSON("/static/js/districts2.json", function (data) {
+                        geojson = L.geoJson(data, {
+                            style: style3(),
                             onEachFeature: function (feature, layer) {
                                 layer.bindPopup(feature.properties.name);
                                 layer._polygonId = feature.id;
@@ -105,10 +154,6 @@
 
         }
         initmap();
-
-        $(document).ready(function () {
-
-        });
 
     </script>
 {% endblock %}

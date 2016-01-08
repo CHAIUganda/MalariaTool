@@ -123,6 +123,7 @@ class TaskFilter(JSONResponseMixin, View):
     json_dumps_kwargs = {u"indent": 2}
 
     def dispatch(self, request, *args, **kwargs):
+        # Task.objects.filter(ip=ip).values_list('affected_districts', flat=True)
         districts_ids = Task.objects.filter(type=kwargs.get('type')).values_list('affected_districts', flat=True)
         districts = District.objects.filter(pk__in=districts_ids).values_list('name', flat=True)
         return self.render_json_response(list(districts))
