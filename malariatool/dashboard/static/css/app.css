@@ -76,5 +76,15 @@
 body {
     padding-top: 70px;
     padding-bottom: 30px;
+    font-size: 13px;
 }
 
+.text-percentage-highlight{
+    font-size: 60px;
+}
+
+.subtitle-text {
+    font-size: 20px;
+    letter-spacing: 2px;
+
+}
