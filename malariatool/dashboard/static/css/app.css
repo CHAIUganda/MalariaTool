@@ -86,5 +86,9 @@ body {
 .subtitle-text {
     font-size: 20px;
     letter-spacing: 2px;
+}
 
+.profile-picture{
+    width: 90px;
+    height: 90px;
 }

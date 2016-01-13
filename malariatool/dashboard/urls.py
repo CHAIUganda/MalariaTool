@@ -8,6 +8,7 @@ from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDet
 from dashboard.views.map import MapView
 from dashboard.views.meeting import MeetingCreateView, MeetingAddAttendeesView, MeetingAttendeeDeleteView, \
     MeetingAttendeesNotifyView
+from dashboard.views.members import MemberCreateView
 from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
     TaskNoteUpdateView, TaskItemNotesListView, TaskUpdateView, TaskDeleteView, TaskFilter
 from dashboard.views.users import UserCreateView, UserListView, UserDeleteView, UserUpdateView
@@ -49,6 +50,8 @@ urlpatterns = [
     url(r'^(?P<meeting_id>\d+)/attendees/(?P<pk>\d+)/delete/$', MeetingAttendeeDeleteView.as_view(),
         name='meeting-remove-attendees'),
     url(r'^calendar/$', CalendarView.as_view(), name='calendar-view'),
+
+    url(r'^member/new/$', MemberCreateView.as_view(), name='member-new'),
 
     url(r'^map/$', MapView.as_view(), name='map-view'),
 
