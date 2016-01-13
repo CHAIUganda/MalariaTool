@@ -19,7 +19,8 @@
                     and quality assured services for Malaria prevention and treatment to all people in Uganda</p>
             </div>
             <div class="col-lg-5">
-                <p class="subtitle-text">UPCOMING MEETINGS (View Calendar)</p>
+                <p class="subtitle-text">UPCOMING MEETINGS <span><a href="{% url 'dashboard:calendar-view' %}">(View
+                    Calendar)</a></span></p>
                 <ul>
                     {% for meeting in meetings %}
                         <li><strong>{{ meeting.start|date:"l, d/M/Y" }}</strong> {{ meeting.title }}</li>
