@@ -2,8 +2,9 @@ from django.conf.urls import url
 
 from dashboard.views.admin_dashboard import AdminDashboardView
 from dashboard.views.calendar import CalendarView
+from dashboard.views.dashboardView import DashboardView
 from dashboard.views.document import DocumentListView, DocumentCreateView, DocumentDetailView
-from dashboard.views.home import Home
+from dashboard.views.home import AboutUs
 from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDetailView, IPFilterView
 from dashboard.views.map import MapView
 from dashboard.views.meeting import MeetingCreateView, MeetingAddAttendeesView, MeetingAttendeeDeleteView, \
@@ -14,7 +15,8 @@ from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateVie
 from dashboard.views.users import UserCreateView, UserListView, UserDeleteView, UserUpdateView
 
 urlpatterns = [
-    url(r'^$', Home.as_view(), name='home'),
+    url(r'^$', DashboardView.as_view(), name='home'),
+    url(r'^about/$', AboutUs.as_view(), name='about-us'),
 
     url(r'^document/list/$', DocumentListView.as_view(), name='document-list'),
     url(r'^document/new/$', DocumentCreateView.as_view(), name='document-new'),
