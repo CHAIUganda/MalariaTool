@@ -36,14 +36,74 @@
                         {% endif %}
                     </td>
                     {% if user|can:'update_tasks' and object.ip == user.ip or user|can:'add_tasks' %}
-                        <td><a class="btn btn-purple"
-                               href="{% url 'dashboard:task-update-items' sub_task.id %}">Update Status</a></td>
+                        <td>
+                            <a class="btn btn-purple" data-toggle="modal" data-target="#update-status">Update Status</a>
+                        </td>
+
                     {% endif %}
                     {% if user|can:'update_tasks' and object.ip == user.ip or user|can:'add_tasks' %}
-                        <td><a class="btn btn-purple"
-                               href="{% url 'dashboard:task-update-notes' sub_task.id %}">Add Notes</a></td>
+                        <td><a class="btn btn-purple" data-toggle="modal" data-target="#add-note">Add Notes</a>
+                        </td>
                     {% endif %}
                 </tr>
+                <div class="modal fade" id="update-status" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="{% url "dashboard:task-update-items" sub_task.id %}" method="post"
+                                  enctype="multipart/form-data">{% csrf_token %}
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Update Status</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for=id_status">Status</label>
+                                        <select class="form-control" id="id_status" name="status">
+                                            <option value="not_started">Not Started</option>
+                                            <option value="ongoing">Ongoing</option>
+                                            <option value="done">Done</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-purple" data-dismiss="modal">Close
+                                    </button>
+                                    <input type="submit" value="Update" class="btn btn-purple"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="add-note" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="{% url "dashboard:task-update-notes" sub_task.id %}" method="post"
+                                  enctype="multipart/form-data">{% csrf_token %}
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Add Notes</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="id_text">Text</label>
+                                        <textarea class="form-control" cols="40" id="id_text" name="text"
+                                                  rows="10"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-purple" data-dismiss="modal">Close
+                                    </button>
+                                    <input type="submit" value="Add notes" class="btn btn-purple"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
 
         </table>
@@ -51,6 +111,7 @@
             <a class="btn btn-purple" href="{% url 'dashboard:task-add-items' object.id %}">ADD SUB TASKS</a>
 
         {% endif %}
+
 
     </div>
 {% endblock %}
