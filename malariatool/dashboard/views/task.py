@@ -1,6 +1,6 @@
 from braces.views import JSONResponseMixin
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.views.generic import CreateView, DetailView, FormView, UpdateView, DeleteView, View
+from django.views.generic import CreateView, DetailView, FormView, UpdateView, DeleteView, View, TemplateView
 
 from dashboard.forms.task import TaskForm, TaskItemForm, TaskNoteForm
 from dashboard.models import Task, District
@@ -126,4 +126,25 @@ class TaskFilter(JSONResponseMixin, View):
         # Task.objects.filter(ip=ip).values_list('affected_districts', flat=True)
         districts_ids = Task.objects.filter(type=kwargs.get('type')).values_list('affected_districts', flat=True)
         districts = District.objects.filter(pk__in=districts_ids).values_list('name', flat=True)
+        districts2 = District.objects.filter(pk__in=districts_ids)
+        entire_list = []
+        for district in districts2:
+            task_list = []
+            tasks = district.affected_districts.all()
+            for task in tasks:
+                task_list.append({"type": task.type, "complete": task.percent_complete()})
+            entire_list.append({"district": district.name, "tasks": task_list})
+        print entire_list
         return self.render_json_response(list(districts))
+
+
+class TaskPopUpItem(TemplateView):
+    template_name = "dashboard/popup.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(TaskPopUpItem, self).get_context_data(**kwargs)
+        district = District.objects.get(name=self.kwargs.get('district'))
+        tasks = district.affected_districts.all()
+        context['tasks'] = tasks
+        context['district'] = self.kwargs.get('district')
+        return context

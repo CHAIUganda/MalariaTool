@@ -4,8 +4,8 @@
 
 
 
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css"/>
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
     <script src="{% static "js/leaflet.ajax.min.js" %}"></script>
 
     <div class="col-lg-offset-1">
@@ -33,7 +33,56 @@
 
     </div>
     <div id="map" class="col-lg-offset-1 col-lg-10" style="height: 600px"></div>
+    <div class="col-lg-offset-1 col-lg-10">
 
+        <table id="task_table_map" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <td>Task</td>
+                <td>IP</td>
+                <td>Percent Complete</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.type|title }}</a></td>
+                <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.ip.name }}</a></td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ task.percent_complete }}"
+                             aria-valuemin="0" aria-valuemax="100" style="width:{{ task.percent_complete }}%">
+                            <span style="text:white;"><strong>{{ task.percent_complete }}% </strong></span>
+                        </div>
+                    </div>
+                </td>
+                <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.end_date|timeuntil }}</a></td>
+                <td>
+                    {% if task.affected_districts.all|length < 4 %}
+                        {% for district in task.affected_districts.all %}
+                            {{ district.name }},
+                        {% endfor %}
+                    {% elif task.affected_districts.all|length > 4 %}
+                        {% for district in task.affected_districts.all|slice:"4" %}
+                            {{ district.name }},
+                        {% endfor %}
+                        <a type="button" class="district-hover" data-container="body"
+                           data-placement="bottom" data-trigger="hover"
+                           data-content="
+                                {% for district in task.affected_districts.all %}
+                                        {{ district }}
+                                {% endfor %}
+                                        ">
+                            ....
+                        </a>
+                    {% endif %}
+
+
+                </td>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 
 {% endblock %}
@@ -57,6 +106,9 @@
             var osmAttrib = 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
             var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 18, attribution: osmAttrib});
 
+            function logthisstuff(hello) {
+                console.log(hello)
+            }
 
             function style(feature) {
                 return {
@@ -90,6 +142,7 @@
                     fillOpacity: 0.5
                 };
             }
+
             map.setView(new L.LatLng(1.395, 32.322), 7);
             map.addLayer(osm);
             $.getJSON("/static/js/districts.json", function (data) {
@@ -104,17 +157,34 @@
                 tiles.addTo(map)
             });
             $('#tasks').on('change', function (data) {
+                var taskType = $(this).val();
                 if (map.hasLayer(geojson)) {
                     map.removeLayer(geojson);
                 }
-                $.getJSON("/task/" + $(this).val(), function (data) {
+                $.getJSON("/task/" + taskType, function (data) {
                     districts = data;
                     $.getJSON("/static/js/districts2.json", function (data) {
                         geojson = L.geoJson(data, {
                             style: style2(),
                             onEachFeature: function (feature, layer) {
-                                layer.bindPopup(feature.properties.name);
-                                layer._polygonId = feature.id;
+                                layer.on('click', function (e) {
+                                    if (layer._popup != undefined) {
+                                        layer.unbindPopup();
+                                    }
+
+
+                                    var marker_url = "/task/" + taskType + "/" + feature.properties.name;
+                                    $.ajax({
+                                        url: marker_url,
+                                        success: function (data) {
+                                            //close placeholder popup
+
+                                            //attach the real popup and open it
+                                            layer.bindPopup(data);
+                                        }
+                                    });
+                                });
+                                {#                                layer._polygonId = feature.id;#}
                             },
                             filter: function (feature, layer) {
                                 return $.inArray(feature.properties.name, districts) > -1;
@@ -155,5 +225,16 @@
         }
         initmap();
 
+
+        $(document).ready(function () {
+            var table = $('#task_table_map').DataTable();
+            
+        });
+
+
     </script>
+
+
+
+
 {% endblock %}

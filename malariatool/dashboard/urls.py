@@ -11,7 +11,7 @@ from dashboard.views.meeting import MeetingCreateView, MeetingAddAttendeesView, 
     MeetingAttendeesNotifyView
 from dashboard.views.members import MemberCreateView
 from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
-    TaskNoteUpdateView, TaskItemNotesListView, TaskUpdateView, TaskDeleteView, TaskFilter
+    TaskNoteUpdateView, TaskItemNotesListView, TaskUpdateView, TaskDeleteView, TaskFilter, TaskPopUpItem
 from dashboard.views.users import UserCreateView, UserListView, UserDeleteView, UserUpdateView
 
 urlpatterns = [
@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^task/edit/(?P<pk>\d+)/$', TaskUpdateView.as_view(), name='task-edit'),
     url(r'^task/delete/(?P<pk>\d+)/$', TaskDeleteView.as_view(), name='task-delete'),
     url(r'^task/(?P<type>\w+)/$', TaskFilter.as_view(), name='task-filter'),
+    url(r'^task/(?P<type>\w+)/(?P<district>\w+)$', TaskPopUpItem.as_view(), name='task-filter'),
 
     url(r'^task/(?P<pk>\d+)/additems$', TaskItemCreateView.as_view(), name='task-add-items'),
     url(r'^task/item/(?P<pk>\d+)/update', TaskItemUpdateView.as_view(), name='task-update-items'),
