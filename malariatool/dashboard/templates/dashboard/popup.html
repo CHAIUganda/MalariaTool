@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<html>
+
+<head>
+    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <link href="{% static "css/app.css" %}" rel="stylesheet">
+    <link href="{% static "css/bootstrap-datepicker3.min.css" %}" rel="stylesheet">
+</head>
+<body>
+<div>
+    {{ district }}
+    {% for task in tasks %}
+        <p>
+            <span>{{ task.ip }}</span>
+            {{ task.type|title }}
+            {{ task.percent_complete }}%
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{ task.percent_complete }}"
+                 aria-valuemin="0" aria-valuemax="100" style="width:{{ task.percent_complete }}%">
+                <span style="text:white;"><strong>{{ task.percent_complete }}% </strong></span>
+            </div>
+        </div>
+        </p>
+    {% endfor %}
+</div>
+</body>
+</html>
