@@ -1,6 +1,6 @@
 Hello {{ username}},
 
-You have invited to attend a meeting on {{ meeting.title }} from the National Malaria Control Website.
+You have been invited to the { meeting.title }} from the National Malaria Control Program.
 
 Meeting: {{ meeting.title }}
 Start: {{ meeting.start }}
