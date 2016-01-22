@@ -8,10 +8,10 @@
         <br/>
         <strong>Overview:</strong>
 
-        <p> {{ object.overview }}</p>
+        <p> {{ task.overview }}</p>
         <strong>Type:</strong>
 
-        <p> {{ object.type }}</p>
+        <p> {{ task.type }}</p>
         <table class="table">
             <tr>
                 <th>Sub-Tasks</th>
@@ -29,7 +29,7 @@
                 <tr>
                     <td>{{ sub_task.description }}</td>
                     <td>{{ sub_task.estimated_end_date }}</td>
-                    <td>{{ sub_task.status|title }}</td>
+                    <td>{{ sub_task.get_status_display }}</td>
                     <td>{{ sub_task.notes }}
                         {% if sub_task.notes >= 1 %}
                             <a href="{% url 'dashboard:subtask-notes-list' sub_task.id %}">View Notes</a>
@@ -37,7 +37,7 @@
                     </td>
                     {% if user|can:'update_tasks' and object.ip == user.ip or user|can:'add_tasks' %}
                         <td>
-                            <a class="btn btn-purple" data-toggle="modal" data-target="#update-status">Update Status</a>
+                            <a class="btn btn-purple" data-toggle="modal" data-target="#update-status-{{ sub_task.id }}">Update Status</a>
                         </td>
 
                     {% endif %}
@@ -46,33 +46,32 @@
                         </td>
                     {% endif %}
                 </tr>
-                <div class="modal fade" id="update-status" tabindex="-1" role="dialog"
+                <div class="modal fade" id="update-status-{{ sub_task.id }}" tabindex="-1" role="dialog"
                      aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <form action="{% url "dashboard:task-update-items" sub_task.id %}" method="post"
-                                  enctype="multipart/form-data">{% csrf_token %}
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Update Status</h4>
-                                </div>
-                                <div class="modal-body">
+
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Update Status</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{% url "dashboard:task-update-items" sub_task.id %}" method="post"
+                                      enctype="multipart/form-data">{% csrf_token %}
                                     <div class="form-group">
-                                        <label for=id_status">Status</label>
+                                        <label for="id_status">Status</label>
                                         <select class="form-control" id="id_status" name="status">
                                             <option value="not_started">Not Started</option>
                                             <option value="ongoing">Ongoing</option>
                                             <option value="done">Done</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-purple" data-dismiss="modal">Close
-                                    </button>
-                                    <input type="submit" value="Update" class="btn btn-purple"/>
-                                </div>
-                            </form>
+                                    <input type="submit" value="Update" class="btn btn-purple pull-right"/>
+                                    <br/>
+                                    <br/>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

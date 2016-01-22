@@ -15,7 +15,7 @@ class TaskForm(ModelForm):
 
 
 class TaskItemForm(forms.Form):
-    status = forms.ChoiceField(choices=Item.STATUS)
+    status = forms.ChoiceField(choices=Item.status_choices)
 
 
 class TaskNoteForm(ModelForm):

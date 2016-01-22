@@ -50,6 +50,7 @@ class TaskItemCreateView(CreateView):
     def form_valid(self, form):
         task = Task.objects.get(id=self.kwargs.get('pk'))
         form.instance.task = task
+        form.instance.status = "not_started"
         return super(TaskItemCreateView, self).form_valid(form)
 
 

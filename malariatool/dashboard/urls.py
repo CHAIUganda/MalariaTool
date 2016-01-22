@@ -34,8 +34,8 @@ urlpatterns = [
     url(r'^task/(?P<pk>\d+)/$', TaskDetailView.as_view(), name='task-detail'),
     url(r'^task/edit/(?P<pk>\d+)/$', TaskUpdateView.as_view(), name='task-edit'),
     url(r'^task/delete/(?P<pk>\d+)/$', TaskDeleteView.as_view(), name='task-delete'),
-    url(r'^task/(?P<type>\w+)/$', TaskFilter.as_view(), name='task-filter'),
-    url(r'^task/(?P<type>\w+)/(?P<district>\w+)$', TaskPopUpItem.as_view(), name='task-filter'),
+    url(r'^task/filter/(?P<type>\w+)/$', TaskFilter.as_view(), name='task-filter'),
+    url(r'^task/filter/(?P<type>\w+)/(?P<district>\w+)$', TaskPopUpItem.as_view(), name='task-filter'),
 
     url(r'^task/(?P<pk>\d+)/additems$', TaskItemCreateView.as_view(), name='task-add-items'),
     url(r'^task/item/(?P<pk>\d+)/update', TaskItemUpdateView.as_view(), name='task-update-items'),

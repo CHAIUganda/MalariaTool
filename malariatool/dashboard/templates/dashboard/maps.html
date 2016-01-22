@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load permission_tags %}
+{% load widget_tweaks %}
 {% block content %}
 
 
@@ -12,7 +14,7 @@
         <div>
             <label for="tasks">Filters</label>
             <select name="task" id="tasks">
-                <option value="#">Filter by Tasks</option>
+                <option value="#" selected="selected">Filter by Tasks</option>
                 <option value="supervision">Supervision</option>
                 <option value="bcc">BCC</option>
                 <option value="training">Training</option>
@@ -22,7 +24,7 @@
             </select>
 
             <select name="ip" id="ips">
-                <option value="#">Filter by IPs</option>
+                <option value="#" selected="selected">Filter by IPs</option>
                 {% for ip in ips %}
                     <option value="{{ ip.id }}">{{ ip }}</option>
 
@@ -32,15 +34,17 @@
         </div>
 
     </div>
-    <div id="map" class="col-lg-offset-1 col-lg-10" style="height: 600px"></div>
+    <div id="map" class="col-lg-offset-1 col-lg-10" style="height: 520px"></div>
     <div class="col-lg-offset-1 col-lg-10">
 
-        <table id="task_table_map" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+        <table id="task_table" class="display table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <td>Task</td>
                 <td>IP</td>
                 <td>Percent Complete</td>
+                <td>Remaining Time</td>
+                <td>Affected Districts</td>
             </tr>
             </thead>
             <tbody>
@@ -79,9 +83,11 @@
 
 
                 </td>
+
             {% endfor %}
             </tbody>
         </table>
+
     </div>
 
 
@@ -90,6 +96,13 @@
 
 {% block js %}
     <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            var table = $('#task_table').DataTable();
+
+        });
+
 
         var map;
         var ajaxRequest;
@@ -157,7 +170,13 @@
                 tiles.addTo(map)
             });
             $('#tasks').on('change', function (data) {
+                $('#ips option').prop('selected', function () {
+                    return this.defaultSelected;
+                });
                 var taskType = $(this).val();
+                table = $('#task_table').DataTable();
+                table.columns(1).search("").draw();
+                table.columns(0).search(taskType).draw();
                 if (map.hasLayer(geojson)) {
                     map.removeLayer(geojson);
                 }
@@ -198,6 +217,14 @@
             });
 
             $('#ips').on('change', function (data) {
+                $('#tasks option').prop('selected', function () {
+                    return this.defaultSelected;
+                });
+                var ip = $("#ips option:selected").text();
+                table = $('#task_table').DataTable();
+                table.columns(0).search("").draw();
+                table.columns(1).search(ip).draw();
+
                 if (map.hasLayer(geojson)) {
                     map.removeLayer(geojson);
                 }
@@ -224,12 +251,6 @@
 
         }
         initmap();
-
-
-        $(document).ready(function () {
-            var table = $('#task_table_map').DataTable();
-            
-        });
 
 
     </script>

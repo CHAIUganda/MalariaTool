@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ item.description }}</td>
                     <td>{{ item.estimated_end_date }}</td>
-                    <td>{{ item.status|title }}</td>
+                    <td>{{ item.get_status_display }}</td>
 
                 </tr>
             {% endfor %}

@@ -40,10 +40,14 @@ class Task(TimeStampedModel):
 
 
 class Item(TimeStampedModel):
-    STATUS = Choices('not_started', 'ongoing', 'done')
+    status_choices = (
+        ('not_started', 'Not Started'),
+        ('ongoing', 'Ongoing'),
+        ('done', 'Done')
+    )
+    status = models.CharField(max_length=150, choices=status_choices)
     description = models.TextField()
     estimated_end_date = models.DateField()
-    status = StatusField()
     task = models.ForeignKey(Task, related_name="taskitems")
 
     def notes(self):
