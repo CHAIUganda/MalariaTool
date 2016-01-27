@@ -135,7 +135,6 @@ class TaskFilter(JSONResponseMixin, View):
             for task in tasks:
                 task_list.append({"type": task.type, "complete": task.percent_complete()})
             entire_list.append({"district": district.name, "tasks": task_list})
-        print entire_list
         return self.render_json_response(list(districts))
 
 

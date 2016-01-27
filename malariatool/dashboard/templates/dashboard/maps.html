@@ -180,7 +180,7 @@
                 if (map.hasLayer(geojson)) {
                     map.removeLayer(geojson);
                 }
-                $.getJSON("/task/" + taskType, function (data) {
+                $.getJSON("/task/filter/" + taskType, function (data) {
                     districts = data;
                     $.getJSON("/static/js/districts2.json", function (data) {
                         geojson = L.geoJson(data, {
