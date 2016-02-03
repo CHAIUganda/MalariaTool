@@ -32,12 +32,14 @@
                     <td>{{ sub_task.get_status_display }}</td>
                     <td>{{ sub_task.notes }}
                         {% if sub_task.notes >= 1 %}
-                            <a href="{% url 'dashboard:subtask-notes-list' sub_task.id %}">View Notes</a>
+                            <a data-toggle="modal"
+                               data-target="#view-notes">View Notes</a>
                         {% endif %}
                     </td>
                     {% if user|can:'update_tasks' and object.ip == user.ip or user|can:'add_tasks' %}
                         <td>
-                            <a class="btn btn-purple" data-toggle="modal" data-target="#update-status-{{ sub_task.id }}">Update Status</a>
+                            <a class="btn btn-purple" data-toggle="modal"
+                               data-target="#update-status-{{ sub_task.id }}">Update Status</a>
                         </td>
 
                     {% endif %}
@@ -100,6 +102,31 @@
                                     <input type="submit" value="Add notes" class="btn btn-purple"/>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="view-notes" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">View Notes for {{ sub_task.description }}</h4>
+                            </div>
+                            <div class="modal-body">
+                                <ul>
+                                    {% for note in sub_task.taskitemnotes.all %}
+                                        <li>{{ note.text }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-purple" data-dismiss="modal">Close
+                                </button>
+                                <input type="submit" value="Add notes" class="btn btn-purple"/>
+                            </div>
                         </div>
                     </div>
                 </div>
