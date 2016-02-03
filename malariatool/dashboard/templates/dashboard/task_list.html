@@ -4,7 +4,7 @@
 {% block content %}
     <div class="col-lg-12">
         {% if user|can:'add_tasks' %}
-            <p><a class="btn btn-purple pull-right"  data-toggle="modal" data-target="#create-task">ADD TASKS</a></p>
+            <p><a class="btn btn-purple pull-right" data-toggle="modal" data-target="#create-task">ADD TASKS</a></p>
             <br/>
         {% endif %}
         <br/>
@@ -24,7 +24,7 @@
             <tbody>
             {% for task in object_list %}
                 <tr>
-                    <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.type|title }}</a></td>
+                    <td><a href="{% url "dashboard:task-detail" task.id %}">{{ task.get_type_display }}</a></td>
                     <td><a href="{% url "dashboard:ip-detail" task.ip.id %}">{{ task.ip.name }}</a></td>
                     <td>
                         <div class="progress">
@@ -59,7 +59,8 @@
                     </td>
                     {% if user|can:'add_tasks' %}
                         <td>
-                            <a href="{% url "dashboard:task-edit" task.id %}" class="btn btn-purple">EDIT</a>
+                            <a href="#" class="btn btn-purple" data-toggle="modal"
+                               data-target="#update-task-{{ task.id }}">EDIT</a>
                             <a href="#" class="btn btn-purple" data-toggle="modal"
                                data-target="#delete-task-{{ task.id }}">DELETE</a>
                         </td>
@@ -90,47 +91,109 @@
                             </div>
                         </div>
                     {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>
-        <div class="modal fade" id="create-task" tabindex="-1" role="dialog"
-             aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <form action="{% url "dashboard:task-new" %}" method="post"
-                          enctype="multipart/form-data">{% csrf_token %}
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">New Task</h4>
-                        </div>
-                        <div class="modal-body">
-                            {% for field in form %}
 
-                                <div class="form-group">
-                                    <label for=id_{{ field.name }}">{{ field.label }}</label>
-                                    {{ field|add_class:"form-control" }}
-                                    {% if field.errors %}
-                                        {% for error in field.errors %}
-                                            <p class="alert-danger"> {{ error }}</p>
-                                        {% endfor %}
-                                    {% endif %}
+
+
+                <div class="modal fade" id="update-task-{{ task.id }}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="{% url "dashboard:task-edit"  task.id %}" method="post"
+                                  enctype="multipart/form-data">{% csrf_token %}
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">New Task</h4>
                                 </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for=id_start_date_2">Start date</label>
+                                        <input class="form-control" id="id_start_date_2" name="start_date" type="text"
+                                               value="{{ task.start_date|date:"c" }}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for=id_end_date">End date</label>
+                                        <input class="form-control" id="id_end_date" name="end_date" type="text"
+                                               value="{{ task.end_date|date:"c" }}"/>
 
-                            {% endfor %}
+                                        <div>
 
+                                            <div class="form-group">
+                                                <label for=id_type">Type</label>
+                                                <select class="form-control" id="id_type" name="type">
+                                                    <option value="">---------</option>
+                                                    <option value="training" {% if "training" == task.type %} selected {% endif %}>Training</option>
+                                                    <option value="supervision" {% if "supervision" == task.type %} selected {% endif %}>Supervision</option>
+                                                    <option value="bcc" {% if "bcc" == task.type|lower %} selected {% endif %}>BCC</option>
+                                                    <option value="new_distribution" {% if "new_distribution" == task.type %} selected {% endif %}>New Distribution</option>
+                                                    <option value="iptp" {% if "iptp" == task.type %} selected {% endif %}>IPTp</option>
+                                                    <option value="irs" {% if "irs" == task.type %} selected {% endif %}>IRS</option>
+                                                </select>
 
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for=id_overview">Overview</label>
+                                                <textarea class="form-control" cols="40" id="id_overview" name="overview" rows="10">{{ task.overview }}</textarea>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-purple" data-dismiss="modal">Close
+                                                </button>
+                                                <input type="submit" value="Add Tasks" class="btn btn-purple"/>
+                                            </div>
+                            </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-purple" data-dismiss="modal">Close
-                            </button>
-                            <input type="submit" value="Add Tasks" class="btn btn-purple"/>
-                        </div>
-                    </form>
+                    </div>
                 </div>
+                </div>
+            {% endfor %}
+    </tbody>
+    </table>
+    <div class="modal fade" id="create-task" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{% url "dashboard:task-new" %}" method="post"
+                      enctype="multipart/form-data">{% csrf_token %}
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">New Task</h4>
+                    </div>
+                    <div class="modal-body">
+                        {% for field in form %}
+
+                            <div class="form-group">
+                                <label for=id_{{ field.name }}">{{ field.label }}</label>
+                                {{ field|add_class:"form-control" }}
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <p class="alert-danger"> {{ error }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+
+                        {% endfor %}
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-purple" data-dismiss="modal">Close
+                        </button>
+                        <input type="submit" value="Add Tasks" class="btn btn-purple"/>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
 
 {% endblock %}
 {% block js %}
