@@ -109,11 +109,7 @@ DEFAULT_FROM_EMAIL = "me@remosamuel.com"
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR + "/assets"
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR + "/static"),
-)
+STATIC_ROOT = BASE_DIR + "/static"
 
 LOGIN_REDIRECT_URL = "/"
 
