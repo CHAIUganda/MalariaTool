@@ -1,0 +1,13 @@
+from base import *
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '{{name}}',
+        'USER': '{{name}}',
+        'PASSWORD': '{{secret}}',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+OKTA_CALLBACK = '52.10.85.234'

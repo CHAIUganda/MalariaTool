@@ -1,0 +1,4 @@
+---
+name: malariatool
+secret: '{{pass}}'
+repo: https://github.com/CHAIUganda/MalariaTool.git

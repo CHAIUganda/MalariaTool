@@ -1,0 +1,18 @@
+server {
+    listen 80;
+    charset utf-8;
+    access_log /var/log/nginx/{{name}}.access.log;
+    error_log /var/log/nginx/{{name}}.error.log;
+    # max upload size
+    client_max_body_size 50M;   # adjust to taste
+
+    location / {
+        uwsgi_pass unix:/tmp/{{name}}.sock;
+        include uwsgi_params;
+
+    }
+  location /static {
+      alias   /srv/checkout/{{name}}/{{name}}/static/;
+
+  }
+}

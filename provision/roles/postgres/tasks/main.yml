@@ -1,0 +1,25 @@
+---
+- apt: update_cache=yes cache_valid_time=3600
+- name: postgreql
+  apt: name={{ item }} state=present
+  with_items:
+    - postgresql
+    - postgresql-contrib
+    - pgadmin3
+    - python-psycopg2
+    - libpq-dev
+- service: name=postgresql state=started
+- postgresql_user: name={{name}} password={{secret}} role_attr_flags=LOGIN
+  sudo_user: postgres
+- template: src=pg_hba.conf dest=/etc/postgresql/9.3/main/pg_hba.conf
+- template: src=postgresql.conf dest=/etc/postgresql/9.3/main/postgresql.conf
+
+- service: name=postgresql state=restarted
+
+- postgresql_db: name={{name}} owner={{name}} state=present
+  sudo_user: postgres
+
+- service: name=postgresql state=restarted
+
+- postgresql_db: name={{name}} owner={{name}} state=present
+  sudo_user: postgres

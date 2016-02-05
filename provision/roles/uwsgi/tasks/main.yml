@@ -1,0 +1,12 @@
+---
+- apt: update_cache=yes cache_valid_time=3600
+
+- apt: name={{item}} state=present
+  with_items:
+    - uwsgi
+    - uwsgi-plugin-python
+
+- template: src=app.uwsgi.j2 dest=/etc/uwsgi/apps-enabled/{{name}}.ini
+
+- service: name=uwsgi state=restarted
+  sudo: yes

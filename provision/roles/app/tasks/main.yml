@@ -1,0 +1,45 @@
+---
+- apt: name=git state=present update_cache=yes
+- apt: name={{ item }} state=present
+  with_items:
+    - build-essential
+    - python-pip
+    - python-dev
+    - libtiff5-dev
+    - libjpeg8-dev
+    - zlib1g-dev
+    - libfreetype6-dev
+    - liblcms2-dev
+    - libwebp-dev
+    - tcl8.6-dev
+    - tk8.6-dev
+    - python-tk
+    - supervisor
+
+- pip: name={{ item }}
+  with_items:
+    - virtualenv
+    - ansible
+
+- file: path=/srv/checkout owner=www-data mode=0755 state=directory
+
+- file: path=/srv/checkout/{{name}} owner=www-data mode=0755 state=directory
+
+- file: path=/home/ubuntu/.ssh mode=0755 state=directory
+
+- name: checkout from github
+  git: repo={{repo}} dest=/srv/checkout/{{name}} accept_hostkey=true force=yes
+
+- pip: requirements=/srv/checkout/{{name}}/requirements.txt virtualenv=/srv/checkout/{{name}}venv
+
+- command: /srv/checkout/{{name}}venv/bin/python manage.py migrate --noinput
+  args:
+    chdir: /srv/checkout/{{name}}/{{name}}
+
+- command: /srv/checkout/{{name}}venv/bin/python manage.py syncdb --noinput
+  args:
+    chdir: /srv/checkout/{{name}}/{{name}}
+
+- command: /srv/checkout/{{name}}venv/bin/python manage.py collectstatic --noinput
+  args:
+    chdir: /srv/checkout/{{name}}/{{name}}

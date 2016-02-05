@@ -1,0 +1,8 @@
+[uwsgi]
+vhost = true
+plugin=python
+socket=/tmp/{{name}}.sock
+chmod-socket=777
+chdir=/srv/checkout/{{name}}/{{name}}/
+virtualenv=/srv/checkout/{{name}}venv
+wsgi-file=/srv/checkout/{{name}}/{{name}}/{{name}}/wsgi.py

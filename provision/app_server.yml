@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: true
+  roles:
+     - nginx
+     - postgres
+     - app
+     - uwsgi
+  vars_files: [vars.yml]

@@ -1,0 +1,15 @@
+from base import *
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '{{name}}',
+        'USER': '{{name}}',
+        'PASSWORD': '{{secret}}',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+OKTA_CALLBACK = 'devtest.gnpolymatheia.com'
+OKTA_META = 'exk4f51nigu3DmocO0h7'
+REDIRECT_URL='https://thoughtworks.oktapreview.com/app/thoughtworks_labspolymatheiatest_2/exk4f51nigu3DmocO0h7/sso/saml'
