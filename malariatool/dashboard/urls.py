@@ -5,10 +5,10 @@ from dashboard.views.calendar import CalendarView
 from dashboard.views.dashboardView import DashboardView
 from dashboard.views.document import DocumentListView, DocumentCreateView, DocumentDetailView
 from dashboard.views.home import AboutUs
-from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDetailView, IPFilterView
+from dashboard.views.implementing_partner import IPListView, IPCreateView, IPDetailView, IPFilterView, IPDeleteView
 from dashboard.views.map import MapView
 from dashboard.views.meeting import MeetingCreateView, MeetingAddAttendeesView, MeetingAttendeeDeleteView, \
-    MeetingAttendeesNotifyView
+    MeetingAttendeesNotifyView, MeetingListView, MeetingDeleteView
 from dashboard.views.members import MemberCreateView, MemberListView, MemberDeleteView
 from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
     TaskNoteUpdateView, TaskItemNotesListView, TaskUpdateView, TaskDeleteView, TaskFilter, TaskPopUpItem
@@ -44,10 +44,13 @@ urlpatterns = [
 
     url(r'^ip/list/$', IPListView.as_view(), name='ip-list'),
     url(r'^ip/new/$', IPCreateView.as_view(), name='ip-new'),
+    url(r'^ip/delete/(?P<pk>\d+)/$', IPDeleteView.as_view(), name='ip-delete'),
     url(r'^ip/(?P<pk>\d+)/$', IPDetailView.as_view(), name='ip-detail'),
     url(r'^ip/(?P<pk>\d+)/districts/$', IPFilterView.as_view(), name='ip-filter'),
 
     url(r'^meeting/new/$', MeetingCreateView.as_view(), name='meeting-new'),
+    url(r'^meeting/list/$', MeetingListView.as_view(), name='meeting-list'),
+    url(r'^meeting/delete/(?P<pk>\d+)$', MeetingDeleteView.as_view(), name='meeting-delete'),
     url(r'^meeting/(?P<pk>\d+)/attendees/$', MeetingAddAttendeesView.as_view(), name='meeting-add-attendees'),
     url(r'^meeting/(?P<pk>\d+)/notify/$', MeetingAttendeesNotifyView.as_view(), name='meeting-notify-attendees'),
     url(r'^(?P<meeting_id>\d+)/attendees/(?P<pk>\d+)/delete/$', MeetingAttendeeDeleteView.as_view(),

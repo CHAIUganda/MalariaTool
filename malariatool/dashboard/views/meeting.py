@@ -2,7 +2,7 @@ from django.contrib.sites.models import Site, RequestSite
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.template import loader
-from django.views.generic import CreateView, FormView, DeleteView, RedirectView
+from django.views.generic import CreateView, FormView, DeleteView, RedirectView, ListView
 
 from dashboard.forms.meeting import AddAttendee
 from dashboard.models import Meeting
@@ -16,6 +16,15 @@ class MeetingCreateView(CreateView):
 
     def get_success_url(self):
         return reverse("dashboard:meeting-add-attendees", kwargs={'pk': self.object.id})
+
+
+class MeetingListView(ListView):
+    model = Meeting
+
+
+class MeetingDeleteView(DeleteView):
+    model = Meeting
+    success_url = reverse_lazy("dashboard:meeting-list")
 
 
 class MeetingAddAttendeesView(FormView):

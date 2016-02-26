@@ -14,6 +14,9 @@
             <tr>
                 <td>No.</td>
                 <td>IP</td>
+                {% if user|can:'add_tasks' %}
+                    <td>Manage</td>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -21,7 +24,39 @@
                 <tr>
                     <td><a href="{% url "dashboard:ip-detail" ip.id %}">{{ ip.id }}</a></td>
                     <td><a href="{% url "dashboard:ip-detail" ip.id %}">{{ ip.name }}</a></td>
+                    {% if user|can:'add_tasks' %}
+                        <td>
+                            <a href="#" class="btn btn-purple" data-toggle="modal"
+                               data-target="#remove-ip-{{ ip.id }}">DELETE</a>
+                        </td>
+                    {% endif %}
                 </tr>
+
+                <div class="modal fade" id="remove-ip-{{ ip.id }}" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="{% url "dashboard:ip-delete" ip.id %}"
+                                  method="post"
+                                  enctype="multipart/form-data">{% csrf_token %}
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Remove Ip</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure you want to remove {{ ip.name }} from this meeting
+                                        invitation</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-purple" data-dismiss="modal">Close
+                                    </button>
+                                    <input type="submit" value="Remove IP" class="btn btn-purple"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             {% empty %}
 
             {% endfor %}
@@ -32,7 +67,7 @@
              aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="{% url "dashboard:document-new" %}" method="post"
+                    <form action="{% url "dashboard:ip-new" %}" method="post"
                           enctype="multipart/form-data">{% csrf_token %}
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
