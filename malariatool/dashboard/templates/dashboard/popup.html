@@ -9,20 +9,15 @@
 </head>
 <body>
 <div>
-    {{ district }}
-    {% for task in tasks %}
-        <p>
-            <span>{{ task.ip }}</span>
-            {{ task.type|title }}
-            {{ task.percent_complete }}%
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="{{ task.percent_complete }}"
-                 aria-valuemin="0" aria-valuemax="100" style="width:{{ task.percent_complete }}%">
-                <span style="text:white;"><strong>{{ task.percent_complete }}% </strong></span>
-            </div>
-        </div>
-        </p>
-    {% endfor %}
+    <div style="line-height: 2px;">
+        <span>{{ district }}</span><br/>
+        <span>_______________</span>
+        {% for task in tasks %}
+            <p><strong>{{ task.ip }}</strong></p>
+            <p style="text-indent: 8px">{{ task.type|title }} {{ task.percent_complete }}</p>
+        {% endfor %}
+    </div>
+
 </div>
 </body>
 </html>
