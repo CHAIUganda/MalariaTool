@@ -1,5 +1,74 @@
 {% extends "base.html" %}
 
 {% block content %}
-asdjasdj
+    <div class="col-lg-10 col-lg-offset-1">
+
+        <p><strong>Filters</strong></p>
+        <label for="filter-from-date">
+        </label><select name="filter-from-date" id="filter-from-date" class="col-md-2">
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+
+    </select>
+        <label for="filter-to-date"></label><select name="filter-to-date" id="filter-to-date" class="col-md-2">
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+    </select>
+
+        <select name="filter-region" id="filter-region" class="col-md-2">
+            <option value="central">Central</option>
+            <option value="central">North</option>
+            <option value="central">South</option>
+            <option value="central">West</option>
+            <option value="central">East</option>
+        </select>
+        <select name="filter-district" id="filter-district" class="col-md-2">
+            <option value="">Kampala</option>
+            <option value="">Kampala</option>
+            <option value="">Kampala</option>
+            <option value="">Kampala</option>
+            <option value="">Kampala</option>
+        </select>
+        <select name="filter-age-group" id="filter-age-group" class="col-md-2">
+            <option value="">Under 5 yrs</option>
+            <option value="">Above 5 yrs</option>
+        </select>
+
+
+        <p><strong>KEY MERTICS</strong></p>
+
+
+        <p><strong>ADDITONAL METRICS</strong></p>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+    <script type="application/javascript">
+
+        $(document).ready(function () {
+            $('#filter-from-date, #filter-to-date, #filter-district, #filter-age-group, #filter-region').select2();
+        });
+
+    </script>
 {% endblock %}
