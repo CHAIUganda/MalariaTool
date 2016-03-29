@@ -12,7 +12,7 @@ from dashboard.views.meeting import MeetingCreateView, MeetingAddAttendeesView, 
 from dashboard.views.members import MemberCreateView, MemberListView, MemberDeleteView
 from dashboard.views.task import TaskCreateView, TaskListView, TaskItemCreateView, TaskDetailView, TaskItemUpdateView, \
     TaskNoteUpdateView, TaskItemNotesListView, TaskUpdateView, TaskDeleteView, TaskFilter, TaskPopUpItem
-from dashboard.views.upload import UploadView
+from dashboard.views.upload import UploadView, XlsList
 from dashboard.views.users import UserCreateView, UserListView, UserDeleteView, UserUpdateView
 
 urlpatterns = [
@@ -43,7 +43,8 @@ urlpatterns = [
     url(r'^task/note/(?P<pk>\d+)/update', TaskNoteUpdateView.as_view(), name='task-update-notes'),
     url(r'^item/(?P<pk>\d+)/notes', TaskItemNotesListView.as_view(), name='subtask-notes-list'),
 
-    url(r'^upload/', UploadView.as_view(), name='upload-docs'),
+    url(r'^upload/$', UploadView.as_view(), name='upload-docs'),
+    url(r'^list/xls/$', XlsList.as_view(), name='list-xls'),
 
 
     url(r'^ip/list/$', IPListView.as_view(), name='ip-list'),
