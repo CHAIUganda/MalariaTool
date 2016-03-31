@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dhisdash.models import DataSet, DataElement, CategoryOptionCombo, AgeGroups
+from dhisdash.models import DataSet, DataElement, CategoryOptionCombo, AgeGroups, Region, District, SubCounty
 
 
 class CategoryOptionComboAdmin(admin.ModelAdmin):
@@ -25,3 +25,6 @@ class DataSetAdmin(admin.ModelAdmin):
 admin.site.register(DataSet, DataSetAdmin)
 admin.site.register(DataElement, DataElementAdmin)
 admin.site.register(CategoryOptionCombo, CategoryOptionComboAdmin)
+admin.site.register(Region)
+admin.site.register(District)
+admin.site.register(SubCounty)

@@ -44,7 +44,7 @@ class DataValue(models.Model):
 
 
 class Region(models.Model):
-    identifier = models.CharField(max_length=255)
+    identifier = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -52,7 +52,7 @@ class Region(models.Model):
 
 
 class District(models.Model):
-    identifier = models.CharField(max_length=255)
+    identifier = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -60,7 +60,7 @@ class District(models.Model):
 
 
 class SubCounty(models.Model):
-    identifier = models.CharField(max_length=255)
+    identifier = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -68,7 +68,7 @@ class SubCounty(models.Model):
 
 
 class Facility(models.Model):
-    identifier = models.CharField(max_length=255)
+    identifier = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
 
     def __str__(self):
