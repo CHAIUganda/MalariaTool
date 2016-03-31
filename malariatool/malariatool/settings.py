@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'djrill',
     'password_reset',
+    'dhisdash'
 )
 
 AUTH_USER_MODEL = 'dashboard.User'
@@ -116,3 +117,8 @@ LOGIN_REDIRECT_URL = "/"
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR + "/media/"
+
+try:
+    from local_settings import *
+except ImportError as e:
+    pass

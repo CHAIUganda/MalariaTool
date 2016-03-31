@@ -1,0 +1,425 @@
+[
+  {
+    "fields": {
+      "identifier": "MvaQ3peApq6",
+      "name": "HMIS 123: Outpatient Monthly Report",
+      "period_type": "Monthly"
+    },
+    "model": "dhisdash.dataset",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "identifier": "V1kJRs8CtW4",
+      "name": "HMIS 033b: Disease Surveillance",
+      "period_type": "Weekly"
+    },
+    "model": "dhisdash.dataset",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "identifier": "ZgPtploqq0L",
+      "name": "Malaria treated - WEP",
+      "data_set_identifier": "V1kJRs8CtW4"
+    },
+    "model": "dhisdash.dataelement",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "identifier": "fOZ2QUjRSB7",
+      "name": "105-7.3 Lab Malaria RDTs",
+      "data_set_identifier": "MvaQ3peApq6"
+    },
+    "model": "dhisdash.dataelement",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "identifier": "STF7P24RAqC",
+      "name": "105-7.3 Lab Malaria Microscopy",
+      "data_set_identifier": "MvaQ3peApq6"
+    },
+    "model": "dhisdash.dataelement",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "identifier": "Q62QyMDzm3h",
+      "name": "105-1.3 OPD Malaria (Total)",
+      "data_set_identifier": "MvaQ3peApq6"
+    },
+    "model": "dhisdash.dataelement",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "identifier": "IBuhlkMrwqY",
+      "name": "105-6 Artemether/ Lumefantrine 100/20mg tablet",
+      "data_set_identifier": "MvaQ3peApq6"
+    },
+    "model": "dhisdash.dataelement",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "identifier": "YNkTlREfRJj",
+      "name": "105-2.1 A6:First dose IPT (IPT1)",
+      "data_set_identifier": "MvaQ3peApq6"
+    },
+    "model": "dhisdash.dataelement",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "identifier": "eGSUL2aL0zW",
+      "name": "105-2.1 A1:ANC 1st Visit for women",
+      "data_set_identifier": "MvaQ3peApq6"
+    },
+    "model": "dhisdash.dataelement",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "identifier": "lNohgsiZ1lr",
+      "name": "105-2.1 A7:Second dose IPT (IPT2)",
+      "data_set_identifier": "MvaQ3peApq6"
+    },
+    "model": "dhisdash.dataelement",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "identifier": "NfJyyb1eBaw",
+      "age_group": 0,
+      "name": "RDT Negative Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "identifier": "TTwU8Bv4fKm",
+      "age_group": 0,
+      "name": "Microscopy Negative Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "identifier": "spSdFB7CVOu",
+      "age_group": 0,
+      "name": "4 Months to 3 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "identifier": "Mswd99t7UbA",
+      "age_group": 0,
+      "name": "3+ to 7 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "identifier": "QOWAmZ7jBno",
+      "age_group": 0,
+      "name": "RDT Positive Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "identifier": "RVczviqd1Vv",
+      "age_group": 0,
+      "name": "12+ Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "identifier": "vp37EZVg3xG",
+      "age_group": 0,
+      "name": "Microscopy Positive Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "identifier": "w16OBdsg4b7",
+      "age_group": 0,
+      "name": "Not Tested Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "identifier": "nNWIFTErQVY",
+      "age_group": 0,
+      "name": "7+ to 12 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 9
+  },
+  {
+    "fields": {
+      "identifier": "Li89EZS6Jss",
+      "age_group": 2,
+      "name": "Number Positive, 5 years and above"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 10
+  },
+  {
+    "fields": {
+      "identifier": "PT9vhPUpxc4",
+      "age_group": 1,
+      "name": "Number Positive, Under 5 years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 11
+  },
+  {
+    "fields": {
+      "identifier": "snPZPBW4ZW0",
+      "age_group": 2,
+      "name": "Number Done, 5 years and above"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 12
+  },
+  {
+    "fields": {
+      "identifier": "bSUziAZFlqN",
+      "age_group": 1,
+      "name": "Number Done, Under 5 years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 13
+  },
+  {
+    "fields": {
+      "identifier": "Li89EZS6Jss",
+      "age_group": 2,
+      "name": "Number Positive, 5 years and above"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 14
+  },
+  {
+    "fields": {
+      "identifier": "PT9vhPUpxc4",
+      "age_group": 1,
+      "name": "Number Positive, Under 5 years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 15
+  },
+  {
+    "fields": {
+      "identifier": "snPZPBW4ZW0",
+      "age_group": 2,
+      "name": "Number Done, 5 years and above"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 16
+  },
+  {
+    "fields": {
+      "identifier": "bSUziAZFlqN",
+      "age_group": 1,
+      "name": "Number Done, Under 5 years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 17
+  },
+  {
+    "fields": {
+      "identifier": "c5w8FybAf6t",
+      "age_group": 2,
+      "name": "5-59 Years, Male"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 18
+  },
+  {
+    "fields": {
+      "identifier": "PS4qYEgqQmx",
+      "age_group": 2,
+      "name": "60andAbove Years, Female"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 19
+  },
+  {
+    "fields": {
+      "identifier": "jft3ntNlnPJ",
+      "age_group": 2,
+      "name": "5-59 Years, Female"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 20
+  },
+  {
+    "fields": {
+      "identifier": "gaJzDinonuC",
+      "age_group": 1,
+      "name": "29 Days-4 Years, Male"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 21
+  },
+  {
+    "fields": {
+      "identifier": "ZIk9srZ7KTh",
+      "age_group": 1,
+      "name": "0-28 Days, Female"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 22
+  },
+  {
+    "fields": {
+      "identifier": "dHjWd4es7e4",
+      "age_group": 2,
+      "name": "60andAbove Years, Male"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 23
+  },
+  {
+    "fields": {
+      "identifier": "z5Yltji9KtS",
+      "age_group": 1,
+      "name": "29 Days-4 Years, Female"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 24
+  },
+  {
+    "fields": {
+      "identifier": "N6sVfgBHDhx",
+      "age_group": 1,
+      "name": "0-28 Days, Male"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 25
+  },
+  {
+    "fields": {
+      "identifier": "JhQChFHlaNM",
+      "age_group": 0,
+      "name": "Stock at Hand"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 26
+  },
+  {
+    "fields": {
+      "identifier": "BhwinOOCTmR",
+      "age_group": 0,
+      "name": "Quantity Utilized"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 27
+  },
+  {
+    "fields": {
+      "identifier": "Avvv8JaSwGR",
+      "age_group": 0,
+      "name": "Days out of stock"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 28
+  },
+  {
+    "fields": {
+      "identifier": "hByJhwG8pWe",
+      "age_group": 2,
+      "name": "10-19 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 29
+  },
+  {
+    "fields": {
+      "identifier": "VnucGyJWga6",
+      "age_group": 2,
+      "name": ">=25 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 30
+  },
+  {
+    "fields": {
+      "identifier": "fJZ9j1SKgYc",
+      "age_group": 2,
+      "name": "20-24 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 31
+  },
+  {
+    "fields": {
+      "identifier": "hByJhwG8pWe",
+      "age_group": 2,
+      "name": "10-19 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 32
+  },
+  {
+    "fields": {
+      "identifier": "VnucGyJWga6",
+      "age_group": 2,
+      "name": ">=25 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 33
+  },
+  {
+    "fields": {
+      "identifier": "fJZ9j1SKgYc",
+      "age_group": 2,
+      "name": "20-24 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 34
+  },
+  {
+    "fields": {
+      "identifier": "hByJhwG8pWe",
+      "age_group": 2,
+      "name": "10-19 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 35
+  },
+  {
+    "fields": {
+      "identifier": "VnucGyJWga6",
+      "age_group": 2,
+      "name": ">=25 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 36
+  },
+  {
+    "fields": {
+      "identifier": "fJZ9j1SKgYc",
+      "age_group": 2,
+      "name": "20-24 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 37
+  }
+]

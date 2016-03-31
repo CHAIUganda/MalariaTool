@@ -9,3 +9,4 @@ django-widget-tweaks==1.4.1
 ipython==4.0.1
 djrill==2.0
 django-password-reset==0.8.1
+requests
