@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.management import BaseCommand
 from dhisdash.models import Region, District, SubCounty, Facility
 from dhisdash.utils import dhis2_request
@@ -5,12 +6,18 @@ from dhisdash.utils import dhis2_request
 
 def store_children(parent_org_unit, child_model):
     for child_org_unit in parent_org_unit['children']:
-        result = dhis2_request('organisationUnits/%s.json' % child_org_unit['id'])
 
-        child_model_instance = child_model()
-        child_model_instance.identifier = child_org_unit['id']
-        child_model_instance.name = result['name']
-        child_model_instance.save()
+        try:
+            # Throws error when unit already exists
+            child_model.objects.get(identifier=child_org_unit['id'])
+
+        except ObjectDoesNotExist:
+            result = dhis2_request('organisationUnits/%s.json' % child_org_unit['id'])
+
+            child_model_instance = child_model()
+            child_model_instance.identifier = child_org_unit['id']
+            child_model_instance.name = result['name']
+            child_model_instance.save()
 
 
 class Command(BaseCommand):
@@ -38,12 +45,6 @@ class Command(BaseCommand):
             for district in districts:
                 district_org_unit = dhis2_request('organisationUnits/%s.json' % district.identifier)
                 store_children(district_org_unit, SubCounty)
-
-        elif unit == 'facility':
-            sub_counties = SubCounty.objects.all()
-            for sub_county in sub_counties:
-                sub_county_org_unit = dhis2_request('organisationUnits/%s.json' % sub_county.identifier)
-                store_children(sub_county_org_unit, Facility)
 
         else:
             self.stdout.write(self.style.NOTICE('Unknown unit [%s]' % options['unit']))
