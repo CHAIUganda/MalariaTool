@@ -1,0 +1,34 @@
+[
+  {
+    "fields": {
+      "identifier": "pz9Uu65Irbg",
+      "name": "Northern Region"
+    },
+    "model": "dhisdash.region",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "identifier": "adZ6T35ve4h",
+      "name": "Eastern Region"
+    },
+    "model": "dhisdash.region",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "identifier": "VA90IqaI4Ji",
+      "name": "Central Region"
+    },
+    "model": "dhisdash.region",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "identifier": "auJdpeHbeet",
+      "name": "Western Region"
+    },
+    "model": "dhisdash.region",
+    "pk": 4
+  }
+]
