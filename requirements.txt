@@ -10,3 +10,6 @@ ipython==4.0.1
 djrill==2.0
 django-password-reset==0.8.1
 requests
+factory_boy
+isoweek
+clint
