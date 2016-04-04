@@ -6,43 +6,6 @@ class AgeGroups(object):
     over_or_equal_5_years = 2
 
 
-class DataSet(models.Model):
-    identifier = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    period_type = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-
-class DataElement(models.Model):
-    identifier = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    data_set_identifier = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.name
-
-
-class CategoryOptionCombo(models.Model):
-    identifier = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    age_group = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.name
-
-
-class DataValue(models.Model):
-    region_identifier = models.CharField(max_length=255)
-    district_identifier = models.CharField(max_length=255)
-    facility_identifier = models.CharField(max_length=255)
-    category_option_identifier = models.CharField(max_length=255)
-    age_group = models.IntegerField(default=0)
-    period = models.IntegerField()
-    value = models.IntegerField()
-
-
 class Region(models.Model):
     identifier = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
@@ -76,3 +39,41 @@ class Facility(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class DataSet(models.Model):
+    identifier = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    period_type = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class DataElement(models.Model):
+    identifier = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    data_set_identifier = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
+class CategoryOptionCombo(models.Model):
+    identifier = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    age_group = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+
+class DataValue(models.Model):
+    region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True)
+    district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)
+    facility = models.ForeignKey(Facility, on_delete=models.SET_NULL, null=True, blank=True)
+    data_element = models.ForeignKey(DataElement, on_delete=models.SET_NULL, null=True, blank=True)
+    category_option_combo = models.ForeignKey(CategoryOptionCombo, on_delete=models.SET_NULL, null=True, blank=True)
+    age_group = models.IntegerField(default=0)
+    period = models.IntegerField()
+    value = models.IntegerField()
