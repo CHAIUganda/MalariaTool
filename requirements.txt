@@ -13,3 +13,4 @@ requests
 factory_boy
 isoweek
 clint
+psycopg2

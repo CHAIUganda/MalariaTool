@@ -1,9 +1,9 @@
 from django.core.management import BaseCommand
+
 from dhisdash import utils
 
 from dhisdash.models import DataSet
-from dhisdash.utils import dhis2_request_to_file
-from malariatool.settings import BASE_DIR
+from dhisdash.utils import dhis2_request_to_file, get_data_set_file_path
 
 
 class Command(BaseCommand):
@@ -26,7 +26,7 @@ class Command(BaseCommand):
             else:
                 period_list = period
 
-            file_name = "%s/dhisdash/downloads/data_set_%s_%s.json" % (BASE_DIR, data_set.identifier, period)
+            file_name = get_data_set_file_path(data_set, period)
             result = dhis2_request_to_file(
                 'dataValueSets.json?dataSet=%s&orgUnit=%s&period=%s&children=true' % (
                     data_set.identifier, root_org_unit, period_list), file_name)

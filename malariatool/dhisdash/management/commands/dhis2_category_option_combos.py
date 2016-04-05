@@ -24,9 +24,13 @@ class Command(BaseCommand):
                 print '    %s' % result['name']
                 selection = raw_input('    Under 5 years(1) 5 years and above (2) others(0): ')
 
-                coc = CategoryOptionCombo()
-                coc.name = result['name']
-                coc.age_group = int(selection)
-                coc.identifier = category_option_combo['id']
-                # Should be run once
-                # coc.save()
+                try:
+                    coc = CategoryOptionCombo()
+                    coc.data_element = element
+                    coc.name = result['name']
+                    coc.age_group = int(selection)
+                    coc.identifier = category_option_combo['id']
+                    # Should be run once
+                    coc.save()
+                except Exception, e:
+                    print e.message

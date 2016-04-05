@@ -60,7 +60,8 @@ class DataElement(models.Model):
 
 
 class CategoryOptionCombo(models.Model):
-    identifier = models.CharField(max_length=255)
+    data_element = models.ForeignKey(DataElement)
+    identifier = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     age_group = models.IntegerField(default=0)
 
@@ -68,10 +69,19 @@ class CategoryOptionCombo(models.Model):
         return self.name
 
 
+class DataSetParserStatus(object):
+    UNKNOWN = 0
+    STARTED = 1
+    COMPLETED = 2
+
+
 class DataSetParser(models.Model):
     data_set = models.ForeignKey(DataSet, on_delete=models.SET_NULL, null=True, blank=True)
     period = models.IntegerField()
     status = models.IntegerField()
+
+    def __str__(self):
+        return '(%s) %s' % (self.period, self.data_set)
 
 
 class DataValue(models.Model):

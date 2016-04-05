@@ -2,6 +2,11 @@ from datetime import date
 import requests
 from malariatool.local_settings import DHIS2_USER, DHIS2_PASS
 from isoweek import Week
+from malariatool.settings import BASE_DIR
+
+
+def get_data_set_file_path(data_set, period):
+    return "%s/dhisdash/downloads/data_set_%s_%s.json" % (BASE_DIR, data_set.identifier, period)
 
 
 def dhis2_request(resource):
