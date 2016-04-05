@@ -68,7 +68,14 @@ class CategoryOptionCombo(models.Model):
         return self.name
 
 
+class DataSetParser(models.Model):
+    data_set = models.ForeignKey(DataSet, on_delete=models.SET_NULL, null=True, blank=True)
+    period = models.IntegerField()
+    status = models.IntegerField()
+
+
 class DataValue(models.Model):
+    data_set_parser = models.ForeignKey(DataSetParser, on_delete=models.CASCADE)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True)
     district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)
     facility = models.ForeignKey(Facility, on_delete=models.SET_NULL, null=True, blank=True)
