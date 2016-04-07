@@ -5,6 +5,10 @@ class AgeGroups(object):
     under_5_years = 1
     over_or_equal_5_years = 2
 
+    @staticmethod
+    def to_tuple():
+        return [(AgeGroups.under_5_years, 'Under 5 years'), (AgeGroups.over_or_equal_5_years, '5 years and above')]
+
 
 class Region(models.Model):
     identifier = models.CharField(max_length=255, unique=True)

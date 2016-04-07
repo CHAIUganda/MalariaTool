@@ -1,4 +1,5 @@
-from datetime import date
+from datetime import date, datetime
+import operator
 import requests
 from malariatool.local_settings import DHIS2_USER, DHIS2_PASS
 from isoweek import Week
@@ -44,3 +45,33 @@ def create_period_list(year, weeks):
     for week in weeks:
         period_list.append('%sW%s' % (year, week))
     return ",".join(period_list)
+
+
+def get_month_from_int(value):
+    months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+    return months[value]
+
+
+def generate_dates_to_now(start_year, start_month):
+    current = datetime.now()
+    dates_dict = {}
+
+    for year in range(start_year, current.year + 1):
+        dates_dict[year] = []
+
+        for month in range(1, 13):
+            if year == start_year and month < start_month:
+                continue
+
+            if year == current.year and month > current.month:
+                break
+
+            date_text = "%s'%s" % (get_month_from_int(month), str(year)[2:])
+            if month < 10:
+                date_value = '%s0%s' % (year, month)
+            else:
+                date_value = '%s%s' % (year, month)
+
+            dates_dict[year].append({'value': date_value, 'text': date_text})
+
+    return sorted(dates_dict.items(), key=operator.itemgetter(0))

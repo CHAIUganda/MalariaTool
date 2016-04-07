@@ -1,0 +1,290 @@
+{% load staticfiles %}<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MALARIA DASHBOARD v1.0</title>
+
+    <link href="{% static 'dhisdash/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/bootstrap-select.min.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/jquery.dataTables.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/jquery-ui.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/nv.d3.min.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/tabs.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/tabstyles.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/app.css'%}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'dhisdash/css/html5shiv.min.js'%}"></script>
+    <script src="{% static 'dhisdash/css/respond.min.js'%}"></script>
+    <![endif]-->
+
+    <script src="{% static 'dhisdash/js/jquery.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/angular.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/angular-route.min.js'%}"></script>
+<script src="{% static 'dhisdash/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/angular-datatables.min.js'%}"></script>
+
+    <script src="{% static 'dhisdash/js/d3.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/nv.d3.min.js'%}"></script>
+
+
+    <script src="{% static 'dhisdash/js/app2.js'%}"></script>
+</head>
+
+<body ng-app="dashboard" ng-controller="DashboardController">
+<!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
+<!--<div class="navbar-header">-->
+<!--<a class="navbar-brand" href="#">MALARIA</a>-->
+<!--</div>-->
+<!--<div class="container">-->
+
+<!--</div>-->
+<!--</nav>-->
+
+<div class="container">
+
+
+    <div class="row" id="header">
+        <div class="col-md-3" id="coart-of-arms"><img src="{% static 'dhisdash/media/coart-of-arms.png' %}"/></div>
+        <div class="col-md-6" id="site-name">
+            <div class="major">Ministry of Health: National Malaria Control Program</div>
+            <div class="minor">Republic of Uganda</div>
+        </div>
+        <div class="col-md-3" id="ug-flag"><img src="{% static 'dhisdash/media/ug-flag.png' %}"/></div>
+    </div>
+
+    <div class="row" id="main-nav">
+        <div id="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#">MOH MAIN SITE</a></li>
+                <li class="active"><a href="#">DASHBOARD</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#map">MAP</a></li>
+                <li><a href="#calendar">CALENDAR</a></li>
+                <li><a href="#documents">DOCUMENTS</a></li>
+                <li><a href="#partners">PARTNERS</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+
+            <div class="row">
+                <div class="col-md-10 heading"><h5>FILTERS</h5></div>
+            </div>
+
+
+            <div class="row">
+
+                <select class="col-mds-2 selectpickerr" data-width="auto"
+                        ng-model="filter.from_date" ng-change="updateData()">
+                    <option value="">FROM</option>
+                    {% for year, values in from_dates_iteritems %}
+                    <optgroup label="{{ year }}">
+                        {% for value in values %}
+
+                        <option value="{{ value.value }}">{{ value.text }}</option>
+
+                        {% endfor %}
+                    </optgroup>
+                    {% endfor %}
+                </select>
+
+
+                <select class="col-mds-2 selectpickerr" data-width="auto"
+                        ng-model="filter.to_date" ng-change="updateData()">
+                    <option value="">TO</option>
+                    {% for year, values in to_dates_iteritems %}
+                    <optgroup label="{{ year }}">
+                        {% for value in values %}
+
+                        <option value="{{ value.value }}">{{ value.text }}</option>
+
+                        {% endfor %}
+                    </optgroup>
+                    {% endfor %}
+                </select>
+
+                <select class="col-mds-2 selectpickerr" data-width="auto"
+                        ng-model="filter.region" ng-change="updateData()">
+                    <option value="">REGIONS</option>
+                    {% for region in regions_list %}
+
+                    <option value="{{ region.id }}">{{ region.name }}</option>
+
+                    {% endfor %}
+                </select>
+                <select class="col-mds-2 selectpickerr" data-width="auto" data-live-search="true"
+                        ng-model="filter.district" ng-change="updateData()">
+                    <option value="">DISTRICTS</option>
+                    {% for district in districts_list %}
+
+                    <option value="{{ district.id }}">{{ district.name }}</option>
+
+                    {% endfor %}
+                </select>
+                <select class="col-mds-2 last selectpickerr"
+                        ng-model="filter.age_group" ng-change="updateData()">
+                    <option value="">AGE GROUP</option>
+                    {% for value, text in age_groups %}
+
+                    <option value="{{ value }}">{{ text }}</option>
+
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 heading"><h5>KEY METRICS</h5></div>
+            </div>
+
+            <div class="row">
+                <div class="tabs tabs-style-flip">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="#positivity-rate-tab" id="positivity-rate">
+                                    <span class="value" ng-bind="big_metric.positivity_rate"></span>
+                                    <span class="desc">POSITIVITY RATE</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#testing-rate-tab" id="testing-rate">
+                                    <span class="value" ng-bind="big_metric.testing_rate"></span>
+                                    <span class="desc">TESTING RATE</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#consumption-rate-tab" id="consumption-rate">
+                                    <span class="value">3:1</span>
+                                    <span class="desc">CONSUMPTION RATE</span>
+                                </a>
+                            </li>
+                            <li>
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="content-wrap">
+                        <section id="positivity-rate-tab">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div id="positivity_rate" class="db-charts">
+                                        <svg></svg>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 districts-table">
+                                    <table datatable="ng"
+                                           class="row-border hover table table-bordered table-condensed table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th width='50%'>District</th>
+                                            <th width='25%'>Positivity Rate</th>
+                                            <th width='25%'>Cases Confirmed</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="result in positivity_data_table_results">
+                                            <td class="ng-cloak"><% result.district %></td>
+                                            <td class="ng-cloak"><% result.positivity_rate %>%</td>
+                                            <td class="ng-cloak"><% result.reported_cases %></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="testing-rate-tab">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div id="testing_rate" class="db-charts">
+                                        <svg></svg>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 districts-table">
+                                    <table datatable="ng"
+                                           class="row-border hover table table-bordered table-condensed table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th width='50%'>District</th>
+                                            <th width='25%'>Testing Rate</th>
+                                            <th width='25%'>Malaria OPD</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="result in testing_data_table_results">
+                                            <td class="ng-cloak"><% result.district %></td>
+                                            <td class="ng-cloak"><% result.testing_rate %>%</td>
+                                            <td class="ng-cloak"><% result.malaria_total %></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="consumption-rate-tab">
+                            <div class="row">
+                                <div class="col-lg-6"></div>
+                                <div class="col-lg-6"></div>
+                            </div>
+                        </section>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 heading"><h5>ADDITIONAL METRICS</h5></div>
+            </div>
+
+            <div class="row" id="additional-metrics">
+                <div class="col-md-3">
+                    <div class="value">92.2%</div>
+                    <div class="desc">UPTAKE<br>IPTP1</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="value">65.3%</div>
+                    <div class="desc">UPTAKE<br>IPTP2</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="value">3,145</div>
+                    <div class="desc">TOTAL<br>POSITIVE RESULTS</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="value">2,800</div>
+                    <div class="desc">TOTAL<br>TREATED PATIENTS</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+</div>
+
+
+</div>
+
+<script src="{% static 'dhisdash/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'dhisdash/js/bootstrap-select.min.js'%}"></script>
+<!--<script src="{% static 'dhisdash/js/i18n/defaults-*.min.js'%}"></script>-->
+<script src="{% static 'dhisdash/js/cbpFWTabs.js'%}"></script>
+<script>
+(function() {
+    [].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+        new CBPFWTabs( el );
+    });
+})();
+
+
+
+
+</script>
+<script src="{% static 'dhisdash/js/app.js'%}"></script>
+
+
+</body>
+</html>
