@@ -53,6 +53,8 @@ class DataSetParserAdmin(admin.ModelAdmin):
 
 class DataValueAdmin(admin.ModelAdmin):
     list_display = ('get_facility', 'district', 'region', 'data_element', 'get_age_group', 'value', 'period')
+    search_fields = ('data_element__identifier', 'district__name')
+    list_filter = ('data_element__name', 'period', 'category_option_combo__identifier')
 
     def get_age_group(self, obj):
         return get_age_group(obj)

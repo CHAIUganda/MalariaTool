@@ -1,0 +1,99 @@
+{% load staticfiles %}
+{% load permission_tags %}<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MALARIA DASHBOARD v1.0</title>
+
+    <link href="{% static 'dhisdash/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/bootstrap-select.min.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/jquery.dataTables.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/jquery-ui.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/nv.d3.min.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/tabs.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/tabstyles.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/app.css'%}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'dhisdash/css/html5shiv.min.js'%}"></script>
+    <script src="{% static 'dhisdash/css/respond.min.js'%}"></script>
+    <![endif]-->
+
+    <script src="{% static 'dhisdash/js/jquery.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/angular.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/angular-route.min.js'%}"></script>
+<script src="{% static 'dhisdash/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/angular-datatables.min.js'%}"></script>
+
+    <script src="{% static 'dhisdash/js/d3.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/nv.d3.min.js'%}"></script>
+
+
+    <script src="{% static 'dhisdash/js/app2.js'%}"></script>
+</head>
+
+<body ng-app="dashboard" ng-controller="DashboardController" data-ng-init="updateData()">
+<!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
+<!--<div class="navbar-header">-->
+<!--<a class="navbar-brand" href="#">MALARIA</a>-->
+<!--</div>-->
+<!--<div class="container">-->
+
+<!--</div>-->
+<!--</nav>-->
+
+<div class="container">
+
+
+    <div class="row" id="header">
+        <div class="col-md-3" id="coart-of-arms"><img src="{% static 'dhisdash/media/coart-of-arms.png' %}"/></div>
+        <div class="col-md-6" id="site-name">
+            <div class="major">Ministry of Health: National Malaria Control Program</div>
+            <div class="minor">Republic of Uganda</div>
+        </div>
+        <div class="col-md-3" id="ug-flag"><img src="{% static 'dhisdash/media/ug-flag.png' %}"/></div>
+    </div>
+
+    <div class="row" id="main-nav">
+        <div id="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#">MOH MAIN SITE</a></li>
+                <li class="active"><a href="#">DASHBOARD</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#map">MAP</a></li>
+                <li><a href="#calendar">CALENDAR</a></li>
+                <li><a href="#documents">DOCUMENTS</a></li>
+                <li><a href="#partners">PARTNERS</a></li>
+            </ul>
+        </div>
+    </div>
+
+    {% block content %}
+
+    {% endblock %}
+
+</div>
+
+
+</div>
+
+<script src="{% static 'dhisdash/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'dhisdash/js/bootstrap-select.min.js'%}"></script>
+<!--<script src="{% static 'dhisdash/js/i18n/defaults-*.min.js'%}"></script>-->
+<script src="{% static 'dhisdash/js/cbpFWTabs.js'%}"></script>
+<script>
+(function() {
+    [].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+        new CBPFWTabs( el );
+    });
+})();
+
+
+
+
+</script>
+<script src="{% static 'dhisdash/js/app.js'%}"></script>
+
+
+</body>
+</html>

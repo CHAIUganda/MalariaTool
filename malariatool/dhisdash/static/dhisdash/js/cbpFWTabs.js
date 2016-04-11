@@ -56,6 +56,7 @@
 	};
 
 	CBPFWTabs.prototype._show = function( idx ) {
+	    if (idx >= 3) return;
 		if( this.current >= 0 ) {
 			this.tabs[ this.current ].className = this.items[ this.current ].className = '';
 		}

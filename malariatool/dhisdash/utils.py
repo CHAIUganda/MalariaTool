@@ -1,23 +1,24 @@
 from datetime import date, datetime
 import operator
 import requests
-from malariatool.local_settings import DHIS2_USER, DHIS2_PASS
+from malariatool.local_settings import DHIS2_USER, DHIS2_PASS, DHIS2_ADDRESS
 from isoweek import Week
 from malariatool.settings import BASE_DIR
 
 
 def get_data_set_file_path(data_set, period):
+    # return "D:\malariatool\data_set_%s_%s.json" % (data_set.identifier, period)
     return "%s/dhisdash/downloads/data_set_%s_%s.json" % (BASE_DIR, data_set.identifier, period)
 
 
 def dhis2_request(resource):
-    url = 'http://hmis2.health.go.ug/hmis2/api/%s' % resource
+    url = '%s/hmis2/api/%s' % (DHIS2_ADDRESS,resource)
     result = requests.get(url, auth=(DHIS2_USER, DHIS2_PASS))
     return result.json()
 
 
 def dhis2_request_to_file(resource, file_name):
-    url = 'http://hmis2.health.go.ug/hmis2/api/%s' % resource
+    url = '%s/hmis2/api/%s' % (DHIS2_ADDRESS,resource)
     print 'Fetching [%s]' % url
     result = requests.get(url, auth=(DHIS2_USER, DHIS2_PASS), stream=True)
 
@@ -74,4 +75,4 @@ def generate_dates_to_now(start_year, start_month):
 
             dates_dict[year].append({'value': date_value, 'text': date_text})
 
-    return sorted(dates_dict.items(), key=operator.itemgetter(0))
+    return sorted(dates_dict.items(), key=operator.itemgetter(0), reverse=True)
