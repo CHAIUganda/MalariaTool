@@ -89,6 +89,9 @@ class DataSetParser(models.Model):
 
 
 class DataValue(models.Model):
+    class Meta:
+        unique_together = (('facility', 'period', 'data_element', 'category_option_combo'),)
+
     data_set_parser = models.ForeignKey(DataSetParser, on_delete=models.CASCADE)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True)
     district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)
