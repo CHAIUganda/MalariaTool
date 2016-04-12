@@ -1,0 +1,165 @@
+body {
+  font-family: arial,sans-serif;
+  background: #EEEEEE;
+}
+
+.container {
+    background: #fff url(../media/strip-flag.png) repeat-x;
+    margin-top: 20px;
+}
+
+.navbar {
+    font-size: 11px;
+    background: #526279;
+    letter-spacing: 1px;
+}
+
+.navbar li a {
+    color: #fff;
+}
+
+.nav > li  > a {
+    color: #EDB88B;
+    font-weight: bold;
+}
+
+.nav > li > a:hover, 
+.nav > li > a:focus {
+    color: #FFCC00;
+    background: #000;
+}
+
+#header {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+#coart-of-arms {
+    margin: 0;
+    padding: 0;
+    padding-left: 20px;
+}
+
+#ug-flag {
+    text-align: right;
+    padding-right: 20px;
+}
+
+#site-name {
+    padding-top: 30px;
+    text-align: center;
+}
+
+#site-name .major {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#site-name .minor {
+    color: #E66060;
+}
+
+#main-nav {
+    background: #000;
+    margin-bottom: 20px;
+}
+
+.heading {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.heading h5 {
+    font-weight: bold;
+    color: #333;
+}
+
+#additional-metrics {
+    /*border: #F5F5F5 1px solid;*/
+    border: #CCC 1px solid;
+    color: #6F6F6F;
+    margin-bottom: 40px;
+}
+
+#additional-metrics .value {
+    padding-top: 20px;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#additional-metrics .desc {
+    font-size: 10px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.tabs nav .value {
+    font-size: 30px;
+}
+
+.tabs nav .desc {
+    font-size: 30px;
+    color: #6F6F6F;
+}
+
+.tabs nav ul li {
+    margin-bottom: -2px;
+}
+
+.table{
+    font-size:12px;
+}
+
+.table tr,.table th{
+    height: 10px;    
+}
+
+table tbody tr{
+    height: 12px;
+}
+
+.dt-loading {
+    font-size: 12px;
+}
+
+.districts-table {
+    font-size: 11px;
+}
+
+.districts-table table tr th,
+.districts-table table thead tr,
+.districts-table table tbody tr{
+    height: 12px;
+}
+
+.districts-table label {
+    font-weight: normal;
+}
+
+
+.db-charts{
+    overflow: auto;
+    white-space: nowrap;
+    width: 450px;
+    height: 450px;
+}
+
+.selectpickerr {
+    width: 20%;
+    margin: 0;
+    padding:0;
+    float: left;
+    border-right-width: 0px;
+    border-left-width: 1px;
+}
+
+.selectpickerr.last {
+    border-right-width: 1px;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}

@@ -5,6 +5,10 @@ class AgeGroups(object):
     under_5_years = 1
     over_or_equal_5_years = 2
 
+    @staticmethod
+    def to_tuple():
+        return [(AgeGroups.under_5_years, 'Under 5 years'), (AgeGroups.over_or_equal_5_years, '5 years and above')]
+
 
 class Region(models.Model):
     identifier = models.CharField(max_length=255, unique=True)
@@ -85,6 +89,9 @@ class DataSetParser(models.Model):
 
 
 class DataValue(models.Model):
+    class Meta:
+        unique_together = (('facility', 'period', 'data_element', 'category_option_combo'),)
+
     data_set_parser = models.ForeignKey(DataSetParser, on_delete=models.CASCADE)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True)
     district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)

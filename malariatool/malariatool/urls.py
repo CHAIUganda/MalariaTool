@@ -19,11 +19,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from dashboard import urls as dashboard_urls
+from dhisdash import urls as dhisdash_urls
 from malariatool import settings
 
 urlpatterns = [
                   url(r'^admin/', include(admin.site.urls)),
                   url(r'^reset/', include(password_urls)),
+                  url(r'^', include(dhisdash_urls, namespace='dhisdash')),
                   url(r'^', include(dashboard_urls, namespace='dashboard')),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
