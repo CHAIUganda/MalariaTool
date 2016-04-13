@@ -1,11 +1,13 @@
 body {
   font-family: arial,sans-serif;
   background: #EEEEEE;
+  padding-top:0px;
 }
 
 .container {
     background: #fff url(../media/strip-flag.png) repeat-x;
     margin-top: 20px;
+    padding-bottom: 40px;
 }
 
 .navbar {
@@ -162,4 +164,114 @@ table tbody tr{
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+.about h4 {
+    border-bottom: #E66060 2px solid;
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    margin-top: 20px;
+}
+
+.side-box {
+    border: #000 2px solid;
+    margin-bottom: 30px;
+}
+
+.red-side-box {
+    border-color: #E66060;
+}
+
+.side-box-header, .side-box-footer {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
+
+.red-side-box .side-box-header {
+    background: #E66060;
+}
+
+.side-box-body .row {
+    padding: 10px 0px 10px 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.side-box-body .row  {
+    border-bottom: #ccc 1px solid;
+}
+
+.side-box-body .meeting-start {
+    color: #aaa;
+}
+
+.side-box-body .meeting-title {
+    font-weight: bold;
+}
+
+.side-box-footer {
+    background: #fff;
+    color: #000;
+}
+.red-side-box .side-box-footer a {
+    color: #E66060;
+    font-weight: bold;
+    letter-spacing: normal;
+}
+
+.goal-value, .goal-brief {
+    text-align: center;
+}
+
+.goal-value {
+    font-weight: bold;
+    font-size: 40px;
+    padding-top: 10px;
+}
+
+.goal-brief {
+    padding: 10px 30px 20px 30px;
+}
+
+.glyphicon {
+    font-size: 30px;
+}
+
+.tools {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.tool-icon, .tool-name, .tool-desc {
+    text-align: center;
+}
+
+.tool-name a, 
+.tool-name a:active, 
+.tool-name a:visited {
+    font-weight: bold;
+    color: #333;
+}
+
+.tool-name {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.tool-desc {
+    color: #aaa;
+}
+
+.structure .profile-picture {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.tabs-style-flip nav li a {
+    padding-bottom: 14px;
 }

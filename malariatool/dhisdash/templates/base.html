@@ -12,6 +12,14 @@
     <link href="{% static 'dhisdash/css/nv.d3.min.css'%}" rel="stylesheet">
     <link href="{% static 'dhisdash/css/tabs.css'%}" rel="stylesheet">
     <link href="{% static 'dhisdash/css/tabstyles.css'%}" rel="stylesheet">
+
+    <link href="{% static 'dashboard/css/app.css' %}" rel="stylesheet">
+    <link href="{% static 'dashboard/css/bootstrap-datepicker3.min.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--<link href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css" rel="stylesheet">-->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.5.0/fullcalendar.css" rel="stylesheet" />
+
     <link href="{% static 'dhisdash/css/app.css'%}" rel="stylesheet">
 
     <!--[if lt IE 9]>
@@ -30,6 +38,12 @@
 
 
     <script src="{% static 'dhisdash/js/app2.js'%}"></script>
+
+    <!--beginning of maps-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+    <script src="{% static 'js/leaflet.ajax.min.js' %}"></script>
+    <!--end of maps-->
 </head>
 
 <body ng-app="dashboard" ng-controller="DashboardController" data-ng-init="updateData()">
@@ -58,19 +72,29 @@
         <div id="navbar">
             <ul class="nav navbar-nav">
                 <li><a href="#">MOH MAIN SITE</a></li>
-                <li class="active"><a href="#">DASHBOARD</a></li>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#map">MAP</a></li>
-                <li><a href="#calendar">CALENDAR</a></li>
-                <li><a href="#documents">DOCUMENTS</a></li>
-                <li><a href="#partners">PARTNERS</a></li>
+                <li class="active"><a href="{% url 'dhisdash:home' %}">DASHBOARD</a></li>
+                <li><a href="{% url 'dashboard:about-us' %}">ABOUT</a></li>
+                <li><a href="{% url 'dashboard:map-view' %}">MAP</a></li>
+                <li><a href="{% url 'dashboard:calendar-view' %}">CALENDAR</a></li>
+                <li><a href="{% url 'dashboard:document-list' %}">DOCUMENTS</a></li>
+                <li><a href="{% url 'dashboard:ip-list' %}">PARTNERS</a></li>
+                {% if user|can:'add_tasks' or user|can:'update_tasks' %}
+                    <li><a href="{% url 'dashboard:task-list' %}">TASKS</a></li>
+                {% endif %}
+                {% if user|can:'add_users' %}
+                    <li><a href="{% url 'dashboard:admin' %}">ADMIN</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
 
     {% block content %}
 
     {% endblock %}
+        <div class="col-md-1"></div>
+</div>
 
 </div>
 
@@ -92,8 +116,15 @@
 
 
 </script>
+<script src="{% static "js/bootstrap-datepicker.min.js" %}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+<script src="{% static "js/moment.min.js" %}"></script>
+<script src="{% static "js/fullcalendar.min.js" %}"></script>
 <script src="{% static 'dhisdash/js/app.js'%}"></script>
 
+{% block js %}
+
+{% endblock %}
 
 </body>
 </html>
