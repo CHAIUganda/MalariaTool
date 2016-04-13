@@ -1,10 +1,10 @@
 import json
-from django.core.serializers.json import DjangoJSONEncoder
+import operator
+
 from django.db.models import Sum, Q
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.views.generic import TemplateView, View
-import operator
+
 from dhisdash import utils
 from dhisdash.models import Region, District, AgeGroups, DataValue
 
