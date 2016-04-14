@@ -6,9 +6,9 @@ from isoweek import Week
 from malariatool.settings import BASE_DIR
 
 
-def get_data_set_file_path(data_set, period):
+def get_data_set_file_path(data_set_identifier, period):
     # return "D:\malariatool\data_set_%s_%s.json" % (data_set.identifier, period)
-    return "%s/dhisdash/downloads/data_set_%s_%s.json" % (BASE_DIR, data_set.identifier, period)
+    return "%s/dhisdash/downloads/data_set_%s_%s.json" % (BASE_DIR, data_set_identifier, period)
 
 
 def dhis2_request(resource):
@@ -53,6 +53,7 @@ def get_month_from_int(value):
     return months[value]
 
 
+
 def generate_dates_to_now(start_year, start_month):
     current = datetime.now()
     dates_dict = {}
@@ -76,3 +77,24 @@ def generate_dates_to_now(start_year, start_month):
             dates_dict[year].append({'value': date_value, 'text': date_text})
 
     return sorted(dates_dict.items(), key=operator.itemgetter(0), reverse=True)
+
+
+def periods_in_ranges(start_period, end_period):
+    start_year, start_month = int(start_period[0:4]), int(start_period[4:])
+    end_year, end_month = int(end_period[0:4]), int(end_period[4:])
+    periods = []
+
+    for year in range (start_year, end_year+1):
+        for month in range(1, 13):
+            if year == start_year and month < start_month:
+                continue
+
+            if year == end_year and month > end_month:
+                break
+
+            if month < 10:
+                periods.append('%s0%s' % (year, month))
+            else:
+                periods.append('%s%s' % (year, month))
+
+    return periods

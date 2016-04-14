@@ -1,6 +1,7 @@
 from django.core.management import BaseCommand
 
 from dhisdash import utils
+from dhisdash.common.data_set_downloader import DataSetDownloader
 
 from dhisdash.models import DataSet
 from dhisdash.utils import dhis2_request_to_file, get_data_set_file_path
@@ -15,18 +16,7 @@ class Command(BaseCommand):
         root_org_unit = 'akV6429SUqu'
 
         data_sets = DataSet.objects.all()
+
         for data_set in data_sets:
-
-            if data_set.period_type.lower() == 'weekly':
-                year = int(period[0:4])
-                month = int(period[4:])
-
-                weeks = utils.month_to_weeks(year, month)
-                period_list = utils.create_period_list(year, weeks)
-            else:
-                period_list = period
-
-            file_name = get_data_set_file_path(data_set, period)
-            result = dhis2_request_to_file(
-                'dataValueSets.json?dataSet=%s&orgUnit=%s&period=%s&children=true' % (
-                    data_set.identifier, root_org_unit, period_list), file_name)
+            downloader = DataSetDownloader(data_set, period, root_org_unit)
+            downloader.download()

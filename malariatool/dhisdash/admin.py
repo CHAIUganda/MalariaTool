@@ -1,6 +1,6 @@
 from django.contrib import admin
 from dhisdash.models import DataSet, DataElement, CategoryOptionCombo, AgeGroups, Region, District, SubCounty, Facility, \
-    DataSetParser, DataSetParserStatus, DataValue
+    DataValue
 
 
 def get_age_group(obj):
@@ -39,21 +39,10 @@ class FacilityAdmin(admin.ModelAdmin):
     list_display = ('name', 'sub_county')
 
 
-class DataSetParserAdmin(admin.ModelAdmin):
-    list_display = ('data_set', 'period', 'get_status')
-
-    def get_status(self, obj):
-        if DataSetParserStatus.STARTED == obj.status:
-            return 'Started'
-        elif DataSetParserStatus.COMPLETED == obj.status:
-            return 'Completed'
-        else:
-            return 'Unknown'
-
-
 class DataValueAdmin(admin.ModelAdmin):
-    list_display = ('get_facility', 'district', 'region', 'data_element', 'get_age_group', 'value', 'period')
-    search_fields = ('data_element__identifier', 'district__name')
+    list_display = (
+        'get_facility', 'district', 'region', 'data_element', 'get_age_group', 'value', 'period', 'category_option_combo')
+    search_fields = ('data_element__identifier', 'district__name', 'facility__name')
     list_filter = ('data_element__name', 'period', 'category_option_combo__identifier')
 
     def get_age_group(self, obj):
@@ -70,5 +59,4 @@ admin.site.register(Region)
 admin.site.register(District, DistrictAdmin)
 admin.site.register(SubCounty, SubCountyAdmin)
 admin.site.register(Facility, FacilityAdmin)
-admin.site.register(DataSetParser, DataSetParserAdmin)
 admin.site.register(DataValue, DataValueAdmin)

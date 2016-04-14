@@ -1,4 +1,7 @@
+from datetime import datetime
 from django.db import models
+from django.utils import timezone
+from dhisdash import utils
 
 
 class AgeGroups(object):
@@ -79,20 +82,11 @@ class DataSetParserStatus(object):
     COMPLETED = 2
 
 
-class DataSetParser(models.Model):
-    data_set = models.ForeignKey(DataSet, on_delete=models.SET_NULL, null=True, blank=True)
-    period = models.IntegerField()
-    status = models.IntegerField()
-
-    def __str__(self):
-        return '(%s) %s' % (self.period, self.data_set)
-
-
 class DataValue(models.Model):
     class Meta:
-        unique_together = (('facility', 'period', 'data_element', 'category_option_combo'),)
+        unique_together = (('facility', 'original_period', 'data_element', 'category_option_combo'),)
 
-    data_set_parser = models.ForeignKey(DataSetParser, on_delete=models.CASCADE)
+    data_set = models.ForeignKey(DataSet, on_delete=models.SET_NULL, null=True, blank=True)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True)
     district = models.ForeignKey(District, on_delete=models.SET_NULL, null=True, blank=True)
     facility = models.ForeignKey(Facility, on_delete=models.SET_NULL, null=True, blank=True)
@@ -100,4 +94,32 @@ class DataValue(models.Model):
     category_option_combo = models.ForeignKey(CategoryOptionCombo, on_delete=models.SET_NULL, null=True, blank=True)
     age_group = models.IntegerField(default=0)
     period = models.IntegerField()
+    original_period = models.CharField(max_length=20)
     value = models.IntegerField()
+
+
+class DataSyncTrackerStatus(object):
+    UNKNOWN = 0
+    INIT_DOWNLOAD = 1
+    INIT_PARSE = 2
+    DOWNLOADED = 3
+    PARSED = 4
+
+
+class DataSyncTracker(models.Model):
+
+    period = models.IntegerField(unique=True)
+    last_downloaded = models.DateTimeField(default=timezone.now)
+    last_parsed = models.DateTimeField(default=timezone.now)
+    status = models.IntegerField(default=0)
+
+    @staticmethod
+    def update_periods(current_period, start_period):
+        periods = utils.periods_in_ranges(start_period, current_period)
+        tracked_periods = [str(dst.period) for dst in DataSyncTracker.objects.all()]
+        diff = [period for period in periods if period not in tracked_periods]
+
+        for period in diff:
+            tracker = DataSyncTracker()
+            tracker.period = int(period)
+            tracker.save()
