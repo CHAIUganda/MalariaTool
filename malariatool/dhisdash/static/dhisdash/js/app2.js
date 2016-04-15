@@ -3,6 +3,15 @@ var app = angular.module('dashboard', ['datatables'], function($interpolateProvi
     $interpolateProvider.endSymbol('%>');
 });
 
+$(document).ready(function(){
+    $('.tabs .desc').tooltip( {
+		delay: {show: 2000},
+		track: true,
+		fade: 250,
+		container: 'body',
+		placement: 'bottom'
+	} );
+});
 
 app.controller('DashboardController', function($scope, $http) {
     $scope.filter = {
@@ -88,8 +97,6 @@ app.controller('DashboardController', function($scope, $http) {
                 console.log(response);
         });
 
-
-
         $http.get('../../data.json?'+params+'&group=period', {})
             .then(function (response) {
                     $scope.chart_data = response.data;
@@ -100,7 +107,7 @@ app.controller('DashboardController', function($scope, $http) {
         $scope.updateCharts = function() {
             var positivity_chart_data = [{'key': 'Positivity Rate', 'values': []}];
             var testing_chart_data = [{'key': 'Testing Rate', 'values': []}];
-            var consumption_chart_data = [{'key': 'Testing Rate', 'values': []}];
+            var consumption_chart_data = [{'key': 'Consumption Ratio', 'values': []}];
             var most_recent_period = 0;
 
             for (period in $scope.chart_data) {
@@ -150,6 +157,8 @@ app.controller('DashboardController', function($scope, $http) {
                 var chart = nv.models.multiBarChart().color(["#F44336","#607D8B"]);
                     if(count($scope.chart_data)<=8) { chart.reduceXTicks(false); }
 
+                chart.stacked(false);
+                chart.showControls(false);
                 chart.yAxis.tickFormat(d3.format(',.0d'));
                 chart.forceY([0,100]);
                 chart.tooltip.valueFormatter(function (d) { return d > 0 ? d : 0; });
