@@ -2,7 +2,9 @@
 vhost = true
 plugin=python
 socket=/tmp/{{name}}.sock
-chmod-socket=777
+#chmod-socket=777
+chmod-socket=666
 chdir=/srv/checkout/{{name}}/{{name}}/
 virtualenv=/srv/checkout/{{name}}venv
-wsgi-file=/srv/checkout/{{name}}/{{name}}/{{name}}/wsgi.py
+#wsgi-file=/srv/checkout/{{name}}/{{name}}/{{name}}/wsgi.py
+module= malariatool.wsgi

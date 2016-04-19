@@ -32,6 +32,8 @@
 
 - pip: requirements=/srv/checkout/{{name}}/requirements.txt virtualenv=/srv/checkout/{{name}}venv
 
+- command: sudo chown -R $USER /srv/checkout/{{name}}venv
+
 - command: /srv/checkout/{{name}}venv/bin/python manage.py migrate --noinput
   args:
     chdir: /srv/checkout/{{name}}/{{name}}
@@ -41,5 +43,20 @@
     chdir: /srv/checkout/{{name}}/{{name}}
 
 - command: /srv/checkout/{{name}}venv/bin/python manage.py collectstatic --noinput
+  args:
+    chdir: /srv/checkout/{{name}}/{{name}}
+
+- command: sudo chown -R $USER /srv/checkout/{{name}}/{{name}}/static
+
+- file: path=/srv/checkout/{{name}}/{{name}}/dhisdash/downloads owner=www-data mode=0755 state=directory
+
+- command: /srv/checkout/{{name}}venv/bin/python manage.py loaddata {{item}} --noinput
+  with_items:
+    - dhisdash_initial_data
+    - dhisdash_category_option_combos
+    - dhisdash_initial_region_data
+    - dhisdash_initial_district_data
+    - dhisdash_initial_sub_county_data
+    - dhisdash_initial_facility_data
   args:
     chdir: /srv/checkout/{{name}}/{{name}}
