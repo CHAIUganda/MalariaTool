@@ -69,9 +69,9 @@ body{
 /*.tabs-style-flip nav a:hover,*/
 .tabs-style-flip nav a:focus,
 .tabs-style-flip nav li.tab-current a{
-	/*border-color:  #F44336;*/
+	/*border-color:  #D90C17;*/
 	border-color: #E66060;
-	color: #F44336;
+	color: #D90C17;
 }
 
 
@@ -142,7 +142,7 @@ body{
 }*/
 
 #tab1,#tab2,#tab3,#tab4{
-	border-color: #F44336;
+	border-color: #D90C17;
 }
 
 .nv-controlsWrap .disabled text {

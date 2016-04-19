@@ -32,8 +32,8 @@ class DataSetDownloader(object):
 
     def get_period_list(self):
         if self.data_set.period_type.lower() == 'weekly':
-            year = int(self.period[0:4])
-            month = int(self.period[4:])
+            year = int(str(self.period)[0:4])
+            month = int(str(self.period)[4:])
 
             weeks = utils.month_to_weeks(year, month)
             period_list = utils.create_period_list(year, weeks)

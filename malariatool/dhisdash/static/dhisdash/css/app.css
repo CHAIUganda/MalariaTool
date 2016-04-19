@@ -58,7 +58,8 @@ body {
 }
 
 #site-name .minor {
-    color: #E66060;
+    color: #D90C17;
+    padding-top: 10px;
 }
 
 #main-nav {
@@ -154,12 +155,7 @@ table tbody tr{
     margin: 0;
     padding:0;
     float: left;
-    border-right-width: 0px;
-    border-left-width: 1px;
-}
-
-.selectpickerr.last {
-    border-right-width: 1px;
+    margin-left: -1px;
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
@@ -167,7 +163,7 @@ table tbody tr{
 }
 
 .about h4 {
-    border-bottom: #E66060 2px solid;
+    border-bottom: #D90C17 2px solid;
     font-size: 14px;
     font-weight: bold;
     padding-bottom: 10px;
@@ -180,7 +176,7 @@ table tbody tr{
 }
 
 .red-side-box {
-    border-color: #E66060;
+    border-color: #D90C17;
 }
 
 .side-box-header, .side-box-footer {
@@ -193,7 +189,7 @@ table tbody tr{
 }
 
 .red-side-box .side-box-header {
-    background: #E66060;
+    background: #D90C17;
 }
 
 .side-box-body .row {
@@ -219,7 +215,7 @@ table tbody tr{
     color: #000;
 }
 .red-side-box .side-box-footer a {
-    color: #E66060;
+    color: #D90C17;
     font-weight: bold;
     letter-spacing: normal;
 }

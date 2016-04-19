@@ -154,7 +154,7 @@ app.controller('DashboardController', function($scope, $http) {
 
         var drawGraph = function(selector, data) {
             nv.addGraph( function(){
-                var chart = nv.models.multiBarChart().color(["#F44336","#607D8B"]);
+                var chart = nv.models.multiBarChart().color(["#D90C17","#607D8B"]);
                     if(count($scope.chart_data)<=8) { chart.reduceXTicks(false); }
 
                 chart.stacked(false);

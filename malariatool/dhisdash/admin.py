@@ -1,6 +1,6 @@
 from django.contrib import admin
 from dhisdash.models import DataSet, DataElement, CategoryOptionCombo, AgeGroups, Region, District, SubCounty, Facility, \
-    DataValue
+    DataValue, DataSyncTracker, DataSyncTrackerStatus
 
 
 def get_age_group(obj):
@@ -52,6 +52,23 @@ class DataValueAdmin(admin.ModelAdmin):
         return obj.facility.name
 
 
+class DataSyncTrackerAdmin(admin.ModelAdmin):
+    list_display = ('period', 'last_downloaded', 'last_parsed', 'get_status')
+
+    def get_status(self, obj):
+        if obj.status == DataSyncTrackerStatus.UNKNOWN:
+            return 'Unknown'
+        elif obj.status == DataSyncTrackerStatus.INIT_PARSE:
+            return 'Initial Parse'
+        elif obj.status == DataSyncTrackerStatus.INIT_DOWNLOAD:
+            return 'Initial Download'
+        elif obj.status == DataSyncTrackerStatus.PARSED:
+            return 'Parsed'
+        elif obj.status == DataSyncTrackerStatus.DOWNLOADED:
+            return 'Downloaded'
+        else:
+            return 'N/A'
+
 admin.site.register(DataSet, DataSetAdmin)
 admin.site.register(DataElement, DataElementAdmin)
 admin.site.register(CategoryOptionCombo, CategoryOptionComboAdmin)
@@ -60,3 +77,4 @@ admin.site.register(District, DistrictAdmin)
 admin.site.register(SubCounty, SubCountyAdmin)
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(DataValue, DataValueAdmin)
+admin.site.register(DataSyncTracker, DataSyncTrackerAdmin)

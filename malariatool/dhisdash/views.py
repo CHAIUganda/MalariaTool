@@ -20,8 +20,8 @@ class HomePageView(TemplateView):
         context['districts_list'] = sorted(districts_list, key=operator.itemgetter('name'))
 
         context['age_groups'] = AgeGroups.to_tuple()
-        context['from_dates_iteritems'] = utils.generate_dates_to_now(2014, 8)
-        context['to_dates_iteritems'] = utils.generate_dates_to_now(2014, 8)
+        context['from_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
+        context['to_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
 
         return context
 

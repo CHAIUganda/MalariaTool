@@ -12,7 +12,7 @@
         <div class="row">
 
             <select class="col-mds-2 selectpickerr" data-width="auto"
-                    ng-model="filter.from_date" ng-change="updateData()">
+                    ng-model="filter.from_date">
                 <option value="">FROM</option>
                 {% for year, values in from_dates_iteritems %}
                 <optgroup label="{{ year }}">

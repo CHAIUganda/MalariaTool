@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.db import models
 from django.utils import timezone
 from dhisdash import utils
@@ -119,7 +119,12 @@ class DataSyncTracker(models.Model):
         tracked_periods = [str(dst.period) for dst in DataSyncTracker.objects.all()]
         diff = [period for period in periods if period not in tracked_periods]
 
+        two_day_ago = timezone.now() - timedelta(days=2)
+
         for period in diff:
             tracker = DataSyncTracker()
             tracker.period = int(period)
+            tracker.last_downloaded = two_day_ago
+            tracker.last_parsed = two_day_ago
+            tracker.status = DataSyncTrackerStatus.UNKNOWN
             tracker.save()

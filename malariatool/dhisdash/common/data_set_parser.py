@@ -12,7 +12,7 @@ class DataSetParser(object):
         self.valid_data_elements = [de.identifier for de in DataElement.objects.all()]
 
     def get_data_values(self):
-        data_set_file_name = utils.get_data_set_file_path(self.data_set, self.period)
+        data_set_file_name = utils.get_data_set_file_path(self.data_set.identifier, self.period)
         data_set_contents = json.load(open(data_set_file_name, "r"))
         return data_set_contents['dataValues']
 

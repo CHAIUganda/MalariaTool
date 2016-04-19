@@ -53,7 +53,6 @@ def get_month_from_int(value):
     return months[value]
 
 
-
 def generate_dates_to_now(start_year, start_month):
     current = datetime.now()
     dates_dict = {}
@@ -61,12 +60,12 @@ def generate_dates_to_now(start_year, start_month):
     for year in range(start_year, current.year + 1):
         dates_dict[year] = []
 
-        for month in range(1, 13):
+        for month in range(12, 0, -1):
             if year == start_year and month < start_month:
                 continue
 
             if year == current.year and month > current.month:
-                break
+                continue
 
             date_text = "%s'%s" % (get_month_from_int(month), str(year)[2:])
             if month < 10:
