@@ -50,7 +50,7 @@
 
 - file: path=/srv/checkout/{{name}}/{{name}}/dhisdash/downloads owner=www-data mode=0755 state=directory
 
-- command: /srv/checkout/{{name}}venv/bin/python manage.py loaddata {{item}} --noinput
+- command: /srv/checkout/{{name}}venv/bin/python manage.py loaddata {{item}}
   with_items:
     - dhisdash_initial_data
     - dhisdash_category_option_combos
