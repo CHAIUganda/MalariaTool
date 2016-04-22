@@ -16,3 +16,4 @@ clint
 psycopg2
 nose
 mock
+sparkpost
