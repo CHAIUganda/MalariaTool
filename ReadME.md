@@ -33,6 +33,19 @@ To create a admin user:
 
 And use that to login and create other users.
 
+####Data Management:
+There are too commands to ensure that data is synced.
+
+To download:
+
+`python malariatool/manage.py dhis2_data_download 201502`
+
+To parse:
+
+`python malariatool/manage.py dhis2_data_parse 201502`
+
+The above commands should be setup to run as cron jobs late in the night. 
+
 The frontend is written in BoostrapCSS, JQuery with a few plugins and LeafLetJs for the maps section.
 
 
