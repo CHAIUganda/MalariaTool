@@ -34,7 +34,7 @@ To create a admin user:
 And use that to login and create other users.
 
 ####Data Management:
-There are too commands to ensure that data is synced.
+There are two commands to ensure that data is synced.
 
 To download:
 
