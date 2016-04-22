@@ -118,6 +118,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR + "/media/"
 
+FROM_EMAIL = "National Malaria Control<me@remosamuel.com>"
+
 try:
     from local_settings import *
 except ImportError as e:
