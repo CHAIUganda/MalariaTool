@@ -8,6 +8,7 @@ from password_reset.utils import get_username
 from dashboard.forms.users import UserForm
 from dashboard.models import User
 from dashboard.roles import IPUserRole
+from malariatool.settings import FROM_EMAIL
 
 
 class UserCreateView(CreateView):
@@ -43,8 +44,7 @@ class UserCreateView(CreateView):
                                        context).strip()
         subject = loader.render_to_string(self.email_subject_template_name,
                                           context).strip()
-        send_mail(subject, body, "National Malaria Control<me@remosamuel.com>",
-                  [user.email])
+        send_mail(subject, body, FROM_EMAIL, [user.email])
 
 
 class UserListView(ListView):
