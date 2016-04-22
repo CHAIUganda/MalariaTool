@@ -16,6 +16,10 @@ body {
     letter-spacing: 1px;
 }
 
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #000;
+}
+
 .navbar li a {
     color: #fff;
 }
@@ -23,6 +27,10 @@ body {
 .nav > li  > a {
     color: #EDB88B;
     font-weight: bold;
+}
+
+.navbar-right {
+    margin-right: 10px;
 }
 
 .nav > li > a:hover, 
