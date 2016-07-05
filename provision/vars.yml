@@ -1,4 +1,4 @@
 ---
 name: malariatool
-secret: '{{pass}}'
+secret: postgres
 repo: https://github.com/CHAIUganda/MalariaTool.git

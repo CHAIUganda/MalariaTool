@@ -77,118 +77,17 @@
             <div class="tabs tabs-style-flip">
                 <nav>
                     <ul>
-                        <li>
-                            <a href="#positivity-rate-tab" id="positivity-rate" ng-click="updateCharts()">
-                                <span class="value" ng-bind="big_metric.positivity_rate"></span>
-                                <span class="desc" title="Total Malaria Positive (RDT + Microscopy) / Total Malaria Cases Confirmed">POSITIVITY RATE</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#testing-rate-tab" id="testing-rate" ng-click="updateCharts()">
-                                <span class="value" ng-bind="big_metric.testing_rate"></span>
-                                <span class="desc" title="Total Tests/ Malaria OPD">TESTING RATE</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#consumption-rate-tab" id="consumption-rate" ng-click="updateCharts()">
-                                <span class="value" ng-bind="big_metric.consumption_rate"></span>
-                                <span class="desc" title=" (ACT consumed/17) / OPD Malaria">CONSUMPTION RATIO</span>
-                            </a>
-                        </li>
-                        <li></li>
+                        {% for tab in tabs %}
+                            {% include 'dhisdash/tab.html' with tab=tab %}
+                        {% endfor %}
                     </ul>
                 </nav>
                 <div class="content-wrap">
-                    <section id="positivity-rate-tab">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div id="positivity_rate" class="db-charts">
-                                    <svg></svg>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 districts-table">
-                                <table datatable="ng"
-                                       class="row-border hover table table-bordered table-condensed table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th width='40%'>District</th>
-                                        <th width='20%'>Positivity Rate</th>
-                                        <th width='20%'>Total Positive</th>
-                                        <th width='20%'>Total Tests</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="result in positivity_data_table_results">
-                                        <td width='40%' class="ng-cloak"><% result.district %></td>
-                                        <td class="ng-cloak"><% result.positivity_rate %>%</td>
-                                        <td class="ng-cloak"><% result.total_positive %></td>
-                                        <td class="ng-cloak"><% result.reported_cases %></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </section>
-                    <section id="testing-rate-tab">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div id="testing_rate" class="db-charts">
-                                    <svg></svg>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 districts-table">
-                                <table datatable="ng"
-                                       class="row-border hover table table-bordered table-condensed table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th width='40%'>District</th>
-                                        <th width='20%'>Testing Rate</th>
-                                        <th width='20%'>Total Tests</th>
-                                        <th width='20%'>Malaria OPD</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="result in testing_data_table_results">
-                                        <td width='40%' class="ng-cloak"><% result.district %></td>
-                                        <td class="ng-cloak"><% result.testing_rate %>%</td>
-                                        <td class="ng-cloak"><% result.total_tests %></td>
-                                        <td class="ng-cloak"><% result.malaria_total %></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </section>
-                    <section id="consumption-rate-tab">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div id="consumption_rate" class="db-charts">
-                                    <svg></svg>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 districts-table">
-                                <table datatable="ng"
-                                       class="row-border hover table table-bordered table-condensed table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th width='40%'>District</th>
-                                        <th width='20%'>Consumption Rate</th>
-                                        <th width='20%'>ACT Consumed</th>
-                                        <th width='20%'>Malaria OPD</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="result in consumption_data_table_results">
-                                        <td width='40%' class="ng-cloak"><% result.district %></td>
-                                        <td class="ng-cloak"><% result.consumption_rate %></td>
-                                        <td class="ng-cloak"><% result.act_consumed %></td>
-                                        <td class="ng-cloak"><% result.malaria_total %></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </section>
+
+                    {% for content in tab_contents %}
+                        {% include 'dhisdash/tab_content.html' with content=content %}
+                    {% endfor %}
+
                 </div>
 
 

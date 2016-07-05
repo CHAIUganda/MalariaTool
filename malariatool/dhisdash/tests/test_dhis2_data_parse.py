@@ -114,7 +114,13 @@ class TestDataParse(TestCase):
         third.status = DataSyncTrackerStatus.INIT_DOWNLOAD
         third.save()
 
-        with patch.object(DataSetParser, 'parse', return_value=None) as mock_method:
-            call_command('dhis2_data_parse', self.start_period)
+        ds1 = MyTestHelper().create_sample_data_set()
 
+        with patch('dhisdash.models.DataSyncTracker.update_periods') as update_periods_mock:
+            update_periods_mock.return_value = None
+
+            with patch.object(DataSetParser, 'parse', return_value=None) as mock_method:
+                call_command('dhis2_data_parse', self.start_period)
+
+        ds1.delete()
         self.assertEqual(2, mock_method.call_count)

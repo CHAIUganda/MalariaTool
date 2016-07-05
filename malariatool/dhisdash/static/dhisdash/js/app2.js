@@ -44,6 +44,11 @@ app.controller('DashboardController', function($scope, $http) {
             console.log(response);
     });
 
+    $scope.showReg=function(option_index){
+        $('.toggle-option').removeClass('active');
+        $('#toggle-option-'+option_index).addClass('active');
+    }
+
     $scope.updateData = function() {
 
         params = 'from_date='+$scope.filter.from_date+
@@ -146,9 +151,9 @@ app.controller('DashboardController', function($scope, $http) {
                 }
             }
 
-            drawGraph('#positivity_rate', positivity_chart_data)
-            drawGraph('#testing_rate', testing_chart_data)
-            drawGraph('#consumption_rate', consumption_chart_data)
+            drawGraph('#positivity-rate-chart', positivity_chart_data)
+            drawGraph('#testing-rate-chart', testing_chart_data)
+            drawGraph('#consumption-rate-chart', consumption_chart_data)
 
         };
 

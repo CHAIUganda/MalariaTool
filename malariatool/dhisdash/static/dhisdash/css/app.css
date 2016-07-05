@@ -280,3 +280,31 @@ table tbody tr{
 .tabs-style-flip nav li a {
     padding-bottom: 14px;
 }
+
+/*The toggles*/
+.toggle-row {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.reg_toggle{
+    cursor: pointer;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 1px solid #F44336 
+}
+
+.reg_toggle span {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.reg_toggle>.active{
+    background-color:#F44336; 
+    color:#FFF;
+    padding-top: inherit;
+    padding-bottom: inherit;
+}
+
+.reg_toggle>.active{
+    margin-right: -5px;
+}

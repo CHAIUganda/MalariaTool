@@ -23,6 +23,77 @@ class HomePageView(TemplateView):
         context['from_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
         context['to_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
 
+        context['tabs'] = [
+            {
+                'id': 'positivity-rate',
+                'ng_bind': 'big_metric.positivity_rate',
+                'title': 'Total Malaria Positive (RDT + Microscopy) / Total Malaria Cases Confirmed',
+                'name': 'POSITIVITY RATE',
+            },
+            {
+                'id': 'testing-rate',
+                'ng_bind': 'big_metric.testing_rate',
+                'title': 'Total Tests/ Malaria OPD',
+                'name': 'TESTING RATE',
+            },
+            {
+                'id': 'consumption-rate',
+                'ng_bind': 'big_metric.consumption_rate',
+                'title': ' (ACT consumed/17) / OPD Malaria',
+                'name': 'CONSUMPTION RATIO',
+            },
+        ]
+
+        context['tab_contents'] = [
+            {
+                'toggles': ['Weekly', 'Monthly'],
+                'main_toggle': 'Monthly',
+                'id_prefix': 'positivity-rate',
+                'table': {
+                    'value_label': 'Positivity Rate',
+                    'numerator_label': 'Total Positive',
+                    'denominator_label': 'Total Tests',
+
+                    'ng_repeat_source': 'positivity_data_table_results',
+                    'value_source': 'positivity_rate',
+                    'numerator_source': 'total_positive',
+                    'denominator_source': 'reported_cases',
+                }
+
+            },
+            {
+                'toggles': ['Weekly', 'Monthly'],
+                'main_toggle': 'Monthly',
+                'id_prefix': 'testing-rate',
+                'table': {
+                    'value_label': 'Testing Rate',
+                    'numerator_label': 'Total Tests',
+                    'denominator_label': 'Malaria OPD',
+
+                    'ng_repeat_source': 'testing_data_table_results',
+                    'value_source': 'testing_rate',
+                    'numerator_source': 'total_tests',
+                    'denominator_source': 'malaria_total',
+                }
+
+            },
+            {
+                'toggles': ['Weekly', 'Monthly'],
+                'main_toggle': 'Monthly',
+                'id_prefix': 'consumption-rate',
+                'table': {
+                    'value_label': 'Consumption Rate',
+                    'numerator_label': 'ACT Consumed',
+                    'denominator_label': 'Malaria OPD',
+
+                    'ng_repeat_source': 'consumption_data_table_results',
+                    'value_source': 'consumption_rate',
+                    'numerator_source': 'act_consumed',
+                    'denominator_source': 'malaria_total',
+                }
+
+            },
+        ]
         return context
 
 
@@ -50,6 +121,7 @@ class JsonDataView(View):
     POSITIVE_OVER_FOUR = 'Li89EZS6Jss'
     DONE_UNDER_FIVE = 'bSUziAZFlqN'
     DONE_OVER_FOUR = 'snPZPBW4ZW0'
+
 
     def get_int_with_default(self, request, name, default):
         try:

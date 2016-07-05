@@ -30,9 +30,9 @@
 - name: checkout from github
   git: repo={{repo}} dest=/srv/checkout/{{name}} accept_hostkey=true force=yes
 
-- command: sudo chown -R $USER /srv/checkout/{{name}}venv
-
 - pip: requirements=/srv/checkout/{{name}}/requirements.txt virtualenv=/srv/checkout/{{name}}venv
+
+- command: sudo chown -R $USER /srv/checkout/{{name}}venv
 
 - command: /srv/checkout/{{name}}venv/bin/python manage.py migrate --noinput
   args:

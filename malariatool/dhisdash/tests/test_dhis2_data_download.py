@@ -6,7 +6,7 @@ from django.utils import timezone
 from dhisdash import utils
 from dhisdash.common.data_set_downloader import DataSetDownloader
 from dhisdash.models import DataSyncTracker, DataSet, DataSyncTrackerStatus
-from mock import patch
+from mock import patch, mock
 from dhisdash.tests.helpers import MyTestHelper
 
 
@@ -16,6 +16,7 @@ class TestDataDownload(TestCase):
         self.start_period = '201505'
         self.end_period = date.today().strftime("%Y%m")
         DataSyncTracker.objects.all().delete()
+        DataSet.objects.all().delete()
 
     def test_that_missing_periods_are_automatically_added(self):
 
@@ -44,8 +45,11 @@ class TestDataDownload(TestCase):
         ds1 = MyTestHelper().create_sample_data_set()
         ds2 = MyTestHelper().create_sample_data_set()
 
-        with patch.object(DataSetDownloader, 'download', return_value=None) as mock_method:
-            call_command('dhis2_data_download', self.start_period)
+        with patch('dhisdash.models.DataSyncTracker.update_periods') as update_periods_mock:
+            update_periods_mock.return_value=None
+
+            with patch.object(DataSetDownloader, 'download', return_value=None) as mock_method:
+                call_command('dhis2_data_download', self.start_period)
 
         first.delete()
         second.delete()
@@ -107,7 +111,12 @@ class TestDataDownload(TestCase):
         third.status = DataSyncTrackerStatus.INIT_PARSE
         third.save()
 
-        with patch.object(DataSetDownloader, 'download', return_value=None) as mock_method:
-            call_command('dhis2_data_download', self.start_period)
+        ds1 = MyTestHelper().create_sample_data_set()
+        with patch('dhisdash.models.DataSyncTracker.update_periods') as update_periods_mock:
+            update_periods_mock.return_value = None
 
+            with patch.object(DataSetDownloader, 'download', return_value=None) as mock_method:
+                call_command('dhis2_data_download', self.start_period)
+
+        ds1.delete()
         self.assertEqual(2, mock_method.call_count)

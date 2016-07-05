@@ -1,0 +1,48 @@
+<section id="{{ content.id_prefix }}-tab">
+
+    <div class="row toggle-row">
+        <span class='reg_toggle'>
+            {% for toggle in content.toggles %}
+                {% if toggle == content.main_toggle %}
+                    <span class='active toggle-option' id="toggle-option-{{ forloop.counter }}"
+                          ng-click="showReg({{ forloop.counter }})">{{ toggle }}</span>
+                {% else %}
+                    <span class="toggle-option" id="toggle-option-{{ forloop.counter }}"
+                          ng-click="showReg({{ forloop.counter }})">{{ toggle }}</span>
+                {% endif %}
+            {% endfor %}
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="{{ content.id_prefix }}-chart" class="db-charts">
+                <svg></svg>
+            </div>
+        </div>
+        <div class="col-lg-6 districts-table">
+
+            <table datatable="ng"
+                   class="row-border hover table table-bordered table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th width='40%'>District</th>
+                    <th width='20%'>{{ content.table.value_label }}</th>
+                    <th width='20%'>{{ content.table.numerator_label }}</th>
+                    <th width='20%'>{{ content.table.denominator_label }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="result in {{ content.table.ng_repeat_source }}">
+                    <td width='40%' class="ng-cloak"><% result.district %></td>
+                    <td class="ng-cloak"><% result.{{ content.table.value_source }} %>%</td>
+                    <td class="ng-cloak"><% result.{{ content.table.numerator_source }} %></td>
+                    <td class="ng-cloak"><% result.{{ content.table.denominator_source }} %></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</section>
