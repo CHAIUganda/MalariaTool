@@ -1,0 +1,11 @@
+Django==1.8.6
+django-braces==1.8.1
+django-custom-user==0.5
+django-discover-runner==1.0
+django-extensions==1.5.9
+django-model-utils==2.3.1
+django-role-permissions==0.6.2
+django-widget-tweaks==1.4.1
+ipython==4.0.1
+djrill==2.0
+django-password-reset==0.8.1
