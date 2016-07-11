@@ -286,6 +286,7 @@ table tbody tr{
     text-align: center;
     margin-bottom: 50px;
 }
+
 .reg_toggle{
     cursor: pointer;
     padding-top: 4px;
@@ -306,5 +307,5 @@ table tbody tr{
 }
 
 .reg_toggle>.active{
-    margin-right: -5px;
+    /*margin-right: -5px;*/
 }

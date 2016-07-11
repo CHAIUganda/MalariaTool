@@ -37,6 +37,10 @@ app.controller('DashboardController', function($scope, $http) {
     $scope.big_metric.total_positive = "0";
     $scope.big_metric.total_treated = "0";
 
+    $scope.big_metric.infant_deaths_rate = "0%";
+    $scope.big_metric.ipt2_rate = "0%";
+    $scope.big_metric.sp_stock_out_rate = "0%";
+
     $http.get('../../districts.json', {})
         .then(function(response) {
             $scope.districts = response.data;
@@ -44,10 +48,10 @@ app.controller('DashboardController', function($scope, $http) {
             console.log(response);
     });
 
-    $scope.showReg=function(option_index){
-        $('.toggle-option').removeClass('active');
-        $('#toggle-option-'+option_index).addClass('active');
-    }
+    // $scope.showReg=function(option_index){
+    //     $('.toggle-option').removeClass('active');
+    //     $('#toggle-option-'+option_index).addClass('active');
+    // }
 
     $scope.updateData = function() {
 

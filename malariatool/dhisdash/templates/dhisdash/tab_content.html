@@ -1,22 +1,22 @@
-<section id="{{ content.id_prefix }}-tab">
+<section id="section-{{ table.identifier }}" class="{% if tab_manager.default == table.identifier %}content-current{% endif %}">
 
+    {% if table.toggle.options|length > 0 %}
     <div class="row toggle-row">
         <span class='reg_toggle'>
-            {% for toggle in content.toggles %}
-                {% if toggle == content.main_toggle %}
-                    <span class='active toggle-option' id="toggle-option-{{ forloop.counter }}"
-                          ng-click="showReg({{ forloop.counter }})">{{ toggle }}</span>
-                {% else %}
-                    <span class="toggle-option" id="toggle-option-{{ forloop.counter }}"
-                          ng-click="showReg({{ forloop.counter }})">{{ toggle }}</span>
-                {% endif %}
+            {% for option in table.toggle.options %}
+
+                <span class='{% if option == table.toggle.default %}active{% endif %} toggle-option-{{ table.toggle.identifier }} toggle-option-{{ table.toggle.identifier }}-{{ forloop.counter }} toggle-option'
+                      data-identifier="{{ table.toggle.identifier }}-{{ forloop.counter }}"
+                      data-group="{{ table.toggle.identifier }}">{{ option }}</span>
+
             {% endfor %}
         </span>
     </div>
+    {% endif %}
 
     <div class="row">
         <div class="col-lg-6">
-            <div id="{{ content.id_prefix }}-chart" class="db-charts">
+            <div id="chart-{{ table.identifier }}" class="db-charts">
                 <svg></svg>
             </div>
         </div>
@@ -27,17 +27,17 @@
                 <thead>
                 <tr>
                     <th width='40%'>District</th>
-                    <th width='20%'>{{ content.table.value_label }}</th>
-                    <th width='20%'>{{ content.table.numerator_label }}</th>
-                    <th width='20%'>{{ content.table.denominator_label }}</th>
+                {% for label in table.labels %}
+                    <th width='20%'>{{ label }}</th>
+                {% endfor %}
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="result in {{ content.table.ng_repeat_source }}">
+                <tr ng-repeat="result in {{ table.ng_repeat }}">
                     <td width='40%' class="ng-cloak"><% result.district %></td>
-                    <td class="ng-cloak"><% result.{{ content.table.value_source }} %>%</td>
-                    <td class="ng-cloak"><% result.{{ content.table.numerator_source }} %></td>
-                    <td class="ng-cloak"><% result.{{ content.table.denominator_source }} %></td>
+                {% for source in table.sources %}
+                    <td class="ng-cloak"><% result.{{ source }} %>%</td>
+                {% endfor %}
                 </tr>
                 </tbody>
             </table>

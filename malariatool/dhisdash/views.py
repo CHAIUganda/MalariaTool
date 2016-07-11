@@ -6,6 +6,9 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, View
 
 from dhisdash import utils
+from dhisdash.common.ContentAreaManager import ContentAreaManager
+from dhisdash.common.TabManager import TabManager
+from dhisdash.common.ToggleManager import ToggleManager, Toggle
 from dhisdash.models import Region, District, AgeGroups, DataValue
 
 
@@ -23,77 +26,75 @@ class HomePageView(TemplateView):
         context['from_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
         context['to_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
 
-        context['tabs'] = [
-            {
-                'id': 'positivity-rate',
-                'ng_bind': 'big_metric.positivity_rate',
-                'title': 'Total Malaria Positive (RDT + Microscopy) / Total Malaria Cases Confirmed',
-                'name': 'POSITIVITY RATE',
-            },
-            {
-                'id': 'testing-rate',
-                'ng_bind': 'big_metric.testing_rate',
-                'title': 'Total Tests/ Malaria OPD',
-                'name': 'TESTING RATE',
-            },
-            {
-                'id': 'consumption-rate',
-                'ng_bind': 'big_metric.consumption_rate',
-                'title': ' (ACT consumed/17) / OPD Malaria',
-                'name': 'CONSUMPTION RATIO',
-            },
-        ]
+        tab_manager = TabManager()
+        tab_manager.set_default_tab('weekly-positivity')
+        tab_manager.add('infant-deaths', 'INFANT DEATHS RATE', '#', 'big_metric.infant_deaths_rate')
+        tab_manager.add('ipt2-rate', 'IPT2 RATE', '#', 'big_metric.ipt2_rate')
+        tab_manager.add('weekly-positivity', 'POSITIVITY RATE', '#', 'big_metric.positivity_rate')
+        tab_manager.add('sp-stock-out', 'SP STOCK OUT RATE', '#', 'big_metric.sp_stock_out_rate')
 
-        context['tab_contents'] = [
-            {
-                'toggles': ['Weekly', 'Monthly'],
-                'main_toggle': 'Monthly',
-                'id_prefix': 'positivity-rate',
-                'table': {
-                    'value_label': 'Positivity Rate',
-                    'numerator_label': 'Total Positive',
-                    'denominator_label': 'Total Tests',
+        context['tab_manager'] = tab_manager
 
-                    'ng_repeat_source': 'positivity_data_table_results',
-                    'value_source': 'positivity_rate',
-                    'numerator_source': 'total_positive',
-                    'denominator_source': 'reported_cases',
-                }
+        ca_manager = ContentAreaManager()
 
-            },
-            {
-                'toggles': ['Weekly', 'Monthly'],
-                'main_toggle': 'Monthly',
-                'id_prefix': 'testing-rate',
-                'table': {
-                    'value_label': 'Testing Rate',
-                    'numerator_label': 'Total Tests',
-                    'denominator_label': 'Malaria OPD',
+        # CASE MANAGEMENT
 
-                    'ng_repeat_source': 'testing_data_table_results',
-                    'value_source': 'testing_rate',
-                    'numerator_source': 'total_tests',
-                    'denominator_source': 'malaria_total',
-                }
+        t1 = Toggle('case-mgt-rate', 'Infant Deaths', ['Infant Deaths', 'Death Proportion', 'Malaria Cases'])
 
-            },
-            {
-                'toggles': ['Weekly', 'Monthly'],
-                'main_toggle': 'Monthly',
-                'id_prefix': 'consumption-rate',
-                'table': {
-                    'value_label': 'Consumption Rate',
-                    'numerator_label': 'ACT Consumed',
-                    'denominator_label': 'Malaria OPD',
+        ca_manager.add(t1, 'infant-deaths',
+                       'testing_data_table_results',
+                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
+                       ['testing_rate', 'total_tests', 'malaria_total'])
 
-                    'ng_repeat_source': 'consumption_data_table_results',
-                    'value_source': 'consumption_rate',
-                    'numerator_source': 'act_consumed',
-                    'denominator_source': 'malaria_total',
-                }
+        ca_manager.add(t1, 'death-proportion',
+                       'testing_data_table_results',
+                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
+                       ['testing_rate', 'total_tests', 'malaria_total'])
 
-            },
-        ]
+        ca_manager.add(t1, 'malaria-cases',
+                       'testing_data_table_results',
+                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
+                       ['testing_rate', 'total_tests', 'malaria_total'])
+
+        # PREVENTION
+
+        t2 = Toggle('prevention-rate', '', [])
+
+        ca_manager.add(t2, 'ipt2-rate',
+                       'testing_data_table_results',
+                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
+                       ['testing_rate', 'total_tests', 'malaria_total'])
+
+        # POSITIVITY
+
+        t3 = Toggle('positivity-rate', 'Weekly Positivity', ['Weekly Positivity', 'Monthly Positivity'])
+
+        ca_manager.add(t3, 'weekly-positivity',
+                       'positivity_data_table_results',
+                       ['Positivity Rate', 'Total Positive', 'Total Tests'],
+                       ['positivity_rate', 'total_positive', 'reported_cases'])
+
+        ca_manager.add(t3, 'monthly-positivity',
+                       'positivity_data_table_results',
+                       ['Positivity Rate', 'Total Positive', 'Total Tests'],
+                       ['positivity_rate', 'total_positive', 'reported_cases'])
+
+        # LOGISTICS
+
+        t4 = Toggle('logistics-rate', 'SP Stock Out', ['SP Stock Out', 'ACT Stock Out'])
+
+        ca_manager.add(t4, 'sp-stock-out',
+                       'consumption_data_table_results',
+                       ['Consumption Rate', 'ACT Consumed', 'Malaria OPD'],
+                       ['consumption_rate', 'act_consumed', 'malaria_total'])
+
+        ca_manager.add(t4, 'act-stock-out',
+                       'positivity_data_table_results',
+                       ['Positivity Rate', 'Total Positive', 'Total Tests'],
+                       ['positivity_rate', 'total_positive', 'reported_cases'])
+
+        context['ca_manager'] = ca_manager
+
         return context
 
 

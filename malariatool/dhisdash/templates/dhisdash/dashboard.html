@@ -76,16 +76,14 @@
         <div class="row">
             <div class="tabs tabs-style-flip">
                 <nav>
-                    <ul>
-                        {% for tab in tabs %}
-                            {% include 'dhisdash/tab.html' with tab=tab %}
-                        {% endfor %}
-                    </ul>
+                    {% include 'dhisdash/tab.html' with tm=tab_manager %}
                 </nav>
                 <div class="content-wrap">
 
-                    {% for content in tab_contents %}
-                        {% include 'dhisdash/tab_content.html' with content=content %}
+                    {% for table in ca_manager.all %}
+                        {% include 'dhisdash/tab_content.html' with table=table tm=toggle_manager tab_manager=tab_manager %}
+                        {% include 'dhisdash/tab_content.html' with table=table tm=toggle_manager tab_manager=tab_manager %}
+                        {% include 'dhisdash/tab_content.html' with table=table tm=toggle_manager tab_manager=tab_manager %}
                     {% endfor %}
 
                 </div>

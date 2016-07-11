@@ -1,6 +1,10 @@
-<li>
-    <a href="#" id="{{ tab.id }}" ng-click="updateCharts()">
-        <span class="value" ng-bind="{{ tab.ng_bind }}"></span>
-        <span class="desc" title="{{ tab.title }}">{{ tab.name }}</span>
-    </a>
-</li>
+<ul>
+    {% for tab in tm.all %}
+    <li class="tab {% if tm.default == tab.identifier %}tab-current{% endif %}" data-identifier="{{ tab.identifier }}" >
+        <a href="#" id="tab-{{ tab.identifier }}" ng-click="updateCharts()">
+            <span class="value" ng-bind="{{ tab.ng_bind }}"></span>
+            <span class="desc" title="{{ tab.title }}">{{ tab.name }}</span>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
