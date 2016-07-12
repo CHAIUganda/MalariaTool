@@ -199,7 +199,7 @@ app.controller('DashboardController', function($scope, $http) {
         };
 
         $scope.redrawCharts = function() {
-            drawLineChart('#chart-infant-deaths', $scope.nv_chart_data['infant_deaths'], 10, periods)
+            drawLineChart('#chart-infant-deaths', $scope.nv_chart_data['infant_deaths'], 3, periods)
             drawLineChart('#chart-death-proportion', $scope.nv_chart_data['death_proportion'], 100, periods)
         };
     };

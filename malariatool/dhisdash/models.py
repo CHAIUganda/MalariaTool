@@ -24,6 +24,7 @@ class Region(models.Model):
 class District(models.Model):
     identifier = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
+    population = models.IntegerField(default=0)
     region = models.ForeignKey(Region, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):

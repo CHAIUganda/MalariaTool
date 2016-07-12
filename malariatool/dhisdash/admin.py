@@ -28,7 +28,10 @@ class DataSetAdmin(admin.ModelAdmin):
 
 
 class DistrictAdmin(admin.ModelAdmin):
-    list_display = ('name', 'region')
+    list_display = ('name', 'region', 'get_population')
+
+    def get_population(self, obj):
+        return "{:,}".format(obj.population)
 
 
 class SubCountyAdmin(admin.ModelAdmin):
