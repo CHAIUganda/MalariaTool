@@ -74,14 +74,15 @@
         <div id="navbar">
             <ul class="nav navbar-nav">
                 <li><a href="http://health.go.ug">MOH MAIN SITE</a></li>
-                <li class="active"><a href="{% url 'dhisdash:home' %}">DASHBOARD</a></li>
                 <li><a href="{% url 'dashboard:about-us' %}">ABOUT</a></li>
-                <li><a href="{% url 'dashboard:map-view' %}">MAP</a></li>
-                <li><a href="{% url 'dashboard:calendar-view' %}">CALENDAR</a></li>
-                <li><a href="{% url 'dashboard:document-list' %}">DOCUMENTS</a></li>
+                <li class="active"><a href="{% url 'dhisdash:home' %}">DASHBOARD</a></li>
+                <!--<li><a href="{% url 'dashboard:map-view' %}">MAP</a></li>-->
+                <!--<li><a href="{% url 'dashboard:calendar-view' %}">CALENDAR</a></li>-->
                 <li><a href="{% url 'dashboard:ip-list' %}">PARTNERS</a></li>
+                <li><a href="{% url 'dashboard:document-list' %}">DOCUMENTS</a></li>
+                <li><a href="#">RESEARCH</a></li>
                 {% if user|can:'add_tasks' or user|can:'update_tasks' %}
-                    <li><a href="{% url 'dashboard:task-list' %}">TASKS</a></li>
+                    <!--<li><a href="{% url 'dashboard:task-list' %}">TASKS</a></li>-->
                 {% endif %}
                 {% if user|can:'add_users' %}
                     <li><a href="{% url 'dashboard:admin' %}">ADMIN</a></li>

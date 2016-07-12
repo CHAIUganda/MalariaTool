@@ -1,3 +1,6 @@
+from collections import OrderedDict
+
+
 class Tab(object):
     def __init__(self, identifier, name, title, ng_bind):
         self.identifier = identifier
@@ -8,7 +11,7 @@ class Tab(object):
 
 class TabManager(object):
     def __init__(self):
-        self.tabs = {}
+        self.tabs = OrderedDict()
         self.default = None
 
     def add(self, identifier, name, title, ng_bind):
