@@ -11,10 +11,12 @@ def get_data_set_file_path(data_set_identifier, period):
     return "%s/dhisdash/downloads/data_set_%s_%s.json" % (BASE_DIR, data_set_identifier, period)
 
 
-def dhis2_request(resource):
+def dhis2_request(resource, parse_json=True):
     url = '%s/hmis2/api/%s' % (DHIS2_ADDRESS,resource)
     result = requests.get(url, auth=(DHIS2_USER, DHIS2_PASS))
-    return result.json()
+    if parse_json:
+        return result.json()
+    return result.text
 
 
 def dhis2_request_to_file(resource, file_name):

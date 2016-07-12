@@ -1,108 +1,12 @@
 import json
-import operator
 
-from django.db.models import Sum, Q
+from django.db.models import Q
+from django.db.models import Sum
 from django.http import HttpResponse
-from django.views.generic import TemplateView, View
+from django.views.generic import View
 
-from dhisdash import utils
-from dhisdash.common.ContentAreaManager import ContentAreaManager
-from dhisdash.common.TabManager import TabManager
-from dhisdash.common.ToggleManager import ToggleManager, Toggle
-from dhisdash.models import Region, District, AgeGroups, DataValue
-
-
-class HomePageView(TemplateView):
-    template_name = 'dhisdash/dashboard.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(HomePageView, self).get_context_data(**kwargs)
-        context['regions_list'] = Region.objects.all()
-
-        districts_list = [{'id': d.id, 'name': d.name} for d in District.objects.all()]
-        context['districts_list'] = sorted(districts_list, key=operator.itemgetter('name'))
-
-        context['age_groups'] = AgeGroups.to_tuple()
-        context['from_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
-        context['to_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
-
-        tab_manager = TabManager()
-        tab_manager.set_default_tab('weekly-positivity')
-        tab_manager.add('infant-deaths', 'INFANT DEATHS RATE', '#', 'big_metric.infant_deaths_rate')
-        tab_manager.add('ipt2-rate', 'IPT2 RATE', '#', 'big_metric.ipt2_rate')
-        tab_manager.add('weekly-positivity', 'POSITIVITY RATE', '#', 'big_metric.positivity_rate')
-        tab_manager.add('sp-stock-out', 'SP STOCK OUT RATE', '#', 'big_metric.sp_stock_out_rate')
-
-        context['tab_manager'] = tab_manager
-
-        ca_manager = ContentAreaManager()
-
-        # CASE MANAGEMENT
-
-        t1 = Toggle('case-mgt-rate', 'Infant Deaths', ['Infant Deaths', 'Death Proportion', 'Malaria Cases'])
-
-        ca_manager.add(t1, 'infant-deaths',
-                       'testing_data_table_results',
-                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
-                       ['testing_rate', 'total_tests', 'malaria_total'])
-
-        ca_manager.add(t1, 'death-proportion',
-                       'testing_data_table_results',
-                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
-                       ['testing_rate', 'total_tests', 'malaria_total'])
-
-        ca_manager.add(t1, 'malaria-cases',
-                       'testing_data_table_results',
-                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
-                       ['testing_rate', 'total_tests', 'malaria_total'])
-
-        # PREVENTION
-
-        t2 = Toggle('prevention-rate', '', [])
-
-        ca_manager.add(t2, 'ipt2-rate',
-                       'testing_data_table_results',
-                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
-                       ['testing_rate', 'total_tests', 'malaria_total'])
-
-        # POSITIVITY
-
-        t3 = Toggle('positivity-rate', 'Weekly Positivity', ['Weekly Positivity', 'Monthly Positivity'])
-
-        ca_manager.add(t3, 'weekly-positivity',
-                       'positivity_data_table_results',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'],
-                       ['positivity_rate', 'total_positive', 'reported_cases'])
-
-        ca_manager.add(t3, 'monthly-positivity',
-                       'positivity_data_table_results',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'],
-                       ['positivity_rate', 'total_positive', 'reported_cases'])
-
-        # LOGISTICS
-
-        t4 = Toggle('logistics-rate', 'SP Stock Out', ['SP Stock Out', 'ACT Stock Out'])
-
-        ca_manager.add(t4, 'sp-stock-out',
-                       'consumption_data_table_results',
-                       ['Consumption Rate', 'ACT Consumed', 'Malaria OPD'],
-                       ['consumption_rate', 'act_consumed', 'malaria_total'])
-
-        ca_manager.add(t4, 'act-stock-out',
-                       'positivity_data_table_results',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'],
-                       ['positivity_rate', 'total_positive', 'reported_cases'])
-
-        context['ca_manager'] = ca_manager
-
-        return context
-
-
-class JsonDistrictsView(View):
-    def get(self, request):
-        districts = District.objects.all()
-        result = [(d.id, d.name) for d in districts]
-        return HttpResponse(json.dumps(dict(result)))
+from dhisdash.common.IdentifierManager import IdentifierManager
+from dhisdash.models import DataValue
 
 
 class JsonDataView(View):
@@ -123,6 +27,9 @@ class JsonDataView(View):
     DONE_UNDER_FIVE = 'bSUziAZFlqN'
     DONE_OVER_FOUR = 'snPZPBW4ZW0'
 
+    def __init__(self, **kwargs):
+        self.im = IdentifierManager()
+        super(JsonDataView, self).__init__(**kwargs)
 
     def get_int_with_default(self, request, name, default):
         try:
@@ -211,6 +118,29 @@ class JsonDataView(View):
         malaria_treated_filter = DataValue.objects.filter(data_element__identifier=self.MALARIA_TREATED)
         return self.filter_on_request(request, malaria_treated_filter, enable_age_group=False)
 
+    def get_inpatient_malaria_deaths(self, request):
+        coc_filters = self.get_coc_filters(
+            'Under 5 years, Death, Female',
+            'Under 5 years, Death, Male',
+            '5 years and above, Death, Female',
+            '5 years and above, Death, Male'
+        )
+
+        return self.get_values(request, '108-6 Malaria total', coc_filters)
+
+    def get_malaria_admissions(self, request):
+        coc_filters = self.get_coc_filters(
+            'Under 5 years, Case, Female',
+            'Under 5 years, Case, Male',
+            '5 years and above, Case, Female',
+            '5 years and above, Case, Male'
+        )
+
+        return self.get_values(request, '108-6 Malaria total', coc_filters)
+
+    def get_total_inpatient_deaths(self, request):
+        return self.get_values(request, '108-1 Deaths', None)
+
     def add_to_final(self, data, partial_data, key, group_by_column):
         for result in partial_data:
             group_column_value = result[group_by_column]
@@ -221,6 +151,24 @@ class JsonDataView(View):
             data[group_column_value][key] = result['value__sum']
 
         return data
+
+    def get_coc_filters(self, *names):
+        f = None
+        for name in names:
+            if f is None:
+                f = Q(category_option_combo__identifier=self.im.coc(name))
+            else:
+                f = f | Q(category_option_combo__identifier=self.im.coc(name))
+        return f
+
+    def get_values(self, request, data_element, coc_filters):
+        if coc_filters is not None:
+            data_filter = DataValue.objects.filter(data_element__identifier=self.im.de(data_element))\
+                .filter(coc_filters)
+        else:
+            data_filter = DataValue.objects.filter(data_element__identifier=self.im.de(data_element))
+
+        return self.filter_on_request(request, data_filter)
 
     def get(self, request):
         rdt_positive = self.get_rdt_positive(request)
@@ -238,6 +186,9 @@ class JsonDataView(View):
         a7_first_dose = self.get_a7_first_dose(request)
 
         malaria_treated = self.get_malaria_treated(request)
+        inpatient_malaria_deaths = self.get_inpatient_malaria_deaths(request)
+        malaria_admissions = self.get_malaria_admissions(request)
+        total_inpatient_deaths = self.get_total_inpatient_deaths(request)
 
         data = {}
         data = self.add_to_final(data, rdt_positive, 'rdt_positive', request.GET['group'])
@@ -251,5 +202,8 @@ class JsonDataView(View):
         data = self.add_to_final(data, a6_first_dose, 'a6_first_dose', request.GET['group'])
         data = self.add_to_final(data, a7_first_dose, 'a7_first_dose', request.GET['group'])
         data = self.add_to_final(data, malaria_treated, 'malaria_treated', request.GET['group'])
+        data = self.add_to_final(data, inpatient_malaria_deaths, 'inpatient_malaria_deaths', request.GET['group'])
+        data = self.add_to_final(data, malaria_admissions, 'malaria_admissions', request.GET['group'])
+        data = self.add_to_final(data, total_inpatient_deaths, 'total_inpatient_deaths', request.GET['group'])
 
         return HttpResponse(json.dumps(data))

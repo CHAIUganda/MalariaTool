@@ -7,7 +7,7 @@
 
                 <span class='{% if option == table.toggle.default %}active{% endif %} toggle-option-{{ table.toggle.identifier }} toggle-option-{{ table.toggle.identifier }}-{{ forloop.counter }} toggle-option'
                       data-identifier="{{ table.toggle.identifier }}-{{ forloop.counter }}"
-                      data-group="{{ table.toggle.identifier }}">{{ option }}</span>
+                      data-group="{{ table.toggle.identifier }}" ng-click="redrawCharts()">{{ option }}</span>
 
             {% endfor %}
         </span>
@@ -36,7 +36,7 @@
                 <tr ng-repeat="result in {{ table.ng_repeat }}">
                     <td width='40%' class="ng-cloak"><% result.district %></td>
                 {% for source in table.sources %}
-                    <td class="ng-cloak"><% result.{{ source }} %>%</td>
+                    <td class="ng-cloak"><% result.{{ source }} %></td>
                 {% endfor %}
                 </tr>
                 </tbody>
