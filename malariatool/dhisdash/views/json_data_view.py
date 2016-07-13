@@ -173,12 +173,15 @@ class JsonDataView(View):
     def get_opd_malaria_cases(self, request):
         return self.get_values(request, '105-1.3 OPD Malaria (Total)', None)
 
-    def add_to_final(self, data, partial_data, key, group_by_column):
+    def add_to_final(self, data, partial_data, key, group_by_column, create=True):
         for result in partial_data:
             group_column_value = result[group_by_column]
             print "%s - %s" % (group_column_value, type(group_column_value))
 
             if group_column_value not in data:
+                if not create:
+                    continue
+
                 data[group_column_value] = {}
 
             data[group_column_value][key] = result['value__sum']
@@ -241,6 +244,6 @@ class JsonDataView(View):
         data = self.add_to_final(data, malaria_admissions, 'malaria_admissions', request.GET['group'])
         data = self.add_to_final(data, total_inpatient_deaths, 'total_inpatient_deaths', request.GET['group'])
         data = self.add_to_final(data, opd_malaria_cases, 'opd_malaria_cases', request.GET['group'])
-        data = self.add_to_final(data, population, 'population', request.GET['group'])
+        data = self.add_to_final(data, population, 'population', request.GET['group'], False)
 
         return HttpResponse(json.dumps(data))

@@ -33,10 +33,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="result in {{ table.ng_repeat }}">
+                <tr ng-repeat="result in table_data['{{ table.ng_repeat }}']">
                     <td width='40%' class="ng-cloak"><% result.district %></td>
                 {% for source in table.sources %}
-                    <td class="ng-cloak"><% result.{{ source }} %></td>
+                    <td class="ng-cloak"><% result.{{ source }} %>{% if source == 'result' %}%{% endif %}</td>
                 {% endfor %}
                 </tr>
                 </tbody>

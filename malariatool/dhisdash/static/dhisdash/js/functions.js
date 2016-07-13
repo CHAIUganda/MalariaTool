@@ -4,24 +4,28 @@ var getComputeResult = function(d) {
     return d.result;
 }
 
-var computeInfantDeathRate = function(data) {
-    var rate = (data['inpatient_malaria_deaths'] / data['malaria_admissions']) * 100;
-    if (isNaN(rate)) rate = 0;
-    
-    return {result: rate.toFixed(1), 
-        numerator: data['inpatient_malaria_deaths'],
-        denominator: data['malaria_admissions']
-    };   
+var computeHelper = function(result, numerator, denominator) {
+    if (isNaN(result)) result = 0;
+
+    return {result: result.toFixed(1),
+        numerator: numberWithCommas(numerator),
+        denominator: numberWithCommas(denominator)
+    }
 }
 
-var computeDeathProportionRate = function(data) {
-    var rate = (data['inpatient_malaria_deaths']/ data['total_inpatient_deaths']) * 100;
-    if (isNaN(rate)) rate = 0;
+var computeMalariaDeathRate = function(data) {
+    var rate = (data['inpatient_malaria_deaths'] / data['malaria_admissions']) * 100;
+    return computeHelper(rate, data['inpatient_malaria_deaths'], data['malaria_admissions']);
+}
 
-    return {result: rate.toFixed(1),
-        numerator: data['inpatient_malaria_deaths'],
-        denominator: data['total_inpatient_deaths']
-    }
+var computeMortalityRate = function(data) {
+    var rate = (data['inpatient_malaria_deaths']/ data['total_inpatient_deaths']) * 100;
+    return computeHelper(rate, data['inpatient_malaria_deaths'], data['total_inpatient_deaths']);
+}
+
+var computeMalariaCases = function(data) {
+    var rate = (data['opd_malaria_cases']/ data['population']) * 100;
+    return computeHelper(rate, data['opd_malaria_cases'], data['population']);
 }
 
 var computePositivityRate = function(data) {
