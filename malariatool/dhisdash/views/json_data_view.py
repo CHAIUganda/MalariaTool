@@ -6,7 +6,8 @@ from django.http import HttpResponse
 from django.views.generic import View
 
 from dhisdash.common.IdentifierManager import IdentifierManager
-from dhisdash.models import DataValue
+from dhisdash.models import DataValue, District
+from dhisdash.utils import periods_in_ranges
 
 
 class JsonDataView(View):
@@ -59,6 +60,35 @@ class JsonDataView(View):
 
         if enable_age_group and age_group != 0:
             results = results.filter(age_group=age_group)
+
+        return results
+
+    def get_population(self, request):
+        start_period = request.GET['from_date']
+        end_period = request.GET['to_date']
+        group_by_column = request.GET['group']
+
+        region = self.get_int_with_default(request, 'region', 0)
+        district = self.get_int_with_default(request, 'district', 0)
+
+        results = []
+        if group_by_column == 'period':
+            total_population = District.objects
+
+            if region == 0 and district > 0:
+                total_population = total_population.filter(pk=district)
+            elif district == 0 and region > 0:
+                total_population = total_population.filter(region=region)
+
+            total_population = total_population.aggregate(Sum('population'))
+
+            for period in periods_in_ranges(start_period, end_period):
+                results.append({'period': int(period), 'value__sum': total_population['population__sum']})
+
+        elif group_by_column == 'district':
+            districts = District.objects.all()
+            for district in districts:
+                results.append({'district': district.pk, 'value__sum': district.population})
 
         return results
 
@@ -141,11 +171,17 @@ class JsonDataView(View):
     def get_total_inpatient_deaths(self, request):
         return self.get_values(request, '108-1 Deaths', None)
 
-    def add_to_final(self, data, partial_data, key, group_by_column):
+    def get_opd_malaria_cases(self, request):
+        return self.get_values(request, '105-1.3 OPD Malaria (Total)', None)
+
+    def add_to_final(self, data, partial_data, key, group_by_column, create=True):
         for result in partial_data:
             group_column_value = result[group_by_column]
 
             if group_column_value not in data:
+                if not create:
+                    continue
+
                 data[group_column_value] = {}
 
             data[group_column_value][key] = result['value__sum']
@@ -189,6 +225,8 @@ class JsonDataView(View):
         inpatient_malaria_deaths = self.get_inpatient_malaria_deaths(request)
         malaria_admissions = self.get_malaria_admissions(request)
         total_inpatient_deaths = self.get_total_inpatient_deaths(request)
+        opd_malaria_cases = self.get_opd_malaria_cases(request)
+        population = self.get_population(request)
 
         data = {}
         data = self.add_to_final(data, rdt_positive, 'rdt_positive', request.GET['group'])
@@ -205,5 +243,7 @@ class JsonDataView(View):
         data = self.add_to_final(data, inpatient_malaria_deaths, 'inpatient_malaria_deaths', request.GET['group'])
         data = self.add_to_final(data, malaria_admissions, 'malaria_admissions', request.GET['group'])
         data = self.add_to_final(data, total_inpatient_deaths, 'total_inpatient_deaths', request.GET['group'])
+        data = self.add_to_final(data, opd_malaria_cases, 'opd_malaria_cases', request.GET['group'])
+        data = self.add_to_final(data, population, 'population', request.GET['group'], False)
 
         return HttpResponse(json.dumps(data))

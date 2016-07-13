@@ -6,7 +6,6 @@
 .pyc
 db.sqlite3
 media/
-static/*
 local_settings.py
 downloads
 *.retry

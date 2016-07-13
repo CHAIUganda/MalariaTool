@@ -15,19 +15,29 @@ class HomePageView(TemplateView):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['regions_list'] = Region.objects.all()
 
-        districts_list = [{'id': d. id, 'name': d.name} for d in District.objects.all()]
+        districts_list = [{'id': d.id, 'name': d.name} for d in District.objects.all()]
         context['districts_list'] = sorted(districts_list, key=operator.itemgetter('name'))
 
         context['age_groups'] = AgeGroups.to_tuple()
         context['from_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
         context['to_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
 
+        act_stock_status_description = 'Proportion of health facilities that reported no stocks outs of first line anti-malarial medicines (ACTs) lasting more than 7 days in the previous month'
+
         tab_manager = TabManager()
-        tab_manager.set_default_tab('death-proportion')
-        tab_manager.add('death-proportion', 'DEATH PROPORTION', '#', 'big_metric.death_proportion')
-        tab_manager.add('ipt2-rate', 'IPT2 RATE', '#', 'big_metric.ipt2_rate')
-        tab_manager.add('weekly-positivity', 'POSITIVITY RATE', '#', 'big_metric.positivity_rate')
-        tab_manager.add('sp-stock-out', 'SP STOCK OUT RATE', '#', 'big_metric.sp_stock_out_rate')
+        tab_manager.set_default_tab('malaria-cases')
+
+        tab_manager.add('malaria-cases', 'MALARIA CASES', 'Malaria cases per 1000 population',
+                        'big_metric.malaria_cases')
+
+        tab_manager.add('ipt2-uptake', 'IPT2 UPTAKE', 'Proportion of women who came for IPT2b',
+                        'big_metric.ipt2_rate')
+
+        tab_manager.add('weekly-reporting-rate', 'REPORTING RATE', 'Facilities reporting',
+                        'big_metric.positivity_rate')
+
+        tab_manager.add('act-stock-status', 'ACT STOCK STATUS', act_stock_status_description,
+                        'big_metric.act_stock_status')
 
         context['tab_manager'] = tab_manager
 
@@ -35,59 +45,63 @@ class HomePageView(TemplateView):
 
         # CASE MANAGEMENT
 
-        t1 = Toggle('case-mgt-rate', 'Death Proportion', ['Infant Deaths', 'Death Proportion', 'Malaria Cases'])
+        t1 = Toggle('case-mgt-rate', 'Malaria Cases',
+                    ['Malaria Cases', 'Testing Rate', 'Positivity Rate', 'Malaria Deaths', 'Mortality Rate'])
 
-        ca_manager.add(t1, 'infant-deaths',
-                       'infant_deaths_data_table_results',
-                       ['Infant Deaths Rate', 'Inpatient Malaria Deaths', 'Malaria Admissions'],
-                       ['infant_death_rate', 'inpatient_malaria_deaths', 'malaria_admissions'])
+        ca_manager.add(t1, 'malaria-deaths',
+                       ['Malaria Death Rate', 'Inpatient Malaria Deaths', 'Malaria Admissions'])
 
         ca_manager.add(t1, 'death-proportion',
-                       'death_proportion_data_table_results',
-                       ['Death Proportion', 'Inpatient Malaria Deaths', 'Total Inpatient Deaths'],
-                       ['death_proportion', 'inpatient_malaria_deaths', 'total_inpatient_deaths'])
+                       ['Death Proportion', 'Inpatient Malaria Deaths', 'Total Inpatient Deaths'])
 
         ca_manager.add(t1, 'malaria-cases',
-                       'testing_data_table_results',
-                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
-                       ['testing_rate', 'total_tests', 'malaria_total'])
+                       ['Malaria Cases', 'Malaria Cases * 1000', 'Population'])
+
+        # ca_manager.add(t1, 'testing-rate',
+        #                ['Testing Rate', 'Total Tests', 'Malaria OPD'])
+
+        ca_manager.add(t1, 'positivity-rate',
+                       ['Positivity Rate', 'Tested Positive', 'Number Tested'])
+
+        ca_manager.add(t1, 'mortality-rate',
+                       ['Mortality Rate', 'Inpatient Malaria Deaths', 'Total Inpatient Deaths'])
 
         # PREVENTION
 
         t2 = Toggle('prevention-rate', '', [])
 
-        ca_manager.add(t2, 'ipt2-rate',
-                       'testing_data_table_results',
-                       ['Testing Rate', 'Total Tests', 'Malaria OPD'],
-                       ['testing_rate', 'total_tests', 'malaria_total'])
+        ca_manager.add(t2, 'ipt2-uptake',
+                       ['Testing Rate', 'Total Tests', 'Malaria OPD'])
 
-        # POSITIVITY
+        # # POSITIVITY
+        #
+        # t3 = Toggle('positivity-rate', 'Weekly Positivity', ['Weekly Positivity', 'Monthly Positivity'])
+        #
+        # ca_manager.add(t3, 'weekly-positivity',
+        #                ['Positivity Rate', 'Total Positive', 'Total Tests'])
+        #
+        # ca_manager.add(t3, 'monthly-positivity',
+        #                ['Positivity Rate', 'Total Positive', 'Total Tests'])
 
-        t3 = Toggle('positivity-rate', 'Weekly Positivity', ['Weekly Positivity', 'Monthly Positivity'])
+        # REPORTING
 
-        ca_manager.add(t3, 'weekly-positivity',
-                       'positivity_data_table_results',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'],
-                       ['positivity_rate', 'total_positive', 'reported_cases'])
-
-        ca_manager.add(t3, 'monthly-positivity',
-                       'positivity_data_table_results',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'],
-                       ['positivity_rate', 'total_positive', 'reported_cases'])
+        # t3 = Toggle('reporting-rate', 'Weekly Reporting Rate', ['Weekly Reporting Rate', 'Monthly Reporting Rate'])
+        #
+        # ca_manager.add(t3, 'weekly-reporting-rate',
+        #                ['Positivity Rate', 'Total Positive', 'Total Tests'])
+        #
+        # ca_manager.add(t3, 'monthly-reporting-rate',
+        #                ['Positivity Rate', 'Total Positive', 'Total Tests'])
 
         # LOGISTICS
 
-        t4 = Toggle('logistics-rate', 'SP Stock Out', ['SP Stock Out', 'ACT Stock Out'])
+        t4 = Toggle('logistics-rate', 'ACT Stock Status', ['ACT Stock Status', 'SP Stock Status'])
 
-        ca_manager.add(t4, 'sp-stock-out',
-                       'consumption_data_table_results',
-                       ['Consumption Rate', 'ACT Consumed', 'Malaria OPD'],
-                       ['consumption_rate', 'act_consumed', 'malaria_total'])
+        ca_manager.add(t4, 'sp-stock-status',
+                       ['Consumption Rate', 'ACT Consumed', 'Malaria OPD'])
 
-        ca_manager.add(t4, 'act-stock-out',
-                       'positivity_data_table_results',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'],
-                       ['positivity_rate', 'total_positive', 'reported_cases'])
+        ca_manager.add(t4, 'act-stock-status',
+                       ['Positivity Rate', 'Total Positive', 'Total Tests'])
 
         context['ca_manager'] = ca_manager
 
