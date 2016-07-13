@@ -67,7 +67,7 @@ body{
 }*/
 
 /*.tabs-style-flip nav a:hover,*/
-.tabs-style-flip nav a:focus,
+/*.tabs-style-flip nav a:focus,*/
 .tabs-style-flip nav li.tab-current a{
 	/*border-color:  #D90C17;*/
 	border-color: #E66060;

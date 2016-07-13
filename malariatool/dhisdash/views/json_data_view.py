@@ -74,12 +74,13 @@ class JsonDataView(View):
         results = []
         if group_by_column == 'period':
             total_population = District.objects
-            total_population = total_population.aggregate(Sum('population'))
 
             if region == 0 and district > 0:
                 total_population = total_population.filter(pk=district)
             elif district == 0 and region > 0:
                 total_population = total_population.filter(region=region)
+
+            total_population = total_population.aggregate(Sum('population'))
 
             for period in periods_in_ranges(start_period, end_period):
                 results.append({'period': int(period), 'value__sum': total_population['population__sum']})
@@ -176,7 +177,6 @@ class JsonDataView(View):
     def add_to_final(self, data, partial_data, key, group_by_column, create=True):
         for result in partial_data:
             group_column_value = result[group_by_column]
-            print "%s - %s" % (group_column_value, type(group_column_value))
 
             if group_column_value not in data:
                 if not create:

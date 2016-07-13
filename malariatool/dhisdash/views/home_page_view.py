@@ -57,11 +57,11 @@ class HomePageView(TemplateView):
         ca_manager.add(t1, 'malaria-cases',
                        ['Malaria Cases', 'Malaria Cases * 1000', 'Population'])
 
-        ca_manager.add(t1, 'testing-rate',
-                       ['Testing Rate', 'Total Tests', 'Malaria OPD'])
+        # ca_manager.add(t1, 'testing-rate',
+        #                ['Testing Rate', 'Total Tests', 'Malaria OPD'])
 
         ca_manager.add(t1, 'positivity-rate',
-                       ['Testing Rate', 'Total Tests', 'Malaria OPD'])
+                       ['Positivity Rate', 'Tested Positive', 'Number Tested'])
 
         ca_manager.add(t1, 'mortality-rate',
                        ['Mortality Rate', 'Inpatient Malaria Deaths', 'Total Inpatient Deaths'])
@@ -73,25 +73,25 @@ class HomePageView(TemplateView):
         ca_manager.add(t2, 'ipt2-uptake',
                        ['Testing Rate', 'Total Tests', 'Malaria OPD'])
 
-        # POSITIVITY
-
-        t3 = Toggle('positivity-rate', 'Weekly Positivity', ['Weekly Positivity', 'Monthly Positivity'])
-
-        ca_manager.add(t3, 'weekly-positivity',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'])
-
-        ca_manager.add(t3, 'monthly-positivity',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'])
+        # # POSITIVITY
+        #
+        # t3 = Toggle('positivity-rate', 'Weekly Positivity', ['Weekly Positivity', 'Monthly Positivity'])
+        #
+        # ca_manager.add(t3, 'weekly-positivity',
+        #                ['Positivity Rate', 'Total Positive', 'Total Tests'])
+        #
+        # ca_manager.add(t3, 'monthly-positivity',
+        #                ['Positivity Rate', 'Total Positive', 'Total Tests'])
 
         # REPORTING
 
-        t3 = Toggle('positivity-rate', 'Weekly Reporting Rate', ['Weekly Reporting Rate', 'Monthly Reporting Rate'])
-
-        ca_manager.add(t3, 'weekly-reporting-rate',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'])
-
-        ca_manager.add(t3, 'monthly-reporting-rate',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'])
+        # t3 = Toggle('reporting-rate', 'Weekly Reporting Rate', ['Weekly Reporting Rate', 'Monthly Reporting Rate'])
+        #
+        # ca_manager.add(t3, 'weekly-reporting-rate',
+        #                ['Positivity Rate', 'Total Positive', 'Total Tests'])
+        #
+        # ca_manager.add(t3, 'monthly-reporting-rate',
+        #                ['Positivity Rate', 'Total Positive', 'Total Tests'])
 
         # LOGISTICS
 

@@ -1,7 +1,14 @@
 var selectContentArea = function(identifier) {
 	var contentAreaSelector = "#section-" + identifier;
-	$('.content-wrap > section').removeClass('content-current');
-	$(contentAreaSelector).addClass('content-current');
+
+	if ( $(contentAreaSelector).length ) {
+		$('.content-wrap > section').removeClass('content-current');
+		$(contentAreaSelector).addClass('content-current');
+		return true;
+	} else {
+		alert("Not Implemented");
+		return false;
+	}
 };
 
 $(document).ready(function() {
@@ -12,18 +19,20 @@ $(document).ready(function() {
 		var toggledOptionIdentifier = $(this).data('identifier');
 		var toggledOptionGroup = $(this).data('group');
 
-		selectContentArea($(this).html().trim().toLowerCase().replace(/ /g, '-'));
-
-		$('.toggle-option-'+toggledOptionGroup).removeClass('active');
-		$('.toggle-option-'+toggledOptionIdentifier).addClass('active');		
-	
+		var ok = selectContentArea($(this).html().trim().toLowerCase().replace(/ /g, '-'));
+		if (ok) {
+			$('.toggle-option-'+toggledOptionGroup).removeClass('active');
+			$('.toggle-option-'+toggledOptionIdentifier).addClass('active');		
+		}
 	});
 
 	$('.tab').click(function() {
-		$('.tab').removeClass('tab-current');
-		$(this).addClass('tab-current');
-
-		selectContentArea($(this).data('identifier'));
+		if (selectContentArea($(this).data('identifier'))) {
+			$('.tab').removeClass('tab-current');
+			$(this).addClass('tab-current');
+		} else {
+			return false;
+		}
 	});
 
 });

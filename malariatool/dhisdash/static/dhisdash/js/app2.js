@@ -79,6 +79,7 @@ app.controller('DashboardController', function($scope, $http) {
                     addTableData(district, 'mortality_rate', computeMortalityRate(response.data[district]));
                     addTableData(district, 'malaria_deaths', computeMalariaDeathRate(response.data[district]));
                     addTableData(district, 'malaria_cases', computeMalariaCases(response.data[district]));
+                    addTableData(district, 'positivity_rate', computePositivityRate(response.data[district]));
                 }
             }, function (response) {
                 console.log(response);
@@ -96,6 +97,7 @@ app.controller('DashboardController', function($scope, $http) {
         $scope.nv_chart_data['malaria_deaths'] = [{'key': 'Malaria Death Rate', 'color':'#D90C17', 'values': []}];
         $scope.nv_chart_data['mortality_rate'] = [{'key': 'Death Proportion', 'color':'#D90C17', 'values': []}];
         $scope.nv_chart_data['malaria_cases'] = [{'key': 'Malaria Cases', 'color':'#D90C17', 'values': []}];
+        $scope.nv_chart_data['positivity_rate'] = [{'key': 'Positivity Rate', 'color':'#D90C17', 'values': []}];
 
         var addChartData = function(x, name, computeResult) {
             $scope.nv_chart_data[name][0]['values'].push({
@@ -117,6 +119,7 @@ app.controller('DashboardController', function($scope, $http) {
                 addChartData(counter, 'malaria_deaths', computeMalariaDeathRate($scope.chart_data[period]));
                 addChartData(counter, 'mortality_rate', computeMortalityRate($scope.chart_data[period]));
                 addChartData(counter, 'malaria_cases', computeMalariaCases($scope.chart_data[period]));
+                addChartData(counter, 'positivity_rate', computePositivityRate($scope.chart_data[period]));
 
                 counter++;
 
@@ -132,7 +135,8 @@ app.controller('DashboardController', function($scope, $http) {
         $scope.redrawCharts = function() {
             drawLineChart('#chart-malaria-deaths', $scope.nv_chart_data['malaria_deaths'], 3, periods)
             drawLineChart('#chart-mortality-rate', $scope.nv_chart_data['mortality_rate'], 100, periods)
-            drawLineChart('#chart-malaria-cases', $scope.nv_chart_data['malaria_cases'], 100, periods)
+            drawLineChart('#chart-malaria-cases', $scope.nv_chart_data['malaria_cases'], 10, periods)
+            drawLineChart('#chart-positivity-rate', $scope.nv_chart_data['positivity_rate'], 100, periods)
         };
     };
 });

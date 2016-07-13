@@ -29,14 +29,11 @@ var computeMalariaCases = function(data) {
 }
 
 var computePositivityRate = function(data) {
-    var reported_cases = (data['rdt_done'] + data['microscopy_done']);
+    var number_tested = (data['rdt_done'] + data['microscopy_done']);
     var total_positive = (data['rdt_positive'] + data['microscopy_positive']);
-    var positivity_rate = (total_positive / reported_cases) * 100;
+    var positivity_rate = (total_positive / number_tested) * 100;
 
-    return {positivity_rate: positivity_rate.toFixed(1),
-        reported_cases : reported_cases,
-        total_positive : total_positive
-    };
+    return computeHelper(positivity_rate, total_positive, number_tested);
 };
 
 var computeTestingRate = function(data) {
