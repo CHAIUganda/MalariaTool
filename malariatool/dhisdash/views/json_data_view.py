@@ -1,6 +1,6 @@
 import json
 
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.db.models import Sum
 from django.http import HttpResponse
 from django.views.generic import View
@@ -11,25 +11,13 @@ from dhisdash.utils import periods_in_ranges
 
 
 class JsonDataView(View):
-    MALARIA_RDT = 'fOZ2QUjRSB7'
-    MALARIA_MICROSCOPY = 'STF7P24RAqC'
-
-    OPD_MALARIA_TOTAL = 'Q62QyMDzm3h'
-    ACT_CONSUMED = 'IBuhlkMrwqY'
-
-    A1_FIRST_VISIT = 'eGSUL2aL0zW'
-    A6_FIRST_DOSE = 'YNkTlREfRJj'
-    A7_FIRST_DOSE = 'lNohgsiZ1lr'
-
-    MALARIA_TREATED = 'ZgPtploqq0L'
-
-    POSITIVE_UNDER_FIVE = 'PT9vhPUpxc4'
-    POSITIVE_OVER_FOUR = 'Li89EZS6Jss'
-    DONE_UNDER_FIVE = 'bSUziAZFlqN'
-    DONE_OVER_FOUR = 'snPZPBW4ZW0'
 
     def __init__(self, **kwargs):
+        self.callbacks = {}
         self.im = IdentifierManager()
+        self.request = None
+        self.facility_count_aggregator = Count('facility', distinct=True)
+
         super(JsonDataView, self).__init__(**kwargs)
 
     def get_int_with_default(self, request, name, default):
@@ -39,7 +27,7 @@ class JsonDataView(View):
             result = default
         return result
 
-    def filter_on_request(self, request, partial_filter, enable_age_group=True):
+    def filter_on_request(self, request, partial_filter, enable_age_group=True, aggregate=None):
         start_period = int(request.GET['from_date'])
         end_period = int(request.GET['to_date'])
         group_by_column = request.GET['group']
@@ -48,8 +36,11 @@ class JsonDataView(View):
         district = self.get_int_with_default(request, 'district', 0)
         age_group = self.get_int_with_default(request, 'age_group', 0)
 
+        if aggregate is None:
+            aggregate = Sum('value')
+
         results = partial_filter.filter(period__gte=start_period, period__lte=end_period) \
-            .values(group_by_column).annotate(Sum('value'))
+            .values(group_by_column).annotate(value_aggregate=aggregate)
 
         if region > 0 and district > 0:
             results = results.filter(Q(region=region) | Q(district=district))
@@ -83,70 +74,46 @@ class JsonDataView(View):
             total_population = total_population.aggregate(Sum('population'))
 
             for period in periods_in_ranges(start_period, end_period):
-                results.append({'period': int(period), 'value__sum': total_population['population__sum']})
+                results.append({'period': int(period), 'value_aggregate': total_population['population__sum']})
 
         elif group_by_column == 'district':
             districts = District.objects.all()
             for district in districts:
-                results.append({'district': district.pk, 'value__sum': district.population})
+                results.append({'district': district.pk, 'value_aggregate': district.population})
 
         return results
 
     def get_rdt_positive(self, request):
-        rdt_positive_filter = DataValue.objects.filter(data_element__identifier=self.MALARIA_RDT) \
-            .filter(Q(category_option_combo__identifier=self.POSITIVE_UNDER_FIVE) |
-                    Q(category_option_combo__identifier=self.POSITIVE_OVER_FOUR))
+        coc_filters = self.get_coc_filters(
+            'Number Positive, Under 5 years',
+            'Number Positive, 5 years and above'
+        )
 
-        return self.filter_on_request(request, rdt_positive_filter)
+        return self.get_values(request, '105-7.3 Lab Malaria RDTs', coc_filters)
 
     def get_rdt_done(self, request):
-        rdt_done_filter = DataValue.objects.filter(data_element__identifier=self.MALARIA_RDT) \
-            .filter(Q(category_option_combo__identifier=self.DONE_UNDER_FIVE) |
-                    Q(category_option_combo__identifier=self.DONE_OVER_FOUR))
+        coc_filters = self.get_coc_filters(
+            'Number Done, Under 5 years',
+            'Number Done, 5 years and above'
+        )
 
-        return self.filter_on_request(request, rdt_done_filter)
+        return self.get_values(request, '105-7.3 Lab Malaria RDTs', coc_filters)
 
     def get_microscopy_positive(self, request):
-        microscopy_positive_filter = DataValue.objects.filter(data_element__identifier=self.MALARIA_MICROSCOPY) \
-            .filter(Q(category_option_combo__identifier=self.POSITIVE_UNDER_FIVE) |
-                    Q(category_option_combo__identifier=self.POSITIVE_OVER_FOUR))
+        coc_filters = self.get_coc_filters(
+            'Number Positive, Under 5 years',
+            'Number Positive, 5 years and above'
+        )
 
-        return self.filter_on_request(request, microscopy_positive_filter)
+        return self.get_values(request, '105-7.3 Lab Malaria Microscopy', coc_filters)
 
     def get_microscopy_done(self, request):
-        microscopy_done_filter = DataValue.objects.filter(data_element__identifier=self.MALARIA_MICROSCOPY) \
-            .filter(Q(category_option_combo__identifier=self.DONE_UNDER_FIVE) |
-                    Q(category_option_combo__identifier=self.DONE_OVER_FOUR))
+        coc_filters = self.get_coc_filters(
+            'Number Done, Under 5 years',
+            'Number Done, 5 years and above'
+        )
 
-        return self.filter_on_request(request, microscopy_done_filter)
-
-    def get_opd_malaria_total(self, request):
-        opd_malaria_total_filter = DataValue.objects.filter(data_element__identifier=self.OPD_MALARIA_TOTAL)
-        return self.filter_on_request(request, opd_malaria_total_filter)
-
-    def get_opd_malaria_total_all_ages(self, request):
-        opd_malaria_total_filter = DataValue.objects.filter(data_element__identifier=self.OPD_MALARIA_TOTAL)
-        return self.filter_on_request(request, opd_malaria_total_filter, enable_age_group=False)
-
-    def get_act_consumed(self, request):
-        act_consumed_filter = DataValue.objects.filter(data_element__identifier=self.ACT_CONSUMED)
-        return self.filter_on_request(request, act_consumed_filter, enable_age_group=False)
-
-    def get_a1_first_visit(self, request):
-        a1_first_visit_filter = DataValue.objects.filter(data_element__identifier=self.A1_FIRST_VISIT)
-        return self.filter_on_request(request, a1_first_visit_filter)
-
-    def get_a6_first_dose(self, request):
-        a6_first_dose_filter = DataValue.objects.filter(data_element__identifier=self.A6_FIRST_DOSE)
-        return self.filter_on_request(request, a6_first_dose_filter)
-
-    def get_a7_first_dose(self, request):
-        a7_first_dose_filter = DataValue.objects.filter(data_element__identifier=self.A7_FIRST_DOSE)
-        return self.filter_on_request(request, a7_first_dose_filter)
-
-    def get_malaria_treated(self, request):
-        malaria_treated_filter = DataValue.objects.filter(data_element__identifier=self.MALARIA_TREATED)
-        return self.filter_on_request(request, malaria_treated_filter, enable_age_group=False)
+        return self.get_values(request, '105-7.3 Lab Malaria Microscopy', coc_filters)
 
     def get_inpatient_malaria_deaths(self, request):
         coc_filters = self.get_coc_filters(
@@ -174,6 +141,42 @@ class JsonDataView(View):
     def get_opd_malaria_cases(self, request):
         return self.get_values(request, '105-1.3 OPD Malaria (Total)', None)
 
+    def get_number_receiving_ipt2(self, request):
+        coc_filters = self.get_coc_filters(
+            '10-19 Years',
+            '20-24 Years',
+            '>=25 Years'
+        )
+
+        return self.get_values(request, '105-2.1 A7:Second dose IPT (IPT2)', coc_filters)
+
+    def get_number_attending_anc1(self, request):
+        return self.get_values(request, '105-2.1 A1:ANC 1st Visit for women', None)
+
+    def get_number_of_facilities_with_stock_outs_of_sp(self, request):
+        coc_filters = self.get_coc_filters('Days out of stock')
+
+        return self.get_values(request, '105-6 Sulfadoxine / Pyrimethamine tablet',
+                               coc_filters, self.facility_count_aggregator, value__gt=7)
+
+    def get_number_of_facilities_submitted_sp(self, request):
+        coc_filters = self.get_coc_filters('Days out of stock')
+
+        return self.get_values(request, '105-6 Sulfadoxine / Pyrimethamine tablet',
+                               coc_filters, self.facility_count_aggregator)
+
+    def get_number_of_facilities_with_stock_outs_of_act(self, request):
+        coc_filters = self.get_coc_filters('Days out of stock')
+
+        return self.get_values(request, '105-6 Artemether/ Lumefantrine 100/20mg tablet',
+                               coc_filters, self.facility_count_aggregator, value__gt=7)
+
+    def get_number_of_facilities_submitted_act(self, request):
+        coc_filters = self.get_coc_filters('Days out of stock')
+
+        return self.get_values(request, '105-6 Artemether/ Lumefantrine 100/20mg tablet',
+                               coc_filters, self.facility_count_aggregator)
+
     def add_to_final(self, data, partial_data, key, group_by_column, create=True):
         for result in partial_data:
             group_column_value = result[group_by_column]
@@ -184,7 +187,25 @@ class JsonDataView(View):
 
                 data[group_column_value] = {}
 
-            data[group_column_value][key] = result['value__sum']
+            data[group_column_value][key] = result['value_aggregate']
+
+        return data
+
+    def generate_final(self, callbacks):
+        callback_keys = self.request.GET.get('callbacks', None)
+
+        if callback_keys is None:
+            callback_keys = callbacks.keys()
+        else:
+            callback_keys = callback_keys.split(',')
+
+        data = {}
+        for key in callback_keys:
+            create = True
+            if key == "population":
+                create=False
+
+            self.add_to_final(data, callbacks[key](self.request), key, self.request.GET['group'], create)
 
         return data
 
@@ -197,53 +218,35 @@ class JsonDataView(View):
                 f = f | Q(category_option_combo__identifier=self.im.coc(name))
         return f
 
-    def get_values(self, request, data_element, coc_filters):
+    def get_values(self, request, data_element, coc_filters, aggregate=None, **extra_filters):
         if coc_filters is not None:
             data_filter = DataValue.objects.filter(data_element__identifier=self.im.de(data_element))\
                 .filter(coc_filters)
         else:
             data_filter = DataValue.objects.filter(data_element__identifier=self.im.de(data_element))
 
-        return self.filter_on_request(request, data_filter)
+        if extra_filters:
+            data_filter = data_filter.filter(**extra_filters)
+
+        return self.filter_on_request(request, data_filter, aggregate=aggregate)
 
     def get(self, request):
-        rdt_positive = self.get_rdt_positive(request)
-        rdt_done = self.get_rdt_done(request)
+        self.request = request
 
-        microscopy_positive = self.get_microscopy_positive(request)
-        microscopy_done = self.get_microscopy_done(request)
+        self.callbacks['rdt_positive'] = self.get_rdt_positive
+        self.callbacks['rdt_done'] = self.get_rdt_done
+        self.callbacks['microscopy_positive'] = self.get_microscopy_positive
+        self.callbacks['microscopy_done'] = self.get_microscopy_done
+        self.callbacks['inpatient_malaria_deaths'] = self.get_inpatient_malaria_deaths
+        self.callbacks['malaria_admissions'] = self.get_malaria_admissions
+        self.callbacks['total_inpatient_deaths'] = self.get_total_inpatient_deaths
+        self.callbacks['opd_malaria_cases'] = self.get_opd_malaria_cases
+        self.callbacks['number_receiving_ipt2'] = self.get_number_receiving_ipt2
+        self.callbacks['number_attending_anc1'] = self.get_number_attending_anc1
+        self.callbacks['population'] = self.get_population
+        self.callbacks['stock_outs_of_sp'] = self.get_number_of_facilities_with_stock_outs_of_sp
+        self.callbacks['stock_outs_of_act'] = self.get_number_of_facilities_with_stock_outs_of_act
+        self.callbacks['submitted_sp'] = self.get_number_of_facilities_submitted_sp
+        self.callbacks['submitted_act'] = self.get_number_of_facilities_submitted_act
 
-        opd_malaria_total = self.get_opd_malaria_total(request)
-        opd_malaria_total_all_ages = self.get_opd_malaria_total_all_ages(request)
-        act_consumed = self.get_act_consumed(request)
-
-        a1_first_visit = self.get_a1_first_visit(request)
-        a6_first_dose = self.get_a6_first_dose(request)
-        a7_first_dose = self.get_a7_first_dose(request)
-
-        malaria_treated = self.get_malaria_treated(request)
-        inpatient_malaria_deaths = self.get_inpatient_malaria_deaths(request)
-        malaria_admissions = self.get_malaria_admissions(request)
-        total_inpatient_deaths = self.get_total_inpatient_deaths(request)
-        opd_malaria_cases = self.get_opd_malaria_cases(request)
-        population = self.get_population(request)
-
-        data = {}
-        data = self.add_to_final(data, rdt_positive, 'rdt_positive', request.GET['group'])
-        data = self.add_to_final(data, rdt_done, 'rdt_done', request.GET['group'])
-        data = self.add_to_final(data, microscopy_positive, 'microscopy_positive', request.GET['group'])
-        data = self.add_to_final(data, microscopy_done, 'microscopy_done', request.GET['group'])
-        data = self.add_to_final(data, opd_malaria_total, 'opd_malaria_total', request.GET['group'])
-        data = self.add_to_final(data, opd_malaria_total_all_ages, 'opd_malaria_total_all_ages', request.GET['group'])
-        data = self.add_to_final(data, act_consumed, 'act_consumed', request.GET['group'])
-        data = self.add_to_final(data, a1_first_visit, 'a1_first_visit', request.GET['group'])
-        data = self.add_to_final(data, a6_first_dose, 'a6_first_dose', request.GET['group'])
-        data = self.add_to_final(data, a7_first_dose, 'a7_first_dose', request.GET['group'])
-        data = self.add_to_final(data, malaria_treated, 'malaria_treated', request.GET['group'])
-        data = self.add_to_final(data, inpatient_malaria_deaths, 'inpatient_malaria_deaths', request.GET['group'])
-        data = self.add_to_final(data, malaria_admissions, 'malaria_admissions', request.GET['group'])
-        data = self.add_to_final(data, total_inpatient_deaths, 'total_inpatient_deaths', request.GET['group'])
-        data = self.add_to_final(data, opd_malaria_cases, 'opd_malaria_cases', request.GET['group'])
-        data = self.add_to_final(data, population, 'population', request.GET['group'], False)
-
-        return HttpResponse(json.dumps(data))
+        return HttpResponse(json.dumps(self.generate_final(self.callbacks)))

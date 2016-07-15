@@ -108,6 +108,10 @@ body {
     padding-bottom: 20px;
 }
 
+.tab {
+    cursor: pointer;
+}
+
 .tabs nav .value {
     font-size: 30px;
 }

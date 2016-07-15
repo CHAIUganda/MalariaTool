@@ -31,7 +31,7 @@ class HomePageView(TemplateView):
                         'big_metric.malaria_cases')
 
         tab_manager.add('ipt2-uptake', 'IPT2 UPTAKE', 'Proportion of women who came for IPT2b',
-                        'big_metric.ipt2_rate')
+                        'big_metric.ipt2_uptake')
 
         tab_manager.add('weekly-reporting-rate', 'REPORTING RATE', 'Facilities reporting',
                         'big_metric.positivity_rate')
@@ -71,7 +71,7 @@ class HomePageView(TemplateView):
         t2 = Toggle('prevention-rate', '', [])
 
         ca_manager.add(t2, 'ipt2-uptake',
-                       ['Testing Rate', 'Total Tests', 'Malaria OPD'])
+                       ['IPTp2 Uptake', 'Number receiving IPT2', 'Number attending ANC1'])
 
         # # POSITIVITY
         #
@@ -95,13 +95,13 @@ class HomePageView(TemplateView):
 
         # LOGISTICS
 
-        t4 = Toggle('logistics-rate', 'ACT Stock Status', ['ACT Stock Status', 'SP Stock Status'])
+        t4 = Toggle('logistics-rate', 'ACT Stock Status', ['ACT Stock Status', 'SP Stock Status', 'RDT Stock Status'])
 
         ca_manager.add(t4, 'sp-stock-status',
-                       ['Consumption Rate', 'ACT Consumed', 'Malaria OPD'])
+                       ['SP Stock Status', 'Facilities with Stock Outs', 'Number of Facilities'])
 
         ca_manager.add(t4, 'act-stock-status',
-                       ['Positivity Rate', 'Total Positive', 'Total Tests'])
+                       ['ACT Stock Status', 'Facilities with Stock Outs', 'Number of Facilities'])
 
         context['ca_manager'] = ca_manager
 

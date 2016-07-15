@@ -12,11 +12,12 @@ class MyTestHelper(object):
         return r
 
     @staticmethod
-    def create_district(region, identifier='yy', name='kampala'):
+    def create_district(region, identifier='yy', name='kampala', population=0):
         d = District()
         d.identifier = identifier
         d.name = name
         d.region = region
+        d.population = population
         d.save()
         return d
 

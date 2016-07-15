@@ -36,6 +36,21 @@ var computePositivityRate = function(data) {
     return computeHelper(positivity_rate, total_positive, number_tested);
 };
 
+var computeIPT2Uptake = function(data) {
+    var rate = (data['number_receiving_ipt2']/ data['number_attending_anc1']) * 100;
+    return computeHelper(rate, data['number_receiving_ipt2'], data['number_attending_anc1']);
+};
+
+var computeSPStockStatus = function(data) {
+    var rate = (data['stock_outs_of_sp']/ data['submitted_sp']) * 100;
+    return computeHelper(rate, data['stock_outs_of_sp'], data['submitted_sp']);
+};
+
+var computeACTStockStatus = function(data) {
+    var rate = (data['stock_outs_of_act']/ data['submitted_act']) * 100;
+    return computeHelper(rate, data['stock_outs_of_act'], data['submitted_act']);
+};
+
 var computeTestingRate = function(data) {
     var tests_done = (data['rdt_done'] + data['microscopy_done']);
     var testing_rate = (tests_done / data['opd_malaria_total']) * 100;
