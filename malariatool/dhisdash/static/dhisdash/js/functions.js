@@ -5,8 +5,8 @@ var getComputeResult = function(d) {
 }
 
 var computeHelper = function(result, numerator, denominator) {
-    if (isNaN(result)) result = 0;
-
+    result = isFinite(result) ? result : 0.0;
+    
     return {result: result.toFixed(1),
         numerator: numberWithCommas(numerator),
         denominator: numberWithCommas(denominator)

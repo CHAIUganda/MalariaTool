@@ -61,7 +61,27 @@ app.controller('DashboardController', function($scope, $http) {
         $scope.table_data[name].push(computeResult);
     }
 
+    $scope.hideSpinnerModal = function() {
+        if ($scope.charts_loaded && $scope.tables_loaded) {
+            $('#spinner-modal').modal('hide');   
+        }
+    }
+
+    $scope.notifyChartsLoaded = function() {
+        $scope.charts_loaded = true;   
+        $scope.hideSpinnerModal();
+    }
+
+    $scope.notifyTablesLoaded = function() {
+        $scope.tables_loaded = true;   
+        $scope.hideSpinnerModal();
+    }
+
     $scope.updateData = function() {
+
+        $('#spinner-modal').modal('show');
+        $scope.tables_loaded = false;
+        $scope.charts_loaded = false;
 
         params = 'from_date='+$scope.filter.from_date+
             '&to_date='+$scope.filter.to_date+
@@ -82,8 +102,11 @@ app.controller('DashboardController', function($scope, $http) {
                     addTableData(district, 'sp_stock_status', computeSPStockStatus(response.data[district]));
                     addTableData(district, 'act_stock_status', computeACTStockStatus(response.data[district]));
                 }
+                $scope.notifyTablesLoaded();
+
             }, function (response) {
                 console.log(response);
+                $scope.notifyTablesLoaded();
         });
 
         $http.get('../../data.json?'+params+'&group=period', {})
@@ -91,7 +114,12 @@ app.controller('DashboardController', function($scope, $http) {
                     $scope.chart_data = response.data;
                     $scope.updateCharts();
                     $scope.redrawCharts();
-                }, function (response) {console.log(response);}
+                    $scope.notifyChartsLoaded();
+
+                }, function (response) {
+                    console.log(response);
+                    $scope.notifyChartsLoaded();
+                }
             );
 
         var addChartData = function(x, name, computeResult) {
@@ -106,7 +134,7 @@ app.controller('DashboardController', function($scope, $http) {
         $scope.updateCharts = function() {
             $scope.nv_chart_data = {};
             $scope.nv_chart_data['malaria_deaths'] = [{'key': 'Malaria Death Rate', 'color':'#D90C17', 'values': []}];
-            $scope.nv_chart_data['mortality_rate'] = [{'key': 'Death Proportion', 'color':'#D90C17', 'values': []}];
+            $scope.nv_chart_data['mortality_rate'] = [{'key': 'Mortality Rate', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['malaria_cases'] = [{'key': 'Malaria Cases', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['positivity_rate'] = [{'key': 'Positivity Rate', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['ipt2_uptake'] = [{'key': 'IPT2 Uptake', 'color':'#D90C17', 'values': []}];
@@ -154,6 +182,7 @@ app.controller('DashboardController', function($scope, $http) {
             drawLineChart('#chart-sp-stock-status', $scope.nv_chart_data['sp_stock_status'], 100, periods)
             drawLineChart('#chart-act-stock-status', $scope.nv_chart_data['act_stock_status'], 100, periods)
         };
+    
     };
 });
 

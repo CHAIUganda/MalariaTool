@@ -313,3 +313,7 @@ table tbody tr{
 .reg_toggle>.active{
     /*margin-right: -5px;*/
 }
+
+#spinner-modal {
+    margin-top: 100px;
+}

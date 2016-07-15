@@ -157,25 +157,25 @@ class JsonDataView(View):
         coc_filters = self.get_coc_filters('Days out of stock')
 
         return self.get_values(request, '105-6 Sulfadoxine / Pyrimethamine tablet',
-                               coc_filters, self.facility_count_aggregator, value__gt=7)
+                               coc_filters, self.facility_count_aggregator, False, value__gt=7)
 
     def get_number_of_facilities_submitted_sp(self, request):
         coc_filters = self.get_coc_filters('Days out of stock')
 
         return self.get_values(request, '105-6 Sulfadoxine / Pyrimethamine tablet',
-                               coc_filters, self.facility_count_aggregator)
+                               coc_filters, self.facility_count_aggregator, False)
 
     def get_number_of_facilities_with_stock_outs_of_act(self, request):
         coc_filters = self.get_coc_filters('Days out of stock')
 
         return self.get_values(request, '105-6 Artemether/ Lumefantrine 100/20mg tablet',
-                               coc_filters, self.facility_count_aggregator, value__gt=7)
+                               coc_filters, self.facility_count_aggregator, False, value__gt=7)
 
     def get_number_of_facilities_submitted_act(self, request):
         coc_filters = self.get_coc_filters('Days out of stock')
 
         return self.get_values(request, '105-6 Artemether/ Lumefantrine 100/20mg tablet',
-                               coc_filters, self.facility_count_aggregator)
+                               coc_filters, self.facility_count_aggregator, False)
 
     def add_to_final(self, data, partial_data, key, group_by_column, create=True):
         for result in partial_data:
@@ -218,7 +218,7 @@ class JsonDataView(View):
                 f = f | Q(category_option_combo__identifier=self.im.coc(name))
         return f
 
-    def get_values(self, request, data_element, coc_filters, aggregate=None, **extra_filters):
+    def get_values(self, request, data_element, coc_filters, aggregate=None, enable_age_group=True, **extra_filters):
         if coc_filters is not None:
             data_filter = DataValue.objects.filter(data_element__identifier=self.im.de(data_element))\
                 .filter(coc_filters)
@@ -228,7 +228,7 @@ class JsonDataView(View):
         if extra_filters:
             data_filter = data_filter.filter(**extra_filters)
 
-        return self.filter_on_request(request, data_filter, aggregate=aggregate)
+        return self.filter_on_request(request, data_filter, aggregate=aggregate, enable_age_group=enable_age_group)
 
     def get(self, request):
         self.request = request
