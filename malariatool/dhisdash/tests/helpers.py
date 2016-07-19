@@ -84,3 +84,4 @@ class MyTestHelper(object):
         dv.value = value
         dv.original_period = period
         dv.save()
+        return dv

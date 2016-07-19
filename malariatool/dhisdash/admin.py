@@ -44,8 +44,9 @@ class FacilityAdmin(admin.ModelAdmin):
 
 class DataValueAdmin(admin.ModelAdmin):
     list_display = (
-        'get_facility', 'district', 'region', 'data_element', 'get_age_group', 'value', 'original_period', 'category_option_combo')
-    search_fields = ('data_element__identifier', 'district__name', 'facility__name')
+        'get_facility', 'district', 'region', 'data_element', 'get_age_group', 'value', 'period', 'original_period',
+        'category_option_combo')
+    search_fields = ('data_element__identifier', 'district__name', 'facility__name', 'original_period')
     list_filter = ('data_element__name', 'period', 'category_option_combo__identifier')
 
     def get_age_group(self, obj):
@@ -71,6 +72,7 @@ class DataSyncTrackerAdmin(admin.ModelAdmin):
             return 'Downloaded'
         else:
             return 'N/A'
+
 
 admin.site.register(DataSet, DataSetAdmin)
 admin.site.register(DataElement, DataElementAdmin)

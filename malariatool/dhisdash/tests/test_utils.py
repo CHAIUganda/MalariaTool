@@ -28,3 +28,7 @@ class UtilsTestCase(TestCase):
     def test_generate_periods_in_rage(self):
         ranges = utils.periods_in_ranges("201508", "201602")
         self.assertEqual(['201508', '201509', '201510', '201511', '201512', '201601', '201602'], ranges)
+
+    def test_that_month_to_weeks_compares_years_too(self):
+        weeks = utils.month_to_weeks(2015, 12)
+        self.assertEqual(weeks, [50, 51, 52, 53])

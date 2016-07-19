@@ -182,3 +182,14 @@ class JsonDataViewTestCase(TestCase, MyTestCaseHelper):
         url = 'path?from_date=201505&to_date=201507&group=period&region=0&district=0' + callbacks
         value = self.get_value_from_url(url, "201505", 'population')
         self.assertEqual(50, value)
+
+    def test_that_period_data_is_grouped_based_on_the_original_period(self):
+        data_value = self.test_helper.create_data_value(self.org_unit_data, self.rdt_data_element, self.positive_under5,
+                                                   self.data_set, 201505, 10, AgeGroups.under_5_years)
+        data_value.original_period = "2015W2"
+        data_value.save()
+
+        callbacks = "&callbacks=rdt_positive"
+        url = 'path?from_date=201505&to_date=201507&group=period&region=0&district=0' + callbacks
+        value = self.get_value_from_url(url, "2015W2", 'rdt_positive')
+        self.assertEqual(10, value)

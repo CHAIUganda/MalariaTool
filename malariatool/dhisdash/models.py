@@ -95,7 +95,7 @@ class DataValue(models.Model):
     category_option_combo = models.ForeignKey(CategoryOptionCombo, on_delete=models.SET_NULL, null=True, blank=True)
     age_group = models.IntegerField(default=0)
     period = models.IntegerField()
-    original_period = models.CharField(max_length=20)
+    original_period = models.CharField(max_length=20, db_index=True)
     value = models.IntegerField()
 
 

@@ -1,17 +1,24 @@
 import json
+from collections import OrderedDict
 
 from django.db.models import Q, Count
 from django.db.models import Sum
 from django.http import HttpResponse
 from django.views.generic import View
+from natsort import natsorted
 
 from dhisdash.common.IdentifierManager import IdentifierManager
 from dhisdash.models import DataValue, District
-from dhisdash.utils import periods_in_ranges
+from dhisdash.utils import periods_in_ranges, month_to_weeks, get_year_and_month_from_period, get_month_from_int
+
+
+def get_actual_group_by_column(group_by_column):
+    if group_by_column == 'period':
+        group_by_column = "original_period"
+    return group_by_column
 
 
 class JsonDataView(View):
-
     def __init__(self, **kwargs):
         self.callbacks = {}
         self.im = IdentifierManager()
@@ -31,6 +38,8 @@ class JsonDataView(View):
         start_period = int(request.GET['from_date'])
         end_period = int(request.GET['to_date'])
         group_by_column = request.GET['group']
+
+        group_by_column = get_actual_group_by_column(group_by_column)
 
         region = self.get_int_with_default(request, 'region', 0)
         district = self.get_int_with_default(request, 'district', 0)
@@ -73,13 +82,42 @@ class JsonDataView(View):
 
             total_population = total_population.aggregate(Sum('population'))
 
+            actual_group_by_column = get_actual_group_by_column(group_by_column)
             for period in periods_in_ranges(start_period, end_period):
-                results.append({'period': int(period), 'value_aggregate': total_population['population__sum']})
+
+                results.append({actual_group_by_column: period,
+                                'value_aggregate': total_population['population__sum']})
+
+                (year, month) = get_year_and_month_from_period(period)
+                for week in month_to_weeks(year, month):
+                    weekly_period = "%sW%s" % (year, week)
+                    results.append({actual_group_by_column: weekly_period,
+                                    'value_aggregate': total_population['population__sum']})
 
         elif group_by_column == 'district':
             districts = District.objects.all()
             for district in districts:
                 results.append({'district': district.pk, 'value_aggregate': district.population})
+
+        return results
+
+    def get_months_from_weeks(self, request):
+        start_period = request.GET['from_date']
+        end_period = request.GET['to_date']
+        group_by_column = request.GET['group']
+
+        actual_group_by_column = get_actual_group_by_column(group_by_column)
+
+        results = []
+        if group_by_column == 'period':
+            for period in periods_in_ranges(start_period, end_period):
+                (year, month) = get_year_and_month_from_period(period)
+                for week in month_to_weeks(year, month):
+                    weekly_period = "%sW%s" % (year, week)
+                    year_month = "%s'%s" % (get_month_from_int(month), str(year)[2:])
+
+                    results.append({actual_group_by_column: weekly_period,
+                                    'value_aggregate': year_month})
 
         return results
 
@@ -141,6 +179,23 @@ class JsonDataView(View):
     def get_opd_malaria_cases(self, request):
         return self.get_values(request, '105-1.3 OPD Malaria (Total)', None)
 
+    def get_malaria_cases_wep(self, request):
+        return self.get_values(request, 'Malaria Cases - WEP', None)
+
+    def get_number_tested(self, request):
+        coc_filters = self.get_coc_filters(
+            'Microscopy Tested Cases',
+            'RDT Tested Cases')
+
+        return self.get_values(request, 'Malaria tests - WEP', coc_filters)
+
+    def get_number_tested_positive(self, request):
+        coc_filters = self.get_coc_filters(
+            'Microscopy Positive Cases',
+            'RDT Positve Cases')
+
+        return self.get_values(request, 'Malaria tests - WEP', coc_filters)
+
     def get_number_receiving_ipt2(self, request):
         coc_filters = self.get_coc_filters(
             '10-19 Years',
@@ -178,6 +233,8 @@ class JsonDataView(View):
                                coc_filters, self.facility_count_aggregator, False)
 
     def add_to_final(self, data, partial_data, key, group_by_column, create=True):
+        group_by_column = get_actual_group_by_column(group_by_column)
+
         for result in partial_data:
             group_column_value = result[group_by_column]
 
@@ -202,12 +259,13 @@ class JsonDataView(View):
         data = {}
         for key in callback_keys:
             create = True
-            if key == "population":
-                create=False
+            if key in ("population", "months_from_weeks"):
+                create = False
 
-            self.add_to_final(data, callbacks[key](self.request), key, self.request.GET['group'], create)
+            callback_result = callbacks[key](self.request)
+            self.add_to_final(data, callback_result, key, self.request.GET['group'], create)
 
-        return data
+        return OrderedDict(natsorted(data.items(), key=lambda t: t[0]))
 
     def get_coc_filters(self, *names):
         f = None
@@ -220,7 +278,7 @@ class JsonDataView(View):
 
     def get_values(self, request, data_element, coc_filters, aggregate=None, enable_age_group=True, **extra_filters):
         if coc_filters is not None:
-            data_filter = DataValue.objects.filter(data_element__identifier=self.im.de(data_element))\
+            data_filter = DataValue.objects.filter(data_element__identifier=self.im.de(data_element)) \
                 .filter(coc_filters)
         else:
             data_filter = DataValue.objects.filter(data_element__identifier=self.im.de(data_element))
@@ -244,9 +302,13 @@ class JsonDataView(View):
         self.callbacks['number_receiving_ipt2'] = self.get_number_receiving_ipt2
         self.callbacks['number_attending_anc1'] = self.get_number_attending_anc1
         self.callbacks['population'] = self.get_population
+        self.callbacks['months_from_weeks'] = self.get_months_from_weeks
         self.callbacks['stock_outs_of_sp'] = self.get_number_of_facilities_with_stock_outs_of_sp
         self.callbacks['stock_outs_of_act'] = self.get_number_of_facilities_with_stock_outs_of_act
         self.callbacks['submitted_sp'] = self.get_number_of_facilities_submitted_sp
         self.callbacks['submitted_act'] = self.get_number_of_facilities_submitted_act
+        self.callbacks['malaria_cases_wep'] = self.get_malaria_cases_wep
+        self.callbacks['number_tested_positive'] = self.get_number_tested_positive
+        self.callbacks['number_tested'] = self.get_number_tested
 
         return HttpResponse(json.dumps(self.generate_final(self.callbacks)))

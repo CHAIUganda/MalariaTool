@@ -37,7 +37,7 @@ def month_to_weeks(year, month):
     for week in range(max_weeks):
         week += 1
         day = Week(int(year), int(week)).day(0)
-        if day.month == month:
+        if day.month == month and day.year == year:
             matched_weeks.append(week)
 
     return matched_weeks
@@ -78,6 +78,10 @@ def generate_dates_to_now(start_year, start_month):
             dates_dict[year].append({'value': date_value, 'text': date_text})
 
     return sorted(dates_dict.items(), key=operator.itemgetter(0), reverse=True)
+
+
+def get_year_and_month_from_period(period):
+    return int(period[0:4]), int(period[4:])
 
 
 def periods_in_ranges(start_period, end_period):

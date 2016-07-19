@@ -28,6 +28,16 @@ var computeMalariaCases = function(data) {
     return computeHelper(rate, data['opd_malaria_cases'], data['population']);
 }
 
+var computeWeeklyMalariaCases = function(data) {
+    var rate = (data['malaria_cases_wep']/ data['population']) * 100;
+    return computeHelper(rate, data['malaria_cases_wep'], data['population']);
+}
+
+var computeWeeklyPositivityRate = function(data) {
+    var rate = (data['number_tested_positive'] / data['number_tested']) * 100;
+    return computeHelper(rate, data['number_tested_positive'], data['number_tested']);
+}
+
 var computePositivityRate = function(data) {
     var number_tested = (data['rdt_done'] + data['microscopy_done']);
     var total_positive = (data['rdt_positive'] + data['microscopy_positive']);
@@ -110,6 +120,13 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+var isMonthPeriod = function(period) {
+    if (period[4] == 'W') {
+        return false;
+    }
+    return true;
+}
+
 var generateLabelFromPeriod = function(period) {
     year = period.substr(2,2);
     month = Number(period.substr(4,2));
@@ -117,6 +134,12 @@ var generateLabelFromPeriod = function(period) {
     var months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
     return months[month] + "'"+year;
 };
+
+var generateLabelFromWeeklyPeriod = function(period, data) {
+    if (! isMonthPeriod(period)) {
+        return data['months_from_weeks'];
+    }
+}
 
 var getPeriodString = function(year, month) {
     if (month < 10) {

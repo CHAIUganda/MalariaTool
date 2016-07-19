@@ -129,58 +129,75 @@ app.controller('DashboardController', function($scope, $http) {
             });
         }
 
-        var periods = [];
+        var monthly_periods = [];
+        var weekly_periods = [];
 
         $scope.updateCharts = function() {
             $scope.nv_chart_data = {};
             $scope.nv_chart_data['malaria_deaths'] = [{'key': 'Malaria Death Rate', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['mortality_rate'] = [{'key': 'Mortality Rate', 'color':'#D90C17', 'values': []}];
-            $scope.nv_chart_data['malaria_cases'] = [{'key': 'Malaria Cases', 'color':'#D90C17', 'values': []}];
-            $scope.nv_chart_data['positivity_rate'] = [{'key': 'Positivity Rate', 'color':'#D90C17', 'values': []}];
+            $scope.nv_chart_data['malaria_cases'] = [{'key': 'Weekly Malaria Cases', 'color':'#D90C17', 'values': []}];
+            $scope.nv_chart_data['positivity_rate'] = [{'key': 'Weekly Positivity Rate', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['ipt2_uptake'] = [{'key': 'IPT2 Uptake', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['sp_stock_status'] = [{'key': 'SP Stock Status', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['act_stock_status'] = [{'key': 'ACT Stock Status', 'color':'#D90C17', 'values': []}];
 
             var most_recent_period = 0;
-            var counter = 0;
+            var month_counter = 0;
+            var week_counter = 0;
             
             for (period in $scope.chart_data) {
+                var period_data = $scope.chart_data[period];
 
-                periods.push(generateLabelFromPeriod(period));
+                if (isMonthPeriod(period)) {        
+                    monthly_periods.push(generateLabelFromPeriod(period));
 
-                addChartData(counter, 'malaria_deaths', computeMalariaDeathRate($scope.chart_data[period]));
-                addChartData(counter, 'mortality_rate', computeMortalityRate($scope.chart_data[period]));
-                addChartData(counter, 'malaria_cases', computeMalariaCases($scope.chart_data[period]));
-                addChartData(counter, 'positivity_rate', computePositivityRate($scope.chart_data[period]));
-                addChartData(counter, 'ipt2_uptake', computeIPT2Uptake($scope.chart_data[period]));
-                addChartData(counter, 'sp_stock_status', computeSPStockStatus($scope.chart_data[period]));
-                addChartData(counter, 'act_stock_status', computeACTStockStatus($scope.chart_data[period]));
+                    addChartData(month_counter, 'malaria_deaths', computeMalariaDeathRate(period_data));
+                    addChartData(month_counter, 'mortality_rate', computeMortalityRate(period_data));
+                    // addChartData(month_counter, 'positivity_rate', computePositivityRate($scope.chart_data[period]));
+                    addChartData(month_counter, 'ipt2_uptake', computeIPT2Uptake(period_data));
+                    addChartData(month_counter, 'sp_stock_status', computeSPStockStatus(period_data));
+                    addChartData(month_counter, 'act_stock_status', computeACTStockStatus(period_data));
 
-                counter++;
+                    if (period > most_recent_period) {
+                        $scope.big_metric.ipt2_uptake = getComputeResult(computeIPT2Uptake(
+                            period_data))+"%";
 
-                if (period > most_recent_period) {
-                    $scope.big_metric.malaria_cases = getComputeResult(computeMalariaCases(
-                        $scope.chart_data[period]))+"%";
+                        $scope.big_metric.act_stock_status = getComputeResult(computeACTStockStatus(
+                            period_data))+"%";
 
-                    $scope.big_metric.ipt2_uptake = getComputeResult(computeIPT2Uptake(
-                        $scope.chart_data[period]))+"%";
+                        most_recent_period = period;
+                    }
 
-                    $scope.big_metric.act_stock_status = getComputeResult(computeACTStockStatus(
-                        $scope.chart_data[period]))+"%";
+                    month_counter++;
 
-                    most_recent_period = period;
+                } else {
+                    console.log(computeWeeklyPositivityRate($scope.chart_data[period]));
+                    weekly_periods.push(generateLabelFromWeeklyPeriod(period, period_data));
+
+                    addChartData(week_counter, 'malaria_cases', computeWeeklyMalariaCases(period_data));
+                    addChartData(week_counter, 'positivity_rate', computeWeeklyPositivityRate(period_data));
+
+                    // Did not compare the biggest because of natuaral language comparison
+                    // E.g. 2010W10 < 2010W2 returns true
+                    $scope.big_metric.malaria_cases = getComputeResult(computeWeeklyMalariaCases(
+                            period_data))+"%";
+
+                    week_counter++;
                 }
+
+                
             }
         };
 
         $scope.redrawCharts = function() {
-            drawLineChart('#chart-malaria-deaths', $scope.nv_chart_data['malaria_deaths'], 3, periods)
-            drawLineChart('#chart-mortality-rate', $scope.nv_chart_data['mortality_rate'], 100, periods)
-            drawLineChart('#chart-malaria-cases', $scope.nv_chart_data['malaria_cases'], 10, periods)
-            drawLineChart('#chart-positivity-rate', $scope.nv_chart_data['positivity_rate'], 100, periods)
-            drawLineChart('#chart-ipt2-uptake', $scope.nv_chart_data['ipt2_uptake'], 100, periods)
-            drawLineChart('#chart-sp-stock-status', $scope.nv_chart_data['sp_stock_status'], 100, periods)
-            drawLineChart('#chart-act-stock-status', $scope.nv_chart_data['act_stock_status'], 100, periods)
+            drawLineChart('#chart-malaria-deaths', $scope.nv_chart_data['malaria_deaths'], 3, monthly_periods);
+            drawLineChart('#chart-mortality-rate', $scope.nv_chart_data['mortality_rate'], 100, monthly_periods);
+            drawLineChart('#chart-malaria-cases', $scope.nv_chart_data['malaria_cases'], 2, weekly_periods);
+            drawLineChart('#chart-positivity-rate', $scope.nv_chart_data['positivity_rate'], 100, weekly_periods);
+            drawLineChart('#chart-ipt2-uptake', $scope.nv_chart_data['ipt2_uptake'], 100, monthly_periods);
+            drawLineChart('#chart-sp-stock-status', $scope.nv_chart_data['sp_stock_status'], 100, monthly_periods);
+            drawLineChart('#chart-act-stock-status', $scope.nv_chart_data['act_stock_status'], 100, monthly_periods);
         };
     
     };

@@ -19,3 +19,4 @@ nose
 mock
 sparkpost
 beautifulsoup4
+natsort
