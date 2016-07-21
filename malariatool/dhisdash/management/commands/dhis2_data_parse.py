@@ -26,11 +26,15 @@ class Command(BaseCommand):
         for tracker in trackers:
             try:
                 for data_set in data_sets:
-                    parser = DataSetParser(data_set, tracker.period)
-                    parser.parse()
+                    try:
+                        parser = DataSetParser(data_set, tracker.period)
+                        parser.parse()
+                    except Exception, e:
+                        print e.message
 
                 tracker.last_parsed = timezone.now()
                 tracker.status = DataSyncTrackerStatus.PARSED
                 tracker.save()
+
             except Exception, e:
                 print e.message

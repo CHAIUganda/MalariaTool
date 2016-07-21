@@ -6,7 +6,7 @@ from django.utils import timezone
 from dhisdash import utils
 from dhisdash.common.data_set_parser import DataSetParser
 from dhisdash.models import DataSyncTracker, DataSet, DataSyncTrackerStatus
-from mock import patch
+from mock import patch, Mock
 from dhisdash.tests.helpers import MyTestHelper
 
 
@@ -119,8 +119,33 @@ class TestDataParse(TestCase):
         with patch('dhisdash.models.DataSyncTracker.update_periods') as update_periods_mock:
             update_periods_mock.return_value = None
 
-            with patch.object(DataSetParser, 'parse', return_value=None) as mock_method:
+            with patch.object(DataSetParser, 'parse', return_value=None, side_effect=None) as mock_method:
                 call_command('dhis2_data_parse', self.start_period)
 
         ds1.delete()
         self.assertEqual(2, mock_method.call_count)
+
+    def exception_raiser(self):
+        raise Exception()
+
+    def test_that_an_empty_data_values_list_does_not_stop_other_data_sets_from_being_parsed(self):
+        three_days_ago = timezone.now() - timedelta(days=2)
+        tracker = self.create_old_tracker(201508, three_days_ago)
+        tracker.status = DataSyncTrackerStatus.INIT_DOWNLOAD
+        tracker.save()
+
+        ds1 = MyTestHelper().create_sample_data_set()
+
+        with patch('dhisdash.models.DataSyncTracker.update_periods') as update_periods_mock:
+            update_periods_mock.return_value = None
+
+            with patch.object(DataSetParser, 'parse') as mock_method:
+                mock_method.side_effect = Exception()
+
+                call_command('dhis2_data_parse', self.start_period)
+
+        updated_tracker = DataSyncTracker.objects.get(pk=tracker.pk)
+        tracker.delete()
+        ds1.delete()
+
+        self.assertEqual(updated_tracker.status, DataSyncTrackerStatus.PARSED)
