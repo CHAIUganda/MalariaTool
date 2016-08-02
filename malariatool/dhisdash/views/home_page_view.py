@@ -30,7 +30,7 @@ class HomePageView(TemplateView):
         tab_manager.add('malaria-cases', 'MALARIA CASES', 'Malaria cases per 1000 population',
                         'big_metric.malaria_cases')
 
-        tab_manager.add('ipt2-uptake', 'IPT2 UPTAKE', 'Proportion of women who came for IPT2b',
+        tab_manager.add('ipt2-uptake', 'IPT2 UPTAKE', 'Proportion of pregnant women who came for IPT2b',
                         'big_metric.ipt2_uptake')
 
         tab_manager.add('weekly-reporting-rate', 'REPORTING RATE', 'Facilities reporting',

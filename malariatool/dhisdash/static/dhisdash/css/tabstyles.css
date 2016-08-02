@@ -149,10 +149,16 @@ body{
     font-weight: normal !important;
 }
 
-// Make the active link bold
+/* Make the active link bold*/
 .nv-controlsWrap .nv-series text,.nv-legend-text {
     font-size: 12px;
     font-family: OpenSans;
     letter-spacing: 1px;
     color: red;
+}
+
+/* change the background of chart */
+.nvd3 .nv-background {
+	fill: #f9f9f9;
+	fill-opacity: 1;
 }

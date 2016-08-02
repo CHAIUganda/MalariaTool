@@ -4,13 +4,15 @@ var app = angular.module('dashboard', ['datatables'], function($interpolateProvi
 });
 
 $(document).ready(function(){
-    $('.tabs .desc').tooltip( {
-		// delay: {show: 2000},
-		track: true,
-		fade: 250,
-		container: 'body',
-		placement: 'bottom'
-	} );
+    var tooltip = {
+        // delay: {show: 2000},
+        track: true,
+        fade: 250,
+        container: 'body',
+        placement: 'bottom'
+    };
+
+    $('.tabs .desc').tooltip(tooltip);
 });
 
 app.controller('DashboardController', function($scope, $http) {
@@ -180,6 +182,7 @@ app.controller('DashboardController', function($scope, $http) {
 
                     // Did not compare the biggest because of natuaral language comparison
                     // E.g. 2010W10 < 2010W2 returns true
+                    // 
                     $scope.big_metric.malaria_cases = getComputeResult(computeWeeklyMalariaCases(
                             period_data))+"%";
 
