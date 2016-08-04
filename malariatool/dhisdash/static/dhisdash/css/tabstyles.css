@@ -159,6 +159,11 @@ body{
 
 /* change the background of chart */
 .nvd3 .nv-background {
-	fill: #f9f9f9;
+	fill: #d9edf7;
 	fill-opacity: 1;
 }
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #d9edf7;
+}
+

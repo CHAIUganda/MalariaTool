@@ -33,8 +33,8 @@ class HomePageView(TemplateView):
         tab_manager.add('ipt2-uptake', 'IPT2 UPTAKE', 'Proportion of pregnant women who came for IPT2b',
                         'big_metric.ipt2_uptake')
 
-        tab_manager.add('weekly-reporting-rate', 'REPORTING RATE', 'Facilities reporting',
-                        'big_metric.positivity_rate')
+        # tab_manager.add('weekly-reporting-rate', 'REPORTING RATE', 'Facilities reporting',
+        #                 'big_metric.positivity_rate')
 
         tab_manager.add('act-stock-status', 'ACT STOCK STATUS', act_stock_status_description,
                         'big_metric.act_stock_status')
@@ -45,8 +45,10 @@ class HomePageView(TemplateView):
 
         # CASE MANAGEMENT
 
+        # t1 = Toggle('case-mgt-rate', 'Malaria Cases',
+        #             ['Malaria Cases', 'Testing Rate', 'Positivity Rate', 'Malaria Deaths', 'Mortality Rate'])
         t1 = Toggle('case-mgt-rate', 'Malaria Cases',
-                    ['Malaria Cases', 'Testing Rate', 'Positivity Rate', 'Malaria Deaths', 'Mortality Rate'])
+                    ['Malaria Cases', 'Positivity Rate', 'Malaria Deaths', 'Mortality Rate'])
 
         ca_manager.add(t1, 'malaria-deaths',
                        ['Malaria Death Rate', 'Inpatient Malaria Deaths', 'Malaria Admissions'])
@@ -95,7 +97,8 @@ class HomePageView(TemplateView):
 
         # LOGISTICS
 
-        t4 = Toggle('logistics-rate', 'ACT Stock Status', ['ACT Stock Status', 'SP Stock Status', 'RDT Stock Status'])
+        # t4 = Toggle('logistics-rate', 'ACT Stock Status', ['ACT Stock Status', 'SP Stock Status', 'RDT Stock Status'])
+        t4 = Toggle('logistics-rate', 'ACT Stock Status', ['ACT Stock Status', 'SP Stock Status'])
 
         ca_manager.add(t4, 'sp-stock-status',
                        ['SP Stock Status', 'Facilities with Stock Outs', 'Number of Facilities'])
