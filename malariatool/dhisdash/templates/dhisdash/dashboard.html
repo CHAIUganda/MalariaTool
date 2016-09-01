@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% include 'dhisdash/spinner_modal.html' %}
+
+<div class="row">
+
+
+        <div class="row">
+            <div class="col-md-10 heading"><h5>FILTERS</h5></div>
+        </div>
+
+
+        <div class="row">
+
+            <select class="col-mds-2 selectpickerr" data-width="auto"
+                    ng-model="filter.from_date">
+                <option value="">FROM</option>
+                {% for year, values in from_dates_iteritems %}
+                <optgroup label="{{ year }}">
+                    {% for value in values %}
+
+                    <option value="{{ value.value }}">{{ value.text }}</option>
+
+                    {% endfor %}
+                </optgroup>
+                {% endfor %}
+            </select>
+
+
+            <select class="col-mds-2 selectpickerr" data-width="auto"
+                    ng-model="filter.to_date" ng-change="updateData()">
+                <option value="">TO</option>
+                {% for year, values in to_dates_iteritems %}
+                <optgroup label="{{ year }}">
+                    {% for value in values %}
+
+                    <option value="{{ value.value }}">{{ value.text }}</option>
+
+                    {% endfor %}
+                </optgroup>
+                {% endfor %}
+            </select>
+
+            <select class="col-mds-2 selectpickerr" data-width="auto"
+                    ng-model="filter.region" ng-change="updateData()">
+                <option value="0">REGIONS</option>
+                {% for region in regions_list %}
+
+                <option value="{{ region.id }}">{{ region.name }}</option>
+
+                {% endfor %}
+            </select>
+            <select class="col-mds-2 selectpickerr" data-width="auto" data-live-search="true"
+                    ng-model="filter.district" ng-change="updateData()">
+                <option value="0">DISTRICTS</option>
+                {% for district in districts_list %}
+
+                <option value="{{ district.id }}">{{ district.name }}</option>
+
+                {% endfor %}
+            </select>
+            <select class="col-mds-2 last selectpickerr"
+                    ng-model="filter.age_group" ng-change="updateData()">
+                <option value="0">AGE GROUP</option>
+                {% for value, text in age_groups %}
+
+                <option value="{{ value }}">{{ text }}</option>
+
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 heading"><h5>KEY METRICS</h5></div>
+        </div>
+
+        <div class="row">
+            <div class="tabs tabs-style-flip">
+                <nav>
+                    {% include 'dhisdash/tab.html' with tm=tab_manager %}
+                </nav>
+                <div class="content-wrap">
+
+                    {% for table in ca_manager.all %}
+                        {% include 'dhisdash/tab_content.html' with table=table tm=toggle_manager tab_manager=tab_manager %}
+                    {% endfor %}
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row hidden">
+            <div class="col-md-12 heading"><h5>ADDITIONAL METRICS</h5></div>
+        </div>
+
+        <div class="row hidden" id="additional-metrics">
+            <div class="col-md-3">
+                <div class="value" ng-bind="big_metric.IPT1"></div>
+                <div class="desc">UPTAKE<br>IPTP1</div>
+            </div>
+            <div class="col-md-3">
+                <div class="value" ng-bind="big_metric.IPT2"></div>
+                <div class="desc">UPTAKE<br>IPTP2</div>
+            </div>
+            <div class="col-md-3">
+                <div class="value" ng-bind="big_metric.total_positive"></div>
+                <div class="desc">TOTAL<br>POSITIVE RESULTS</div>
+            </div>
+            <div class="col-md-3">
+                <div class="value" ng-bind="big_metric.total_treated"></div>
+                <div class="desc">TOTAL<br>TREATED PATIENTS</div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}

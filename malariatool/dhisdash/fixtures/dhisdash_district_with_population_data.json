@@ -1,0 +1,1122 @@
+[
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "zNgVoDVPYgD",
+      "name": "Nwoya District",
+      "population": 128094
+    },
+    "model": "dhisdash.district",
+    "pk": 1
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "Gwk4wkLz7EW",
+      "name": "Gulu District",
+      "population": 443733
+    },
+    "model": "dhisdash.district",
+    "pk": 2
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "NREoMszwQZW",
+      "name": "Abim District",
+      "population": 109039
+    },
+    "model": "dhisdash.district",
+    "pk": 3
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "iqsaGItA68C",
+      "name": "Koboko District",
+      "population": 208163
+    },
+    "model": "dhisdash.district",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "ztIyIYAzFKp",
+      "name": "Agago District",
+      "population": 227486
+    },
+    "model": "dhisdash.district",
+    "pk": 5
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "eOJUW6OGpc7",
+      "name": "Kaabong District",
+      "population": 169274
+    },
+    "model": "dhisdash.district",
+    "pk": 6
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "EDhGji3EteB",
+      "name": "Napak District",
+      "population": 145219
+    },
+    "model": "dhisdash.district",
+    "pk": 7
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "W0kQBddyGyh",
+      "name": "Moyo District",
+      "population": 137489
+    },
+    "model": "dhisdash.district",
+    "pk": 8
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "p7EEgDEX3jT",
+      "name": "Alebtong District",
+      "population": 225327
+    },
+    "model": "dhisdash.district",
+    "pk": 9
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "Y4LV8xqkv6J",
+      "name": "Kole District",
+      "population": 241878
+    },
+    "model": "dhisdash.district",
+    "pk": 10
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "aBrjuZk0W31",
+      "name": "Pader District",
+      "population": 183723
+    },
+    "model": "dhisdash.district",
+    "pk": 11
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "xpIFdCMhVHG",
+      "name": "Oyam District",
+      "population": 388011
+    },
+    "model": "dhisdash.district",
+    "pk": 12
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "Lj8t70RYnEt",
+      "name": "Lira District",
+      "population": 410516
+    },
+    "model": "dhisdash.district",
+    "pk": 13
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "C0RSe3EWBqU",
+      "name": "Amuru District",
+      "population": 190516
+    },
+    "model": "dhisdash.district",
+    "pk": 14
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "VuHCApXcMTm",
+      "name": "Nakapiripirit District",
+      "population": 169691
+    },
+    "model": "dhisdash.district",
+    "pk": 15
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "wMQ25dybdgH",
+      "name": "Dokolo District",
+      "population": 182579
+    },
+    "model": "dhisdash.district",
+    "pk": 16
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "pnTVIF5v27r",
+      "name": "Kitgum District",
+      "population": 204012
+    },
+    "model": "dhisdash.district",
+    "pk": 17
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "JyZJhGXKeEq",
+      "name": "Apac District",
+      "population": 368786
+    },
+    "model": "dhisdash.district",
+    "pk": 18
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "Xjc0LDFa5gW",
+      "name": "Nebbi District",
+      "population": 385220
+    },
+    "model": "dhisdash.district",
+    "pk": 19
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "A9kRCvmn6Co",
+      "name": "Moroto District",
+      "population": 104539
+    },
+    "model": "dhisdash.district",
+    "pk": 20
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "W1JM2Qdhcv3",
+      "name": "Yumbe District",
+      "population": 485582
+    },
+    "model": "dhisdash.district",
+    "pk": 21
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "WyR8Eetj7Uw",
+      "name": "Maracha District",
+      "population": 186176
+    },
+    "model": "dhisdash.district",
+    "pk": 22
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "a8RHFdF4DXL",
+      "name": "Amudat District",
+      "population": 111758
+    },
+    "model": "dhisdash.district",
+    "pk": 23
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "xy0M4HhjXtD",
+      "name": "Lamwo District",
+      "population": 134050
+    },
+    "model": "dhisdash.district",
+    "pk": 24
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "aPZzL4CyBTg",
+      "name": "Kotido District",
+      "population": 178909
+    },
+    "model": "dhisdash.district",
+    "pk": 25
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "ZuQHWOaFQVM",
+      "name": "Amolatar District",
+      "population": 146904
+    },
+    "model": "dhisdash.district",
+    "pk": 26
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "WcB3kLlgRTb",
+      "name": "Arua District",
+      "population": 785189
+    },
+    "model": "dhisdash.district",
+    "pk": 27
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "A4aGXEfdb8P",
+      "name": "Zombo District",
+      "population": 240368
+    },
+    "model": "dhisdash.district",
+    "pk": 28
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "aXjub1BYn1y",
+      "name": "Otuke District",
+      "population": 105617
+    },
+    "model": "dhisdash.district",
+    "pk": 29
+  },
+  {
+    "fields": {
+      "region": 1,
+      "identifier": "QYiQ2KqgCxj",
+      "name": "Adjumani District",
+      "population": 232813
+    },
+    "model": "dhisdash.district",
+    "pk": 30
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "QoRZB7xc3j9",
+      "name": "Kaberamaido District",
+      "population": 213374
+    },
+    "model": "dhisdash.district",
+    "pk": 31
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "lkuO79O6mRx",
+      "name": "Busia District",
+      "population": 325527
+    },
+    "model": "dhisdash.district",
+    "pk": 32
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "MtpE3CH6vq3",
+      "name": "Butaleja District",
+      "population": 245873
+    },
+    "model": "dhisdash.district",
+    "pk": 33
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "KhT80mlwJ3Y",
+      "name": "Tororo District",
+      "population": 526378
+    },
+    "model": "dhisdash.district",
+    "pk": 34
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "saT18HClZoz",
+      "name": "Kumi District",
+      "population": 258073
+    },
+    "model": "dhisdash.district",
+    "pk": 35
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "aginheWSLef",
+      "name": "Kapchorwa District",
+      "population": 104580
+    },
+    "model": "dhisdash.district",
+    "pk": 36
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "wJ2a6YKDFZW",
+      "name": "Sironko District",
+      "population": 246636
+    },
+    "model": "dhisdash.district",
+    "pk": 37
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "kb7iUQISRlx",
+      "name": "Budaka District",
+      "population": 208439
+    },
+    "model": "dhisdash.district",
+    "pk": 38
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "aj4hsYK3dVm",
+      "name": "Ngora District",
+      "population": 142487
+    },
+    "model": "dhisdash.district",
+    "pk": 39
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "mv4gKtY0qW8",
+      "name": "Mayuge District",
+      "population": 479172
+    },
+    "model": "dhisdash.district",
+    "pk": 40
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "AhwgeZQYj16",
+      "name": "Bududa District",
+      "population": 211683
+    },
+    "model": "dhisdash.district",
+    "pk": 41
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "auLatLbcOxf",
+      "name": "Bulambuli District",
+      "population": 177322
+    },
+    "model": "dhisdash.district",
+    "pk": 42
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "TM6ccNxawqy",
+      "name": "Amuria District",
+      "population": 270601
+    },
+    "model": "dhisdash.district",
+    "pk": 43
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "Ut0ysYGEipO",
+      "name": "Namayingo District",
+      "population": 223229
+    },
+    "model": "dhisdash.district",
+    "pk": 44
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "tdZbtg9sZkO",
+      "name": "Bukedea District",
+      "population": 188918
+    },
+    "model": "dhisdash.district",
+    "pk": 45
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "kJCEJnXLgnh",
+      "name": "Kaliro District",
+      "population": 236927
+    },
+    "model": "dhisdash.district",
+    "pk": 46
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "oNxpMjveyZt",
+      "name": "Iganga District",
+      "population": 506388
+    },
+    "model": "dhisdash.district",
+    "pk": 47
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "esIUe2tQAtL",
+      "name": "Namutumba District",
+      "population": 253260
+    },
+    "model": "dhisdash.district",
+    "pk": 48
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "JIZDvNlIhXS",
+      "name": "Manafwa District",
+      "population": 352864
+    },
+    "model": "dhisdash.district",
+    "pk": 49
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "Oyxwe3iDqpR",
+      "name": "Kibuku District",
+      "population": 202630
+    },
+    "model": "dhisdash.district",
+    "pk": 50
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "WiVj4bEhX4P",
+      "name": "Pallisa District",
+      "population": 386074
+    },
+    "model": "dhisdash.district",
+    "pk": 51
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "oyygQ2STBST",
+      "name": "Kamuli District",
+      "population": 490255
+    },
+    "model": "dhisdash.district",
+    "pk": 52
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "F3ccON3OCsL",
+      "name": "Buyende District",
+      "population": 320468
+    },
+    "model": "dhisdash.district",
+    "pk": 53
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "gUaoj8Geuao",
+      "name": "Bugiri District",
+      "population": 390076
+    },
+    "model": "dhisdash.district",
+    "pk": 54
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "cSrCFjPKqcG",
+      "name": "Katakwi District",
+      "population": 165553
+    },
+    "model": "dhisdash.district",
+    "pk": 55
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "srmGjHrpVE5",
+      "name": "Soroti District",
+      "population": 297154
+    },
+    "model": "dhisdash.district",
+    "pk": 56
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "yuo5ielNL7W",
+      "name": "Mbale District",
+      "population": 492804
+    },
+    "model": "dhisdash.district",
+    "pk": 57
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "hn1AlYtF1Pu",
+      "name": "Luuka District",
+      "population": 241453
+    },
+    "model": "dhisdash.district",
+    "pk": 58
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "zJfpujxC1kD",
+      "name": "Serere District",
+      "population": 283630
+    },
+    "model": "dhisdash.district",
+    "pk": 59
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "aJR2ZxSH7g4",
+      "name": "Jinja District",
+      "population": 468256
+    },
+    "model": "dhisdash.district",
+    "pk": 60
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "h1O9AvNR4jS",
+      "name": "Kween District",
+      "population": 95623
+    },
+    "model": "dhisdash.district",
+    "pk": 61
+  },
+  {
+    "fields": {
+      "region": 2,
+      "identifier": "e8m9ZYMRoeR",
+      "name": "Bukwo District",
+      "population": 89253
+    },
+    "model": "dhisdash.district",
+    "pk": 62
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "aIahLLmtvgT",
+      "name": "Wakiso District",
+      "population": 2007700
+    },
+    "model": "dhisdash.district",
+    "pk": 63
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "ykxQEnZGXkj",
+      "name": "Kayunga District",
+      "population": 370210
+    },
+    "model": "dhisdash.district",
+    "pk": 64
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "Ame30QOwuX6",
+      "name": "Bukomansimbi District",
+      "population": 151075
+    },
+    "model": "dhisdash.district",
+    "pk": 65
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "Q7PaNIbyZII",
+      "name": "Mityana District",
+      "population": 331266
+    },
+    "model": "dhisdash.district",
+    "pk": 66
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "aZLZPPjqft0",
+      "name": "Buvuma District",
+      "population": 89960
+    },
+    "model": "dhisdash.district",
+    "pk": 67
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "aqpd0Y9eXZ2",
+      "name": "Lwengo District",
+      "population": 275450
+    },
+    "model": "dhisdash.district",
+    "pk": 68
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "tr9XWtYsL5P",
+      "name": "Luwero District",
+      "population": 458158
+    },
+    "model": "dhisdash.district",
+    "pk": 69
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "bIONCoCnt3Q",
+      "name": "Masaka District",
+      "population": 296649
+    },
+    "model": "dhisdash.district",
+    "pk": 70
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "IVuiLJYABw6",
+      "name": "Kyankwanzi District",
+      "population": 214057
+    },
+    "model": "dhisdash.district",
+    "pk": 71
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "ahyi8Uq4vaj",
+      "name": "Kalungu District",
+      "population": 184131
+    },
+    "model": "dhisdash.district",
+    "pk": 72
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "aPRNSGUR3vk",
+      "name": "Lyantonde District",
+      "population": 94573
+    },
+    "model": "dhisdash.district",
+    "pk": 73
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "JrHILmtK0OU",
+      "name": "Kalangala District",
+      "population": 53406
+    },
+    "model": "dhisdash.district",
+    "pk": 74
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "aXmBzv61LbM",
+      "name": "Kampala District",
+      "population": 1516210
+    },
+    "model": "dhisdash.district",
+    "pk": 75
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "j7AQsnEYmvi",
+      "name": "Sembabule District",
+      "population": 252994
+    },
+    "model": "dhisdash.district",
+    "pk": 76
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "aSbgVKaeCP0",
+      "name": "Nakaseke District",
+      "population": 197703
+    },
+    "model": "dhisdash.district",
+    "pk": 77
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "P8iz90eiIrW",
+      "name": "Rakai District",
+      "population": 518008
+    },
+    "model": "dhisdash.district",
+    "pk": 78
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "a3LMKP8z8Xj",
+      "name": "Butambala District",
+      "population": 100471
+    },
+    "model": "dhisdash.district",
+    "pk": 79
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "YMMexeHFUay",
+      "name": "Mpigi District",
+      "population": 251512
+    },
+    "model": "dhisdash.district",
+    "pk": 80
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "lQj3yMM1lI7",
+      "name": "Gomba District",
+      "population": 160075
+    },
+    "model": "dhisdash.district",
+    "pk": 81
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "a0DfYpC2Rwl",
+      "name": "Mukono District",
+      "population": 599817
+    },
+    "model": "dhisdash.district",
+    "pk": 82
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "lzWuB6bCQeV",
+      "name": "Mubende District",
+      "population": 688819
+    },
+    "model": "dhisdash.district",
+    "pk": 83
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "aUcYGQCK9ub",
+      "name": "Nakasongola District",
+      "population": 181863
+    },
+    "model": "dhisdash.district",
+    "pk": 84
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "GLHh0BXys9w",
+      "name": "Kiboga District",
+      "population": 148606
+    },
+    "model": "dhisdash.district",
+    "pk": 85
+  },
+  {
+    "fields": {
+      "region": 3,
+      "identifier": "x75Yh65MaUa",
+      "name": "Buikwe District",
+      "population": 436406
+    },
+    "model": "dhisdash.district",
+    "pk": 86
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "PJFtfCyp6Rb",
+      "name": "Hoima District",
+      "population": 573903
+    },
+    "model": "dhisdash.district",
+    "pk": 87
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "sWoNWQZ9qrD",
+      "name": "Buhweju District",
+      "population": 124044
+    },
+    "model": "dhisdash.district",
+    "pk": 88
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "tM3DsJxMaMX",
+      "name": "Kibaale District",
+      "population": 788714
+    },
+    "model": "dhisdash.district",
+    "pk": 89
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "B0G9cqixld8",
+      "name": "Kiryandongo District",
+      "population": 268188
+    },
+    "model": "dhisdash.district",
+    "pk": 90
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "xAJgEKKAeRA",
+      "name": "Sheema District",
+      "population": 211720
+    },
+    "model": "dhisdash.district",
+    "pk": 91
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "zBIpPzKYFLp",
+      "name": "Kabale District",
+      "population": 534160
+    },
+    "model": "dhisdash.district",
+    "pk": 92
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "xr8EMirOASp",
+      "name": "Masindi District",
+      "population": 292951
+    },
+    "model": "dhisdash.district",
+    "pk": 93
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "qf9xWZu7Dq8",
+      "name": "Kiruhura District",
+      "population": 328544
+    },
+    "model": "dhisdash.district",
+    "pk": 94
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "auswb7JO9wY",
+      "name": "Mbarara District",
+      "population": 474144
+    },
+    "model": "dhisdash.district",
+    "pk": 95
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "fS71jg1WYPk",
+      "name": "Rubirizi District",
+      "population": 129283
+    },
+    "model": "dhisdash.district",
+    "pk": 96
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "z8D9ER36EKN",
+      "name": "Ntoroko District",
+      "population": 66422
+    },
+    "model": "dhisdash.district",
+    "pk": 97
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "aa8xVDzSpte",
+      "name": "Kasese District",
+      "population": 702029
+    },
+    "model": "dhisdash.district",
+    "pk": 98
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "aphcy5JTnd6",
+      "name": "Kanungu District",
+      "population": 252075
+    },
+    "model": "dhisdash.district",
+    "pk": 99
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "m77oR1YJESj",
+      "name": "Kabarole District",
+      "population": 474216
+    },
+    "model": "dhisdash.district",
+    "pk": 100
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "r8WLxW9JwsS",
+      "name": "Ibanda District",
+      "population": 248083
+    },
+    "model": "dhisdash.district",
+    "pk": 101
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "a9tQqo1rSj7",
+      "name": "Kyegegwa District",
+      "population": 277379
+    },
+    "model": "dhisdash.district",
+    "pk": 102
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "It5UGwdHAPF",
+      "name": "Bushenyi District",
+      "population": 235621
+    },
+    "model": "dhisdash.district",
+    "pk": 103
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "tugqr4dY6wq",
+      "name": "Rukungiri District",
+      "population": 320567
+    },
+    "model": "dhisdash.district",
+    "pk": 104
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "g8M1cWRJZV6",
+      "name": "Bundibugyo District",
+      "population": 224145
+    },
+    "model": "dhisdash.district",
+    "pk": 105
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "UaR7OHycj8c",
+      "name": "Isingiro District",
+      "population": 492116
+    },
+    "model": "dhisdash.district",
+    "pk": 106
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "CQTmrrriwOq",
+      "name": "Buliisa District",
+      "population": 113569
+    },
+    "model": "dhisdash.district",
+    "pk": 107
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "aPhSZRinfbg",
+      "name": "Kisoro District",
+      "population": 287179
+    },
+    "model": "dhisdash.district",
+    "pk": 108
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "O9MoQcpZ4uA",
+      "name": "Kyenjojo District",
+      "population": 423991
+    },
+    "model": "dhisdash.district",
+    "pk": 109
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "FLygHiUd2UW",
+      "name": "Mitooma District",
+      "population": 185519
+    },
+    "model": "dhisdash.district",
+    "pk": 110
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "uCVQXAdKqL9",
+      "name": "Kamwenge District",
+      "population": 421470
+    },
+    "model": "dhisdash.district",
+    "pk": 111
+  },
+  {
+    "fields": {
+      "region": 4,
+      "identifier": "hAoe9dhZh9V",
+      "name": "Ntungamo District",
+      "population": 489323
+    },
+    "model": "dhisdash.district",
+    "pk": 112
+  }
+]

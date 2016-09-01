@@ -1,0 +1,48 @@
+<section id="section-{{ table.identifier }}" class="{% if tab_manager.default == table.identifier %}content-current{% endif %}">
+
+    {% if table.toggle.options|length > 0 %}
+    <div class="row toggle-row">
+        <span class='reg_toggle'>
+            {% for option in table.toggle.options %}
+
+                <span class='{% if option == table.toggle.default %}active{% endif %} toggle-option-{{ table.toggle.identifier }} toggle-option-{{ table.toggle.identifier }}-{{ forloop.counter }} toggle-option'
+                      data-identifier="{{ table.toggle.identifier }}-{{ forloop.counter }}"
+                      data-group="{{ table.toggle.identifier }}" ng-click="redrawCharts()">{{ option }}</span>
+
+            {% endfor %}
+        </span>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div id="chart-{{ table.identifier }}" class="db-charts">
+                <svg></svg>
+            </div>
+        </div>
+        <div class="col-lg-6 districts-table">
+
+            <table datatable="ng"
+                   class="row-border hover table table-bordered table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th width='40%'>District</th>
+                {% for label in table.labels %}
+                    <th width='20%'>{{ label }}</th>
+                {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="result in table_data['{{ table.ng_repeat }}']">
+                    <td width='40%' class="ng-cloak"><% result.district %></td>
+                {% for source in table.sources %}
+                    <td class="ng-cloak"><% result.{{ source }} %>{% if source == 'result' %}%{% endif %}</td>
+                {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</section>

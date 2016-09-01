@@ -1,0 +1,282 @@
+[
+  {
+    "fields": {
+      "data_element": 1,
+      "identifier": "NfJyyb1eBaw",
+      "age_group": 0,
+      "name": "RDT Negative Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 71
+  },
+  {
+    "fields": {
+      "data_element": 1,
+      "identifier": "TTwU8Bv4fKm",
+      "age_group": 0,
+      "name": "Microscopy Negative Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 72
+  },
+  {
+    "fields": {
+      "data_element": 1,
+      "identifier": "spSdFB7CVOu",
+      "age_group": 0,
+      "name": "4 Months to 3 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 73
+  },
+  {
+    "fields": {
+      "data_element": 1,
+      "identifier": "Mswd99t7UbA",
+      "age_group": 0,
+      "name": "3+ to 7 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 74
+  },
+  {
+    "fields": {
+      "data_element": 1,
+      "identifier": "QOWAmZ7jBno",
+      "age_group": 0,
+      "name": "RDT Positive Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 75
+  },
+  {
+    "fields": {
+      "data_element": 1,
+      "identifier": "RVczviqd1Vv",
+      "age_group": 0,
+      "name": "12+ Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 76
+  },
+  {
+    "fields": {
+      "data_element": 1,
+      "identifier": "vp37EZVg3xG",
+      "age_group": 0,
+      "name": "Microscopy Positive Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 77
+  },
+  {
+    "fields": {
+      "data_element": 1,
+      "identifier": "w16OBdsg4b7",
+      "age_group": 0,
+      "name": "Not Tested Cases Treated"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 78
+  },
+  {
+    "fields": {
+      "data_element": 1,
+      "identifier": "nNWIFTErQVY",
+      "age_group": 0,
+      "name": "7+ to 12 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 79
+  },
+  {
+    "fields": {
+      "data_element": 2,
+      "identifier": "Li89EZS6Jss",
+      "age_group": 2,
+      "name": "Number Positive, 5 years and above"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 80
+  },
+  {
+    "fields": {
+      "data_element": 2,
+      "identifier": "PT9vhPUpxc4",
+      "age_group": 1,
+      "name": "Number Positive, Under 5 years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 81
+  },
+  {
+    "fields": {
+      "data_element": 2,
+      "identifier": "snPZPBW4ZW0",
+      "age_group": 2,
+      "name": "Number Done, 5 years and above"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 82
+  },
+  {
+    "fields": {
+      "data_element": 2,
+      "identifier": "bSUziAZFlqN",
+      "age_group": 1,
+      "name": "Number Done, Under 5 years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 83
+  },
+  {
+    "fields": {
+      "data_element": 4,
+      "identifier": "c5w8FybAf6t",
+      "age_group": 2,
+      "name": "5-59 Years, Male"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 88
+  },
+  {
+    "fields": {
+      "data_element": 4,
+      "identifier": "PS4qYEgqQmx",
+      "age_group": 2,
+      "name": "60andAbove Years, Female"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 89
+  },
+  {
+    "fields": {
+      "data_element": 4,
+      "identifier": "jft3ntNlnPJ",
+      "age_group": 2,
+      "name": "5-59 Years, Female"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 90
+  },
+  {
+    "fields": {
+      "data_element": 4,
+      "identifier": "gaJzDinonuC",
+      "age_group": 1,
+      "name": "29 Days-4 Years, Male"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 91
+  },
+  {
+    "fields": {
+      "data_element": 4,
+      "identifier": "ZIk9srZ7KTh",
+      "age_group": 1,
+      "name": "0-28 Days, Female"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 92
+  },
+  {
+    "fields": {
+      "data_element": 4,
+      "identifier": "dHjWd4es7e4",
+      "age_group": 2,
+      "name": "60andAbove Years, Male"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 93
+  },
+  {
+    "fields": {
+      "data_element": 4,
+      "identifier": "z5Yltji9KtS",
+      "age_group": 1,
+      "name": "29 Days-4 Years, Female"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 96
+  },
+  {
+    "fields": {
+      "data_element": 4,
+      "identifier": "N6sVfgBHDhx",
+      "age_group": 1,
+      "name": "0-28 Days, Male"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 97
+  },
+  {
+    "fields": {
+      "data_element": 5,
+      "identifier": "JhQChFHlaNM",
+      "age_group": 0,
+      "name": "Stock at Hand"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 98
+  },
+  {
+    "fields": {
+      "data_element": 5,
+      "identifier": "BhwinOOCTmR",
+      "age_group": 0,
+      "name": "Quantity Utilized"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 99
+  },
+  {
+    "fields": {
+      "data_element": 5,
+      "identifier": "Avvv8JaSwGR",
+      "age_group": 0,
+      "name": "Days out of stock"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 100
+  },
+  {
+    "fields": {
+      "data_element": 6,
+      "identifier": "hByJhwG8pWe",
+      "age_group": 2,
+      "name": "10-19 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 101
+  },
+  {
+    "fields": {
+      "data_element": 6,
+      "identifier": "VnucGyJWga6",
+      "age_group": 2,
+      "name": ">=25 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 102
+  },
+  {
+    "fields": {
+      "data_element": 6,
+      "identifier": "fJZ9j1SKgYc",
+      "age_group": 2,
+      "name": "20-24 Years"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 103
+  },
+  {
+    "fields": {
+      "data_element": 8,
+      "identifier": "gGhClrV5odI",
+      "age_group": 2,
+      "name": "default"
+    },
+    "model": "dhisdash.categoryoptioncombo",
+    "pk": 110
+  }
+]

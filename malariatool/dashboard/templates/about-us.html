@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row about">
+
+    <div class="col-md-7">
+        <p>Welcome to the National Malaria Control Program progress tracking tool. Use this tool to view all major
+            Malaria metrics and keep tabs on progress being made across Uganda.</p>
+
+        <h4>TOOLS</h4>
+
+        <div class="row tools">
+            <div class="col-md-4 ">
+                <div class="tool-icon"><span class="glyphicon glyphicon-stats"></span></div>
+                <div class="tool-name"><a href="{% url 'dhisdash:home' %}">DASHBOARD</a></div>
+                <div class="tool-desc">Key metrics from DHIS2</div>
+            </div>
+            <div class="col-md-4">
+                <div class="tool-icon"><span class="glyphicon glyphicon-map-marker"></span></div>
+                <div class="tool-name"><a href="{% url 'dashboard:map-view' %}">MAP</a></div>
+                <div class="tool-desc">IP progress by district</div>
+            </div>
+            <div class="col-md-4">
+                <div class="tool-icon"><span class="glyphicon glyphicon-calendar"></span></div>
+                <div class="tool-name"><a href="{% url 'dashboard:calendar-view' %}">CALENDAR</a></div>
+                <div class="tool-desc">Upcoming events</div>
+            </div>
+        </div>
+
+        <div class="row tools">
+            <div class="col-md-4 ">
+                <div class="tool-icon"><span class="glyphicon glyphicon-file"></span></div>
+                <div class="tool-name"><a href="{% url 'dashboard:document-list' %}">DOCUMENTS</a></div>
+                <div class="tool-desc">Important NMCP files</div>
+            </div>
+            <div class="col-md-4">
+                <div class="tool-icon"><span class="glyphicon glyphicon-tasks"></span></div>
+                <div class="tool-name"><a href="{% url 'dashboard:task-list' %}">TASKS</a></div>
+                <div class="tool-desc">IP Task list (login only)</div>
+            </div>
+            <div class="col-md-4">
+                <div class="tool-icon"><span class="glyphicon glyphicon-user"></span></div>
+                <div class="tool-name"><a href="{% url 'dashboard:ip-list' %}">PARTNERS</a></div>
+                <div class="tool-desc">All implementers</div>
+            </div>
+        </div>
+
+        <h4>ABOUT</h4>
+
+        <p>The mission of the Ministry of Health’s National Malaria Control Programme is to provide quality
+            assured services for malaria prevention and treatment to all people in Uganda.</p>
+
+        <p>NNMCP is the technical department with the mandate to provide policy, guidelines, manuals
+            and quality assured services for Malaria prevention and treatment to all people in Uganda</p>
+
+        <h4>PROGRAM STRUCTURE</h4>
+
+        <div class="row structure">
+            {% for member in members %}
+
+            <div class="col-md-3">
+                <img class="img-circle img-responsive img-center center-block profile-picture"
+                     src="/media/{{ member.profile_picture }}"
+                     alt="">
+
+                <p class="text-center"><small>{{ member.title }} {{ member.first_name }}<br>{{ member.last_name }}</small></p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-4">
+        <div class="side-box red-side-box">
+            <div class="side-box-header">UPCOMING EVENTS</div>
+            <div class="side-box-body">
+
+                {% for meeting in meetings %}
+                <div class="row">
+                    <span class="col-md-6 meeting-start">{{ meeting.start|date:"D, d/M/Y" }}</span>
+                    <span class="col-md-6 meeting-title">{{ meeting.title }}</span>
+                </div>
+                {% endfor %}
+
+            </div>
+            <div class="side-box-footer"><a href="{% url 'dashboard:calendar-view' %}">ALL EVENTS</a></div>
+        </div>
+
+        <div class="side-box">
+            <div class="side-box-header">2020 PROGRAM GOALS</div>
+            <div class="side-box-body">
+
+                <div class="row">
+                    <div class="goal-value">0</div>
+                    <div class="goal-brief">Reduce annual Malaria deaths to near zero</div>
+                </div>
+
+                <div class="row">
+                    <div class="goal-value">30</div>
+                    <div class="goal-brief">Reduce malaria morbidity to 30 cases per 1000 population</div>
+                </div>
+
+                <div class="row">
+                    <div class="goal-value">7%</div>
+                    <div class="goal-brief">Reduce the malaria parasite prevalence to less than 7%</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

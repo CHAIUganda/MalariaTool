@@ -1,0 +1,151 @@
+{% load staticfiles %}
+{% load permission_tags %}<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MALARIA DASHBOARD v1.0</title>
+
+    <link href="{% static 'dhisdash/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/bootstrap-select.min.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/jquery.dataTables.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/jquery-ui.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/nv.d3.min.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/tabs.css'%}" rel="stylesheet">
+    <link href="{% static 'dhisdash/css/tabstyles.css'%}" rel="stylesheet">
+
+    <link href="{% static 'dashboard/css/app.css' %}" rel="stylesheet">
+    <link href="{% static 'dashboard/css/bootstrap-datepicker3.min.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--<link href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css" rel="stylesheet">-->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.5.0/fullcalendar.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <link href="{% static 'dhisdash/css/app.css'%}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'dhisdash/css/html5shiv.min.js'%}"></script>
+    <script src="{% static 'dhisdash/css/respond.min.js'%}"></script>
+    <![endif]-->
+
+    <script src="{% static 'dhisdash/js/jquery.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/angular.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/angular-route.min.js'%}"></script>
+<script src="{% static 'dhisdash/js/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/angular-datatables.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/moment.min.js'%}"></script>
+
+    <script src="{% static 'dhisdash/js/d3.min.js'%}"></script>
+    <script src="{% static 'dhisdash/js/nv.d3.min.js'%}"></script>
+
+
+    <script src="{% static 'dhisdash/js/functions.js'%}"></script>
+    <script src="{% static 'dhisdash/js/graphs.js'%}"></script>
+    <script src="{% static 'dhisdash/js/app2.js'%}"></script>
+
+    <!--beginning of maps-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+    <script src="{% static 'js/leaflet.ajax.min.js' %}"></script>
+    <!--end of maps-->
+</head>
+
+<body ng-app="dashboard" ng-controller="DashboardController" data-ng-init="updateData()">
+<!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
+<!--<div class="navbar-header">-->
+<!--<a class="navbar-brand" href="#">MALARIA</a>-->
+<!--</div>-->
+<!--<div class="container">-->
+
+<!--</div>-->
+<!--</nav>-->
+
+<div class="container">
+
+
+    <div class="row" id="header">
+        <div class="col-md-2" id="coart-of-arms"><img src="{% static 'dhisdash/images/coart-of-arms.png' %}"/></div>
+        <div class="col-md-8" id="site-name">
+            <div class="major">MINISTRY OF HEALTH: NATIONAL MALARIA CONTROL PROGRAM</div>
+            <div class="minor">REPUBLIC OF UGANDA</div>
+        </div>
+        <div class="col-md-2" id="ug-flag"><img src="{% static 'dhisdash/images/ug-flag.png' %}"/></div>
+    </div>
+
+    <div class="row" id="main-nav">
+        <div id="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="http://health.go.ug">MOH MAIN SITE</a></li>
+                <li><a href="{% url 'dashboard:about-us' %}">ABOUT</a></li>
+                <li class="active"><a href="{% url 'dhisdash:home' %}">DASHBOARD</a></li>
+                <!--<li><a href="{% url 'dashboard:map-view' %}">MAP</a></li>-->
+                <!--<li><a href="{% url 'dashboard:calendar-view' %}">CALENDAR</a></li>-->
+                <li><a href="{% url 'dashboard:ip-list' %}">PARTNERS</a></li>
+                <li><a href="{% url 'dashboard:document-list' %}">DOCUMENTS</a></li>
+                <li><a href="#">RESEARCH</a></li>
+                {% if user|can:'add_tasks' or user|can:'update_tasks' %}
+                    <!--<li><a href="{% url 'dashboard:task-list' %}">TASKS</a></li>-->
+                {% endif %}
+                {% if user|can:'add_users' %}
+                    <li><a href="{% url 'dashboard:admin' %}">ADMIN</a></li>
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    {% if user.is_authenticated %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">
+                            {{ request.user.first_name }} {{ request.user.last_name }} <span class="caret"></span>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'dashboard:login' %}">Sign In</a>
+                    {% endif %}
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'dashboard:logout' %}">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+
+    {% block content %}
+
+    {% endblock %}
+        <div class="col-md-1"></div>
+</div>
+
+</div>
+
+
+</div>
+
+<script src="{% static 'dhisdash/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'dhisdash/js/bootstrap-select.min.js'%}"></script>
+<!--<script src="{% static 'dhisdash/js/i18n/defaults-*.min.js'%}"></script>-->
+<script src="{% static 'dhisdash/js/cbpFWTabs.js'%}"></script>
+<script>
+(function() {
+    [].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+        new CBPFWTabs( el );
+    });
+})();
+
+
+
+
+</script>
+<script src="{% static "js/bootstrap-datepicker.min.js" %}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+<script src="{% static "js/moment.min.js" %}"></script>
+<script src="{% static "js/fullcalendar.min.js" %}"></script>
+<script src="{% static 'dhisdash/js/app.js'%}"></script>
+
+{% block js %}
+
+{% endblock %}
+
+</body>
+</html>

@@ -4,7 +4,7 @@ from dashboard.models import Member, Meeting
 
 
 class AboutUs(TemplateView):
-    template_name = "index.html"
+    template_name = "about-us.html"
 
     def get_context_data(self, **kwargs):
         context = super(AboutUs, self).get_context_data(**kwargs)

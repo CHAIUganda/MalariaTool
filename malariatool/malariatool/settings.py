@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'djrill',
     'password_reset',
+    'dhisdash'
 )
 
 AUTH_USER_MODEL = 'dashboard.User'
@@ -109,10 +110,21 @@ DEFAULT_FROM_EMAIL = "me@remosamuel.com"
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR + "/static"
+#STATIC_ROOT = BASE_DIR + "static/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
 
 LOGIN_REDIRECT_URL = "/"
 
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR + "/media/"
+
+FROM_EMAIL = "National Malaria Control<me@remosamuel.com>"
+
+try:
+    from local_settings import *
+except ImportError as e:
+    pass
+

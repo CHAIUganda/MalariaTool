@@ -7,6 +7,7 @@ from django.views.generic import CreateView, FormView, DeleteView, RedirectView,
 from dashboard.forms.meeting import AddAttendee
 from dashboard.models import Meeting
 from dashboard.models.meeting import Attendee
+from malariatool.settings import FROM_EMAIL
 
 
 class MeetingCreateView(CreateView):
@@ -94,5 +95,5 @@ class MeetingAttendeesNotifyView(RedirectView):
                                        context).strip()
         subject = loader.render_to_string(self.email_subject_template_name,
                                           context).strip()
-        send_mail(subject=subject, message=body, from_email="National Malaria Control<me@remosamuel.com>",
+        send_mail(subject=subject, message=body, from_email=FROM_EMAIL,
                   recipient_list=[attendee], fail_silently=True)

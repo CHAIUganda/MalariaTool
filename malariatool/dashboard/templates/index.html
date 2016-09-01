@@ -1,141 +1,141 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="starter-template">
-        <div class="row">
-            <div class="col-lg-12">
-            </div>
-
-            <div class="col-lg-7">
-                <p class="subtitle-text">MISSION AND VISION</p>
-
-
-                <p>The mission of the Ministry of Health’s National Malaria Control Programme is to provide quality
-                    assured services for malaria prevention and treatment to all people in Uganda.</p>
-
-                <p>NNMCP is the technical department with the mandate to provide policy, guidelines, manuals
-                    and quality assured services for Malaria prevention and treatment to all people in Uganda</p>
-            </div>
-            <div class="col-lg-5">
-                <p class="subtitle-text">UPCOMING MEETINGS <span><a href="{% url 'dashboard:calendar-view' %}">(View
-                    Calendar)</a></span></p>
-                <ul>
-                    {% for meeting in meetings %}
-                        <li><strong>{{ meeting.start|date:"l, d/M/Y" }}</strong> {{ meeting.title }}</li>
-
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-lg-12">
-                <br/>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <hr>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <p class="subtitle-text">2020 GOALS</p>
-            </div>
-            <div class="col-lg-4">
-                {#                <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">#}
-                <p class="text-center text-percentage-highlight"><strong>0</strong></p>
-
-                <p>Reduce annual Malaria deaths to near zero (Near zero implies less than 1 death per 100,000
-                    population)
-                </p>
-            </div>
-            <div class="col-lg-4">
-                <p class="text-center text-percentage-highlight"><strong>30</strong></p>
-
-                <p>Reduce malaria morbidity to 30 cases per 1000 population (80% reduction from the 2013 levels of 150
-                    confirmed malaria cases per 1000)</p>
-            </div>
-            <div class="col-lg-4">
-                <p class="text-center text-percentage-highlight"><strong>7%</strong></p>
-
-                <p>Reduce the malaria parasite prevalence to less than 7% (Over 85% reduction in malaria parasite
-                    prevalence from a baseline of 45% in 2010)
-                </p>
-            </div>
-            <div class="col-lg-12">
-                <br/>
-            </div>
+<div class="starter-template">
+    <div class="row">
+        <div class="col-lg-12">
         </div>
 
-
-        <hr>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <p class="subtitle-text">PROGRAM STRUCTURE</p>
-            </div>
-
-            {% for member in members %}
-
-                <div class="col-md-3">
-                    <img class="img-circle img-responsive img-center center-block profile-picture"
-                         src="/media/{{ member.profile_picture }}"
-                         alt="">
-
-                    <br/>
-
-                    <p class="text-center"><strong>{{ member.title }}</strong></p>
-
-                    <p class="text-center">{{ member.first_name }}</p>
-
-                    <p class="text-center">{{ member.last_name }}</p>
-                </div>
-            {% endfor %}
+        <div class="col-lg-7">
+            <p class="subtitle-text">MISSION AND VISION</p>
 
 
-            <div class="col-lg-12">
-                <br/>
-            </div>
+            <p>The mission of the Ministry of Health’s National Malaria Control Programme is to provide quality
+                assured services for malaria prevention and treatment to all people in Uganda.</p>
+
+            <p>NNMCP is the technical department with the mandate to provide policy, guidelines, manuals
+                and quality assured services for Malaria prevention and treatment to all people in Uganda</p>
         </div>
+        <di v class="col-lg-5">
+            <p class="subtitle-text">UPCOMING MEETINGS <span><a href="{% url 'dashboard:calendar-view' %}">(View
+                Calendar)</a></span></p>
+            <ul>
+                {% for meeting in meetings %}
+                <li><strong>{{ meeting.start|date:"l, d/M/Y" }}</strong> {{ meeting.title }}</li>
 
-        <hr>
-
-        <div class="row">
-            <div class="col-lg-12">
-                <p class="subtitle-text">STRATEGIC OBJECTIVES BY YEAR</p>
-                <br/>
-            </div>
-            <div class="col-lg-4">
-                {#                <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">#}
-                <p class="text-center subtitle-text">2016</p>
-                <br/>
-
-                <p>The program is able to manage and coordinate multi-sectoral malaria reduction efforts at all levels
-                </p>
-            </div>
-            <div class="col-lg-4">
-                <p class="text-center subtitle-text">2017</p>
-                <br/>
-
-                <p>Achieve and sustain protection of at least 85% of the population at risk through recommended malaria
-                    prevention measures
-                    At least 85% of the population practices correct malaria prevention and management measures
-                    All health facilities and District Health Offices report routinely and timely on malaria programme
-                    performance;
-                    All malaria epidemic prone districts have the capacity for epidemic preparedness and response.
-                </p>
-            </div>
-            <div class="col-lg-4">
-                <p class="text-center subtitle-text">2018</p>
-                <br/>
-
-                <p>Achieve and sustain at least 90% of malaria cases in the public and private sectors and community
-                    level receive prompt treatment according to national guidelines
-                </p>
-            </div>
-            <div class="col-lg-12">
-                <br/>
-            </div>
+                {% endfor %}
+            </ul>
         </div>
-
-        <!-- /.row -->
+        <div class="col-lg-12">
+            <br/>
+        </div>
     </div>
+    <!-- /.row -->
+
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="subtitle-text">2020 GOALS</p>
+        </div>
+        <div class="col-lg-4">
+            {# <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">#}
+            <p class="text-center text-percentage-highlight"><strong>0</strong></p>
+
+            <p>Reduce annual Malaria deaths to near zero (Near zero implies less than 1 death per 100,000
+                population)
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <p class="text-center text-percentage-highlight"><strong>30</strong></p>
+
+            <p>Reduce malaria morbidity to 30 cases per 1000 population (80% reduction from the 2013 levels of 150
+                confirmed malaria cases per 1000)</p>
+        </div>
+        <div class="col-lg-4">
+            <p class="text-center text-percentage-highlight"><strong>7%</strong></p>
+
+            <p>Reduce the malaria parasite prevalence to less than 7% (Over 85% reduction in malaria parasite
+                prevalence from a baseline of 45% in 2010)
+            </p>
+        </div>
+        <div class="col-lg-12">
+            <br/>
+        </div>
+    </div>
+
+
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="subtitle-text">PROGRAM STRUCTURE</p>
+        </div>
+
+        {% for member in members %}
+
+        <div class="col-md-3">
+            <img class="img-circle img-responsive img-center center-block profile-picture"
+                 src="/media/{{ member.profile_picture }}"
+                 alt="">
+
+            <br/>
+
+            <p class="text-center"><strong>{{ member.title }}</strong></p>
+
+            <p class="text-center">{{ member.first_name }}</p>
+
+            <p class="text-center">{{ member.last_name }}</p>
+        </div>
+        {% endfor %}
+
+
+        <div class="col-lg-12">
+            <br/>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="subtitle-text">STRATEGIC OBJECTIVES BY YEAR</p>
+            <br/>
+        </div>
+        <div class="col-lg-4">
+            {# <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">#}
+            <p class="text-center subtitle-text">2016</p>
+            <br/>
+
+            <p>The program is able to manage and coordinate multi-sectoral malaria reduction efforts at all levels
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <p class="text-center subtitle-text">2017</p>
+            <br/>
+
+            <p>Achieve and sustain protection of at least 85% of the population at risk through recommended malaria
+                prevention measures
+                At least 85% of the population practices correct malaria prevention and management measures
+                All health facilities and District Health Offices report routinely and timely on malaria programme
+                performance;
+                All malaria epidemic prone districts have the capacity for epidemic preparedness and response.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <p class="text-center subtitle-text">2018</p>
+            <br/>
+
+            <p>Achieve and sustain at least 90% of malaria cases in the public and private sectors and community
+                level receive prompt treatment according to national guidelines
+            </p>
+        </div>
+        <div class="col-lg-12">
+            <br/>
+        </div>
+    </div>
+
+    <!-- /.row -->
+</div>
 
 {% endblock %}
