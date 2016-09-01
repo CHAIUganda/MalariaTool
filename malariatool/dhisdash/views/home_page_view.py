@@ -48,7 +48,7 @@ class HomePageView(TemplateView):
         # t1 = Toggle('case-mgt-rate', 'Malaria Cases',
         #             ['Malaria Cases', 'Testing Rate', 'Positivity Rate', 'Malaria Deaths', 'Mortality Rate'])
         t1 = Toggle('case-mgt-rate', 'Malaria Cases',
-                    ['Malaria Cases', 'Positivity Rate', 'Malaria Deaths', 'Mortality Rate'])
+                    ['Malaria Cases', 'Positivity Rate', 'Mortality Rate'])
 
         ca_manager.add(t1, 'malaria-deaths',
                        ['Malaria Death Rate', 'Inpatient Malaria Deaths', 'Malaria Admissions'])

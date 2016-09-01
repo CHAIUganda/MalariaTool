@@ -167,7 +167,7 @@ body{
     background-color: #d9edf7;
 }
 
-table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting {
+/*table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting {
 	background: #ff0000;
 	color: #ffffff;
 }
@@ -182,4 +182,4 @@ table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.d
 
 table.dataTable.no-footer {
     border-bottom: 0px;
-}
+}*/
