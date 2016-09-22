@@ -13,6 +13,17 @@ var computeHelper = function(result, numerator, denominator) {
     }
 }
 
+var computeHelperPostivityRate = function(result, numerator, denominator, rdt, microscopy) {
+    result = isFinite(result) ? result : 0.0;
+
+    return {result: result.toFixed(1),
+        numerator: numberWithCommas(numerator),
+        denominator: numberWithCommas(denominator),
+        rdt: numberWithCommas(rdt),
+        microscopy: numberWithCommas(microscopy)
+    }
+}
+
 var computeMalariaDeathRate = function(data) {
     var rate = (data['inpatient_malaria_deaths'] / data['malaria_admissions']) * 100;
     return computeHelper(rate, data['inpatient_malaria_deaths'], data['malaria_admissions']);
@@ -43,7 +54,7 @@ var computePositivityRate = function(data) {
     var total_positive = (data['rdt_positive'] + data['microscopy_positive']);
     var positivity_rate = (total_positive / number_tested) * 100;
 
-    return computeHelper(positivity_rate, total_positive, number_tested);
+    return computeHelperPostivityRate(positivity_rate, total_positive, number_tested, data['rdt_done'], data['microscopy_done']);
 };
 
 var computeIPT2Uptake = function(data) {
