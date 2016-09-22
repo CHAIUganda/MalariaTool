@@ -18,7 +18,7 @@ class ContentAreaManager(object):
 
     def add(self, toggle, identifier, labels, sources=None):
         if sources is None:
-            sources = ['result', 'numerator', 'denominator']
+            sources = ['denominator', 'numerator', 'result']
         self.tables[identifier] = Table(toggle, identifier, labels, sources)
 
     def all(self):

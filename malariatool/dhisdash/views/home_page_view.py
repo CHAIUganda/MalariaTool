@@ -51,29 +51,32 @@ class HomePageView(TemplateView):
                     ['Malaria Cases', 'Positivity Rate', 'Mortality Rate'])
 
         ca_manager.add(t1, 'malaria-deaths',
-                       ['Malaria Death Rate', 'Inpatient Malaria Deaths', 'Malaria Admissions'])
+                       ['Malaria Admissions', 'Inpatient Malaria Deaths', 'Malaria Death Rate'])
 
         ca_manager.add(t1, 'death-proportion',
-                       ['Death Proportion', 'Inpatient Malaria Deaths', 'Total Inpatient Deaths'])
+                       ['Total Inpatient Deaths', 'Inpatient Malaria Deaths', 'Death Proportion'])
 
         ca_manager.add(t1, 'malaria-cases',
-                       ['Malaria Cases', 'Malaria Cases * 1000', 'Population'])
+                       ['Population', 'Malaria Cases * 1000', 'Prevalence'])
 
         # ca_manager.add(t1, 'testing-rate',
         #                ['Testing Rate', 'Total Tests', 'Malaria OPD'])
 
         ca_manager.add(t1, 'positivity-rate',
-                       ['Positivity Rate', 'Tested Positive', 'Number Tested'])
+                       ['No Tested', 'RDT', 'Micros', 'Tested Positive', 'Positivity Rate'], ['denominator', 'rdt', 'microscopy', 'numerator', 'result'])
+
+        # ca_manager.add(t1,'postivity-rate',
+        #               ['Number Tested', 'RDT', 'Microscopy', 'Tested Positive', 'Positivity Rate'], 'tested')
 
         ca_manager.add(t1, 'mortality-rate',
-                       ['Mortality Rate', 'Inpatient Malaria Deaths', 'Total Inpatient Deaths'])
+                       ['Total Inpatient Deaths', 'Inpatient Malaria Deaths', 'Mortality Rate'])
 
         # PREVENTION
 
         t2 = Toggle('prevention-rate', '', [])
 
         ca_manager.add(t2, 'ipt2-uptake',
-                       ['IPTp2 Uptake', 'Number receiving IPT2', 'Number attending ANC1'])
+                       ['Number attending ANC1', 'Number receiving IPT2', 'IPTp2 Uptake'])
 
         # # POSITIVITY
         #
@@ -101,10 +104,10 @@ class HomePageView(TemplateView):
         t4 = Toggle('logistics-rate', 'ACT Stock Status', ['ACT Stock Status', 'SP Stock Status'])
 
         ca_manager.add(t4, 'sp-stock-status',
-                       ['SP Stock Status', 'Facilities with Stock Outs', 'Number of Facilities'])
+                       ['Number of Facilities', 'Facilities with Stock Outs', 'SP Stock Status'])
 
         ca_manager.add(t4, 'act-stock-status',
-                       ['ACT Stock Status', 'Facilities with Stock Outs', 'Number of Facilities'])
+                       ['Number of Facilities', 'Facilities with Stock Outs', 'ACT Stock Status'])
 
         context['ca_manager'] = ca_manager
 
