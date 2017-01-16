@@ -20,3 +20,4 @@ mock
 sparkpost
 beautifulsoup4
 natsort
+gunicorn==19.6.0
