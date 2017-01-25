@@ -34,6 +34,22 @@ To create a admin user:
 And use that to login and create other users.
 
 ####Data Management:
+To download initial data from DHIS2 run the commands below
+`python manage.py dhis2_download_org_units region`
+`python manage.py dhis2_download_org_units district`
+`python manage.py dhis2_download_org_units subcounty`
+
+`python manage.py dhis2_download_facilities`
+
+`python manage.py dhis2_set_org_unit_parents region`
+`python manage.py dhis2_set_org_unit_parents district`
+`python manage.py dhis2_set_org_unit_parents subcounty`
+`python manage.py dhis2_set_org_unit_parents facility`
+
+`python manage.py loaddata dhisdash/fixtures/dhisdash_new_data_elements.json`
+`python manage.py loaddata dhisdash/fixtures/dhisdash_new_data_sets.json`
+`python manage.py loaddata dhisdash/fixtures/dhisdash_new_category_option_combos.json`
+
 There are two commands to ensure that data is synced.
 
 To download:
