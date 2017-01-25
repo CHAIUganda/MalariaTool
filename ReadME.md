@@ -50,6 +50,8 @@ To download initial data from DHIS2 run the commands below
 `python manage.py loaddata dhisdash/fixtures/dhisdash_new_data_sets.json`
 `python manage.py loaddata dhisdash/fixtures/dhisdash_new_category_option_combos.json`
 
+Make sure the 'downloads' folder is created before running the next 2 commands
+
 There are two commands to ensure that data is synced.
 
 To download:
