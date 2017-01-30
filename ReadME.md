@@ -43,7 +43,7 @@ To download initial data from DHIS2 run the commands below
 
 `python manage.py dhis2_set_org_unit_parents region`
 `python manage.py dhis2_set_org_unit_parents district`
-`python manage.py dhis2_set_org_unit_parents subcounty`
+`python manage.py dhis2_set_org_unit_parents sub_county`
 `python manage.py dhis2_set_org_unit_parents facility`
 
 `python manage.py loaddata dhisdash/fixtures/dhisdash_new_data_elements.json`
