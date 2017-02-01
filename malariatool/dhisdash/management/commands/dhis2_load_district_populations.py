@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
         total = 0
         for line in lines:
-            split_line = line.strip().split("\t")
+            split_line = line.strip().split(" ")
             size = int(split_line[-1].replace(",", ""))
             name = split_line[0]
             print ">> %s - %s" % (name, size)
