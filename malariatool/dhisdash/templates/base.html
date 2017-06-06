@@ -24,6 +24,31 @@
 
     <link href="{% static 'dhisdash/css/app.css'%}" rel="stylesheet">
 
+    <style>
+        #tooltip {
+            position: absolute;
+            z-index: 2;
+            background: rgba(255,255,255,0.8);
+            border-radius: 4px;
+            width: 105px;
+            height: 35px;
+            color: black;
+            font-size: 14px;
+            padding: 5px;
+            top: -150px;
+            left: -150px;
+            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        }
+
+        #tooltip p {
+            margin: 0;
+        }
+
+        #tooltip p.value {
+            font-weight: bold;
+        }
+    </style>
+
     <!--[if lt IE 9]>
     <script src="{% static 'dhisdash/css/html5shiv.min.js'%}"></script>
     <script src="{% static 'dhisdash/css/respond.min.js'%}"></script>
@@ -121,6 +146,11 @@
 
 
 </div>
+<!-- Tooltip div -->
+		<div id="tooltip">
+		<p class="name"></p>
+		<p class="value"></p>
+		</div>
 
 <script src="{% static 'dhisdash/js/bootstrap.min.js'%}"></script>
 <script src="{% static 'dhisdash/js/bootstrap-select.min.js'%}"></script>
@@ -137,11 +167,12 @@
 
 
 </script>
-<script src="{% static "js/bootstrap-datepicker.min.js" %}"></script>
+<script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
-<script src="{% static "js/moment.min.js" %}"></script>
-<script src="{% static "js/fullcalendar.min.js" %}"></script>
+<script src="{% static 'js/moment.min.js' %}"></script>
+<script src="{% static 'js/fullcalendar.min.js' %}"></script>
 <script src="{% static 'dhisdash/js/app.js'%}"></script>
+
 
 {% block js %}
 
