@@ -22,21 +22,21 @@ class HomePageView(TemplateView):
         context['from_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
         context['to_dates_iteritems'] = utils.generate_dates_to_now(2015, 2)
 
-        act_stock_status_description = 'Proportion of health facilities that reported no stocks outs of first line anti-malarial medicines (ACTs) lasting more than 7 days in the previous month'
+        act_stock_status_description = 'Proportion of health facilities that reported no stocks outs of ACTs'
 
         tab_manager = TabManager()
         tab_manager.set_default_tab('malaria-cases')
 
-        tab_manager.add('malaria-cases', 'MALARIA CASES', 'Malaria cases per 1000 population',
+        tab_manager.add('malaria-cases', 'MALARIA INCIDENCE', 'Malaria cases per 1000 population',
                         'big_metric.malaria_cases')
 
-        tab_manager.add('ipt2-uptake', 'IPT2 UPTAKE', 'Proportion of pregnant women who came for IPT2b',
+        tab_manager.add('ipt2-uptake', 'IPT UPTAKE', 'Proportion of pregnant women who came for IPT2',
                         'big_metric.ipt2_uptake')
 
         # tab_manager.add('weekly-reporting-rate', 'REPORTING RATE', 'Facilities reporting',
         #                 'big_metric.positivity_rate')
 
-        tab_manager.add('act-stock-status', 'ACT STOCK STATUS', act_stock_status_description,
+        tab_manager.add('act-stock-status', 'STOCK STATUS', act_stock_status_description,
                         'big_metric.act_stock_status')
 
         context['tab_manager'] = tab_manager
@@ -48,7 +48,7 @@ class HomePageView(TemplateView):
         # t1 = Toggle('case-mgt-rate', 'Malaria Cases',
         #             ['Malaria Cases', 'Testing Rate', 'Positivity Rate', 'Malaria Deaths', 'Mortality Rate'])
         t1 = Toggle('case-mgt-rate', 'Malaria Cases',
-                    ['Malaria Cases', 'Positivity Rate', 'Mortality Rate'])
+                    ['Malaria Cases', 'Testing', 'Mortality'])
 
         ca_manager.add(t1, 'malaria-deaths',
                        ['Malaria Admissions', 'Inpatient Malaria Deaths', 'Malaria Death Rate'])
@@ -57,19 +57,19 @@ class HomePageView(TemplateView):
                        ['Total Inpatient Deaths', 'Inpatient Malaria Deaths', 'Death Proportion'])
 
         ca_manager.add(t1, 'malaria-cases',
-                       ['Population', 'Malaria Cases * 1000', 'Prevalence'])
+                       ['Population', 'Malaria Cases per 1000', 'Incidence'])
 
         # ca_manager.add(t1, 'testing-rate',
         #                ['Testing Rate', 'Total Tests', 'Malaria OPD'])
 
-        ca_manager.add(t1, 'positivity-rate',
+        ca_manager.add(t1, 'testing',
                        ['No Tested', 'RDT', 'Micros', 'Tested Positive', 'Positivity Rate'], ['denominator', 'rdt', 'microscopy', 'numerator', 'result'])
 
         # ca_manager.add(t1,'postivity-rate',
         #               ['Number Tested', 'RDT', 'Microscopy', 'Tested Positive', 'Positivity Rate'], 'tested')
 
-        ca_manager.add(t1, 'mortality-rate',
-                       ['Total Inpatient Deaths', 'Inpatient Malaria Deaths', 'Mortality Rate'])
+        ca_manager.add(t1, 'mortality',
+                       ['Total Inpatient Deaths', 'Inpatient Malaria Deaths', 'Proportionate Malaria Death'])
 
         # PREVENTION
 
@@ -104,10 +104,10 @@ class HomePageView(TemplateView):
         t4 = Toggle('logistics-rate', 'ACT Stock Status', ['ACT Stock Status', 'SP Stock Status'])
 
         ca_manager.add(t4, 'sp-stock-status',
-                       ['Number of Facilities', 'Facilities with Stock Outs', 'SP Stock Status'])
+                       ['Number of Facilities', 'Facilities with Stock Outs', 'SP Stock Status', 'ACT Stock Status'])
 
         ca_manager.add(t4, 'act-stock-status',
-                       ['Number of Facilities', 'Facilities with Stock Outs', 'ACT Stock Status'])
+                       ['Number of Facilities', 'ACT Stock Status', 'RDT Stock Status', 'SP Stock Status'])
 
         context['ca_manager'] = ca_manager
 

@@ -39,7 +39,7 @@ app.controller('DashboardController', function($scope, $http) {
     $scope.big_metric.total_positive = "0";
     $scope.big_metric.total_treated = "0";
 
-    $scope.big_metric.malaria_cases = "0%";
+    $scope.big_metric.malaria_cases = "0";
     $scope.big_metric.ipt2_uptake = "0%";
     $scope.big_metric.act_stock_status = "0%";
 
@@ -96,10 +96,10 @@ app.controller('DashboardController', function($scope, $http) {
                 $scope.table_data = {};
 
                 for (district in response.data) {
-                    addTableData(district, 'mortality_rate', computeMortalityRate(response.data[district]));
+                    addTableData(district, 'mortality', computeMortalityRate(response.data[district]));
                     addTableData(district, 'malaria_deaths', computeMalariaDeathRate(response.data[district]));
                     addTableData(district, 'malaria_cases', computeMalariaCases(response.data[district]));
-                    addTableData(district, 'positivity_rate', computePositivityRate(response.data[district]));
+                    addTableData(district, 'testing', computePositivityRate(response.data[district]));
                     addTableData(district, 'ipt2_uptake', computeIPT2Uptake(response.data[district]));
                     addTableData(district, 'sp_stock_status', computeSPStockStatus(response.data[district]));
                     addTableData(district, 'act_stock_status', computeACTStockStatus(response.data[district]));
@@ -137,9 +137,9 @@ app.controller('DashboardController', function($scope, $http) {
         $scope.updateCharts = function() {
             $scope.nv_chart_data = {};
             $scope.nv_chart_data['malaria_deaths'] = [{'key': 'Malaria Death Rate', 'color':'#D90C17', 'values': []}];
-            $scope.nv_chart_data['mortality_rate'] = [{'key': 'Mortality Rate', 'color':'#D90C17', 'values': []}];
+            $scope.nv_chart_data['mortality'] = [{'key': 'Mortality Rate', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['malaria_cases'] = [{'key': 'Weekly Malaria Cases', 'color':'#D90C17', 'values': []}];
-            $scope.nv_chart_data['positivity_rate'] = [{'key': 'Weekly Positivity Rate', 'color':'#D90C17', 'values': []}];
+            $scope.nv_chart_data['testing'] = [{'key': 'Weekly Positivity Rate', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['ipt2_uptake'] = [{'key': 'IPT2 Uptake', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['sp_stock_status'] = [{'key': 'SP Stock Status', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['act_stock_status'] = [{'key': 'ACT Stock Status', 'color':'#D90C17', 'values': []}];
@@ -155,7 +155,7 @@ app.controller('DashboardController', function($scope, $http) {
                     monthly_periods.push(generateLabelFromPeriod(period));
 
                     addChartData(month_counter, 'malaria_deaths', computeMalariaDeathRate(period_data));
-                    addChartData(month_counter, 'mortality_rate', computeMortalityRate(period_data));
+                    addChartData(month_counter, 'mortality', computeMortalityRate(period_data));
                     // addChartData(month_counter, 'positivity_rate', computePositivityRate($scope.chart_data[period]));
                     addChartData(month_counter, 'ipt2_uptake', computeIPT2Uptake(period_data));
                     addChartData(month_counter, 'sp_stock_status', computeSPStockStatus(period_data));
@@ -178,13 +178,13 @@ app.controller('DashboardController', function($scope, $http) {
                     weekly_periods.push(generateLabelFromWeeklyPeriod(period, period_data));
 
                     addChartData(week_counter, 'malaria_cases', computeWeeklyMalariaCases(period_data));
-                    addChartData(week_counter, 'positivity_rate', computeWeeklyPositivityRate(period_data));
+                    addChartData(week_counter, 'testing', computeWeeklyPositivityRate(period_data));
 
                     // Did not compare the biggest because of natuaral language comparison
                     // E.g. 2010W10 < 2010W2 returns true
                     // 
                     $scope.big_metric.malaria_cases = getComputeResult(computeWeeklyMalariaCases(
-                            period_data))+"%";
+                            period_data));
 
                     week_counter++;
                 }
@@ -195,9 +195,9 @@ app.controller('DashboardController', function($scope, $http) {
 
         $scope.redrawCharts = function() {
             drawLineChart('#chart-malaria-deaths', $scope.nv_chart_data['malaria_deaths'], 3, monthly_periods);
-            drawLineChart('#chart-mortality-rate', $scope.nv_chart_data['mortality_rate'], 100, monthly_periods);
+            drawLineChart('#chart-mortality', $scope.nv_chart_data['mortality'], 100, monthly_periods);
             drawLineChart('#chart-malaria-cases', $scope.nv_chart_data['malaria_cases'], 2, weekly_periods);
-            drawLineChart('#chart-positivity-rate', $scope.nv_chart_data['positivity_rate'], 100, weekly_periods);
+            drawLineChart('#chart-testing', $scope.nv_chart_data['testing'], 100, weekly_periods);
             drawLineChart('#chart-ipt2-uptake', $scope.nv_chart_data['ipt2_uptake'], 100, monthly_periods);
             drawLineChart('#chart-sp-stock-status', $scope.nv_chart_data['sp_stock_status'], 100, monthly_periods);
             drawLineChart('#chart-act-stock-status', $scope.nv_chart_data['act_stock_status'], 100, monthly_periods);
