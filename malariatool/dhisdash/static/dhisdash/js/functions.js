@@ -24,6 +24,22 @@ var computeHelperPostivityRate = function(result, numerator, denominator, rdt, m
     }
 }
 
+var computeHelperTestingRate = function(test_rate, test_positivity_rate, test_negative_treated_rate, total_tested, tested_positive, tested_negative, total_suspected, tested_negative_treated) {
+    test_rate = isFinite(test_rate) ? test_rate : 0.0;
+    test_positivity_rate = isFinite(test_positivity_rate) ? test_positivity_rate : 0.0;
+    test_negative_treated_rate = isFinite(test_negative_treated_rate) ? test_negative_treated_rate : 0.0;
+
+    return {test_rate: test_rate.toFixed(1),
+        test_positivity_rate: test_positivity_rate.toFixed(1),
+        test_negative_treated_rate: test_negative_treated_rate.toFixed(1),
+        total_tested: numberWithCommas(total_tested),
+        tested_positive: numberWithCommas(tested_positive),
+        tested_negative: numberWithCommas(tested_negative),
+        total_suspected: numberWithCommas(total_suspected),
+        tested_negative_treated: numberWithCommas(tested_negative_treated)
+    }
+}
+
 var computeMalariaDeathRate = function(data) {
     var rate = (data['inpatient_malaria_deaths'] / data['malaria_admissions']) * 100;
     return computeHelper(rate, data['inpatient_malaria_deaths'], data['malaria_admissions']);
@@ -55,6 +71,19 @@ var computePositivityRate = function(data) {
     var positivity_rate = (total_positive / number_tested) * 100;
 
     return computeHelperPostivityRate(positivity_rate, total_positive, number_tested, data['rdt_done'], data['microscopy_done']);
+};
+
+var computeWeeklyTestingRate = function(data) {
+    var total_tested = (data['number_tested']);
+    var total_suspected = (data['number_suspected']);
+    var tested_positive = (data['number_tested_positive']);
+    var tested_negative = (data['number_tested'] - data['number_tested_positive']);
+    var tested_negative_treated = (data['number_treated_tested_negative']);
+    var test_rate = (total_tested / total_suspected) * 100;
+    var test_positivity_rate = (tested_positive / total_tested) * 100;
+    var test_negative_treated_rate = (tested_negative_treated / tested_negative) * 100;
+
+    return computeHelperTestingRate(test_rate, test_positivity_rate, test_negative_treated_rate, total_tested, tested_positive, tested_negative, total_suspected, tested_negative_treated);
 };
 
 var computeIPT2Uptake = function(data) {

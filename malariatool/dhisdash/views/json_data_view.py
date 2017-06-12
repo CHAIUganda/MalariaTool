@@ -196,6 +196,19 @@ class JsonDataView(View):
 
         return self.get_values(request, 'Malaria tests - WEP', coc_filters)
 
+    def get_number_suspected(self, request):
+        coc_filters = self.get_coc_filters(
+            'Suspected Malaria (fever)')
+
+        return self.get_values(request, 'Malaria tests - WEP', coc_filters)
+
+    def get_number_treated_tested_negative(self, request):
+        coc_filters = self.get_coc_filters(
+            'Microscopy Negative Cases Treated',
+            'RDT Negative Cases Treated')
+
+        return self.get_values(request, 'Malaria tests - WEP', coc_filters)
+
     def get_number_receiving_ipt2(self, request):
         coc_filters = self.get_coc_filters(
             '10-19 Years',
@@ -310,5 +323,7 @@ class JsonDataView(View):
         self.callbacks['malaria_cases_wep'] = self.get_malaria_cases_wep
         self.callbacks['number_tested_positive'] = self.get_number_tested_positive
         self.callbacks['number_tested'] = self.get_number_tested
+        self.callbacks['number_suspected'] = self.get_number_suspected
+        self.callbacks['number_treated_tested_negative'] = self.get_number_treated_tested_negative
 
         return HttpResponse(json.dumps(self.generate_final(self.callbacks)))
