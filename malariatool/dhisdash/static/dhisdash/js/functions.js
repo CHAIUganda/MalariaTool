@@ -40,7 +40,7 @@ var computeMalariaCases = function(data) {
 }
 
 var computeWeeklyMalariaCases = function(data) {
-    var rate = (data['malaria_cases_wep']/ data['population']) * 100;
+    var rate = (data['malaria_cases_wep']/ data['population']) * 1000;
     return computeHelper(rate, data['malaria_cases_wep'], data['population']);
 }
 

@@ -98,7 +98,7 @@ app.controller('DashboardController', function($scope, $http) {
                 for (district in response.data) {
                     addTableData(district, 'mortality', computeMortalityRate(response.data[district]));
                     addTableData(district, 'malaria_deaths', computeMalariaDeathRate(response.data[district]));
-                    addTableData(district, 'malaria_cases', computeMalariaCases(response.data[district]));
+                    addTableData(district, 'malaria_cases', computeWeeklyMalariaCases(response.data[district]));
                     addTableData(district, 'testing', computePositivityRate(response.data[district]));
                     addTableData(district, 'ipt2_uptake', computeIPT2Uptake(response.data[district]));
                     addTableData(district, 'sp_stock_status', computeSPStockStatus(response.data[district]));
