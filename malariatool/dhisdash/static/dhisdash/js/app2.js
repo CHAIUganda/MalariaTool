@@ -99,7 +99,7 @@ app.controller('DashboardController', function($scope, $http) {
                     addTableData(district, 'mortality', computeMortalityRate(response.data[district]));
                     addTableData(district, 'malaria_deaths', computeMalariaDeathRate(response.data[district]));
                     addTableData(district, 'malaria_cases', computeWeeklyMalariaCases(response.data[district]));
-                    addTableData(district, 'testing', computePositivityRate(response.data[district]));
+                    addTableData(district, 'testing', computeWeeklyTestingRate(response.data[district]));
                     addTableData(district, 'ipt2_uptake', computeIPT2Uptake(response.data[district]));
                     addTableData(district, 'sp_stock_status', computeSPStockStatus(response.data[district]));
                     addTableData(district, 'act_stock_status', computeACTStockStatus(response.data[district]));
@@ -139,7 +139,7 @@ app.controller('DashboardController', function($scope, $http) {
             $scope.nv_chart_data['malaria_deaths'] = [{'key': 'Malaria Death Rate', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['mortality'] = [{'key': 'Mortality Rate', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['malaria_cases'] = [{'key': 'Weekly Malaria Cases', 'color':'#D90C17', 'values': []}];
-            $scope.nv_chart_data['testing'] = [{'key': 'Weekly Positivity Rate', 'color':'#D90C17', 'values': []}];
+            $scope.nv_chart_data['testing'] = [{'key': 'Weekly Testing Rate', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['ipt2_uptake'] = [{'key': 'IPT2 Uptake', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['sp_stock_status'] = [{'key': 'SP Stock Status', 'color':'#D90C17', 'values': []}];
             $scope.nv_chart_data['act_stock_status'] = [{'key': 'ACT Stock Status', 'color':'#D90C17', 'values': []}];
@@ -178,7 +178,7 @@ app.controller('DashboardController', function($scope, $http) {
                     weekly_periods.push(generateLabelFromWeeklyPeriod(period, period_data));
 
                     addChartData(week_counter, 'malaria_cases', computeWeeklyMalariaCases(period_data));
-                    addChartData(week_counter, 'testing', computeWeeklyPositivityRate(period_data));
+                    addChartData(week_counter, 'testing', computeWeeklyTestingRate(period_data));
 
                     // Did not compare the biggest because of natuaral language comparison
                     // E.g. 2010W10 < 2010W2 returns true

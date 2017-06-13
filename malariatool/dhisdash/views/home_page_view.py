@@ -63,7 +63,7 @@ class HomePageView(TemplateView):
         #                ['Testing Rate', 'Total Tests', 'Malaria OPD'])
 
         ca_manager.add(t1, 'testing', '%',
-                       ['No Tested', 'RDT', 'Micros', 'Tested Positive', 'Positivity Rate'], ['denominator', 'rdt', 'microscopy', 'numerator', 'result'])
+                       ['Testing Rate', 'Test Postivity Rate', 'Tested Negative Treated Rate'], ['test_rate', 'test_positivity_rate', 'test_negative_treated_rate'])
 
         # ca_manager.add(t1,'postivity-rate',
         #               ['Number Tested', 'RDT', 'Microscopy', 'Tested Positive', 'Positivity Rate'], 'tested')
