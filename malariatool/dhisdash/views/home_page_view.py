@@ -104,10 +104,10 @@ class HomePageView(TemplateView):
         t4 = Toggle('logistics-rate', 'ACT Stock Status', ['ACT Stock Status', 'SP Stock Status'])
 
         ca_manager.add(t4, 'sp-stock-status', '%',
-                       ['Number of Facilities', 'Facilities with Stock Outs', 'SP Stock Status', 'ACT Stock Status'])
+                       ['Number of Facilities', 'Facilities with Stock Outs', 'SP Stock Status'])
 
         ca_manager.add(t4, 'act-stock-status', '%',
-                       ['Number of Facilities', 'ACT Stock Status', 'RDT Stock Status', 'SP Stock Status'])
+                       ['Number of Facilities', 'Facilities with Stock Outs', 'ACT Stock Status'])
 
         context['ca_manager'] = ca_manager
 

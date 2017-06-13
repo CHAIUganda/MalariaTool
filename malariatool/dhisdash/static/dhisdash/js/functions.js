@@ -101,10 +101,10 @@ var computeACTStockStatus = function(data) {
     return computeHelper(rate, data['stock_outs_of_act'], data['submitted_act']);
 };
 
-var computeRDTStockStatus = function(data) {
+/*var computeRDTStockStatus = function(data) {
     var rate = (data['stock_outs_of_rdt']/ data['submitted_rdt']) * 100;
     return computeHelper(rate, data['stock_outs_of_rdt'], data['submitted_rdt']);
-};
+};*/
 
 var computeTestingRate = function(data) {
     var tests_done = (data['rdt_done'] + data['microscopy_done']);
