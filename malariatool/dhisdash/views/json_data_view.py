@@ -196,6 +196,19 @@ class JsonDataView(View):
 
         return self.get_values(request, 'Malaria tests - WEP', coc_filters)
 
+    def get_number_suspected(self, request):
+        coc_filters = self.get_coc_filters(
+            'Suspected Malaria (fever)')
+
+        return self.get_values(request, 'Malaria tests - WEP', coc_filters)
+
+    def get_number_treated_tested_negative(self, request):
+        coc_filters = self.get_coc_filters(
+            'Microscopy Negative Cases Treated',
+            'RDT Negative Cases Treated')
+
+        return self.get_values(request, 'Malaria tests - WEP', coc_filters)
+
     def get_number_receiving_ipt2(self, request):
         coc_filters = self.get_coc_filters(
             '10-19 Years',
@@ -305,10 +318,14 @@ class JsonDataView(View):
         self.callbacks['months_from_weeks'] = self.get_months_from_weeks
         self.callbacks['stock_outs_of_sp'] = self.get_number_of_facilities_with_stock_outs_of_sp
         self.callbacks['stock_outs_of_act'] = self.get_number_of_facilities_with_stock_outs_of_act
+        #self.callbacks['stock_outs_of_rdt'] = self.get_number_of_facilities_with_stock_outs_of_rdt
         self.callbacks['submitted_sp'] = self.get_number_of_facilities_submitted_sp
         self.callbacks['submitted_act'] = self.get_number_of_facilities_submitted_act
+        #self.callbacks['submitted_rdt'] = self.get_number_of_facilities_submitted_rdt
         self.callbacks['malaria_cases_wep'] = self.get_malaria_cases_wep
         self.callbacks['number_tested_positive'] = self.get_number_tested_positive
         self.callbacks['number_tested'] = self.get_number_tested
+        self.callbacks['number_suspected'] = self.get_number_suspected
+        self.callbacks['number_treated_tested_negative'] = self.get_number_treated_tested_negative
 
         return HttpResponse(json.dumps(self.generate_final(self.callbacks)))

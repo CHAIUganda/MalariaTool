@@ -2,8 +2,9 @@
     {% for tab in tm.all %}
     <li class="tab {% if tm.default == tab.identifier %}tab-current{% endif %}" data-identifier="{{ tab.identifier }}" >
         <a id="tab-{{ tab.identifier }}" ng-click="redrawCharts()">
-            <span class="value" ng-bind="{{ tab.ng_bind }}"></span>
             <span class="desc" title="{{ tab.title }}">{{ tab.name }}</span>
+            <span class="value" ng-bind="{{ tab.ng_bind }}"></span>
+            <span class="smalldesc" title="{{ tab.title }}">{{ tab.title }}</span>
         </a>
     </li>
     {% endfor %}

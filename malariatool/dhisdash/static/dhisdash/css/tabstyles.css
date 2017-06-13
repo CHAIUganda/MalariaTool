@@ -14,7 +14,7 @@ body{
 }
 
 .tabs-style-flip  nav{
-	height: 90px;
+	height: 106px;
 }
 
 .tabs-style-flip nav a:hover,
@@ -90,6 +90,13 @@ body{
 	letter-spacing: 1px;
 	display:block;
 	font-size:12px;
+}
+
+.tabs-style-flip nav a span.smalldesc {
+	letter-spacing: 1px;
+	display:block;
+	font-size: 8px;
+    white-space: initial;
 }
 
 .tabs-style-flip nav a::after {
