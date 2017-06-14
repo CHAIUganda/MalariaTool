@@ -86,6 +86,21 @@ var computeWeeklyTestingRate = function(data) {
     return computeHelperTestingRate(test_rate, test_positivity_rate, test_negative_treated_rate, total_tested, tested_positive, tested_negative, total_suspected, tested_negative_treated);
 };
 
+var computeWeeklyTestRate = function(data) {
+    var rate = (data['number_tested'] / data['number_suspected']) * 100;
+    return computeHelper(rate, data['number_tested'], data['number_suspected']);
+}
+
+var computeWeeklyTestPositivityRate = function(data) {
+    var rate = (data['number_tested_positive'] / data['number_tested']) * 100;
+    return computeHelper(rate, data['number_tested_positive'], data['number_tested']);
+}
+
+var computeWeeklyTestNegativeTreatedRate = function(data) {
+    var rate = (data['number_treated_tested_negative'] / (data['number_tested'] - data['number_tested_positive'])) * 100;
+    return computeHelper(rate, data['number_treated_tested_negative'], (data['number_tested'] - data['number_tested_positive']));
+}
+
 var computeIPT2Uptake = function(data) {
     var rate = (data['number_receiving_ipt2']/ data['number_attending_anc1']) * 100;
     return computeHelper(rate, data['number_receiving_ipt2'], data['number_attending_anc1']);
