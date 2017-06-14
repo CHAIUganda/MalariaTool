@@ -9,7 +9,15 @@ var drawLineChart = function(selector, data, ymax, xLabels) {
         ;
 
         chart.forceY([0,ymax]);
-        chart.yAxis.axisLabel("%")
+        if(ymax >= 100)
+        {
+            chart.yAxis.axisLabel("%")
+        }
+        else
+        {
+            chart.yAxis.axisLabel("")
+        }
+        //chart.yAxis.axisLabel("%")
         chart.xAxis.axisLabel("Period")
         chart.xAxis.tickFormat(function(p) {
             return xLabels[p];

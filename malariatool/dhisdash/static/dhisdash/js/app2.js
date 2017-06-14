@@ -208,8 +208,8 @@ app.controller('DashboardController', function($scope, $http) {
         $scope.redrawCharts = function() {
             drawLineChart('#chart-malaria-deaths', $scope.nv_chart_data['malaria_deaths'], 3, monthly_periods);
             drawLineChart('#chart-mortality', $scope.nv_chart_data['mortality'], 100, monthly_periods);
-            drawLineChart('#chart-malaria-cases', $scope.nv_chart_data['malaria_cases'], 100, weekly_periods);
-            drawLineChart('#chart-testing', $scope.nv_chart_data['testing'], 100, weekly_periods);
+            drawLineChart('#chart-malaria-cases', $scope.nv_chart_data['malaria_cases'], 20, weekly_periods);
+            drawLineChart('#chart-testing', $scope.nv_chart_data['testing'], 200, weekly_periods);
             drawLineChart('#chart-ipt2-uptake', $scope.nv_chart_data['ipt2_uptake'], 100, monthly_periods);
             drawLineChart('#chart-sp-stock-status', $scope.nv_chart_data['sp_stock_status'], 100, monthly_periods);
             drawLineChart('#chart-act-stock-status', $scope.nv_chart_data['act_stock_status'], 100, monthly_periods);
