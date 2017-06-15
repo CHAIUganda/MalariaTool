@@ -9,15 +9,14 @@ var drawLineChart = function(selector, data, ymax, xLabels) {
         ;
 
         chart.forceY([0,ymax]);
-        if(ymax >= 100)
+        if(selector == "#chart-malaria-cases")
         {
-            chart.yAxis.axisLabel("%")
+            chart.yAxis.axisLabel("per 1000 pop")
         }
         else
         {
-            chart.yAxis.axisLabel("")
+            chart.yAxis.axisLabel("%")
         }
-        //chart.yAxis.axisLabel("%")
         chart.xAxis.axisLabel("Period")
         chart.xAxis.tickFormat(function(p) {
             return xLabels[p];

@@ -25,9 +25,9 @@ class HomePageView(TemplateView):
         act_stock_status_description = 'Proportion of health facilities that reported no stocks outs of ACTs'
 
         tab_manager = TabManager()
-        tab_manager.set_default_tab('malaria-cases')
+        tab_manager.set_default_tab('weekly-malaria-cases')
 
-        tab_manager.add('malaria-cases', 'MALARIA INCIDENCE', 'Malaria cases per 1000 population',
+        tab_manager.add('weekly-malaria-cases', 'MALARIA INCIDENCE', 'Malaria cases per 1000 population',
                         'big_metric.malaria_cases')
 
         tab_manager.add('ipt2-uptake', 'IPT UPTAKE', 'Proportion of pregnant women who came for IPT2',
@@ -47,8 +47,8 @@ class HomePageView(TemplateView):
 
         # t1 = Toggle('case-mgt-rate', 'Malaria Cases',
         #             ['Malaria Cases', 'Testing Rate', 'Positivity Rate', 'Malaria Deaths', 'Mortality Rate'])
-        t1 = Toggle('case-mgt-rate', 'Malaria Cases',
-                    ['Malaria Cases', 'Testing', 'Mortality'])
+        t1 = Toggle('case-mgt-rate', 'Weekly Malaria Cases',
+                    ['Weekly Malaria Cases', 'Weekly Testing', 'Mortality'])
 
         ca_manager.add(t1, 'malaria-deaths', '%',
                        ['Malaria Admissions', 'Inpatient Malaria Deaths', 'Malaria Death Rate'])
@@ -56,14 +56,14 @@ class HomePageView(TemplateView):
         ca_manager.add(t1, 'death-proportion', '%',
                        ['Total Inpatient Deaths', 'Inpatient Malaria Deaths', 'Death Proportion'])
 
-        ca_manager.add(t1, 'malaria-cases', '',
-                       ['Population', 'Malaria Cases per 1000', 'Incidence'])
+        ca_manager.add(t1, 'weekly-malaria-cases', '',
+                       ['Population', 'Malaria Cases', 'Incidence per 1000 pop'])
 
         # ca_manager.add(t1, 'testing-rate',
         #                ['Testing Rate', 'Total Tests', 'Malaria OPD'])
 
-        ca_manager.add(t1, 'testing', '%',
-                       ['Testing Rate', 'Test Postivity Rate', 'Tested Negative Treated Rate'], ['test_rate', 'test_positivity_rate', 'test_negative_treated_rate'])
+        ca_manager.add(t1, 'weekly-testing', '%',
+                       ['% Tested', '% Tested Positive', '% Tested Negative Treated'], ['test_rate', 'test_positivity_rate', 'test_negative_treated_rate'])
 
         # ca_manager.add(t1,'postivity-rate',
         #               ['Number Tested', 'RDT', 'Microscopy', 'Tested Positive', 'Positivity Rate'], 'tested')
